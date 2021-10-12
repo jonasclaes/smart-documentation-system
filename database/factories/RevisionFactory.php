@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Client;
+use App\Models\Revision;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class ClientFactory extends Factory
+class RevisionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Client::class;
+    protected $model = Revision::class;
 
     /**
      * Define the model's default state.
@@ -23,10 +23,8 @@ class ClientFactory extends Factory
     public function definition()
     {
         return [
-            'clientNumber' => $this->faker->unique()->numberBetween(1, 10000),
-            'name' => $this->faker->company(),
-            'contactEmail' => $this->faker->unique()->companyEmail(),
-            'contactPhoneNumber' => $this->faker->unique()->e164PhoneNumber(),
+            'revisionNumber' => $this->faker->numberBetween(1, 100),
+            'fileId' => $this->faker->numberBetween(1, 100)
         ];
     }
 }
