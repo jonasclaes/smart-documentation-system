@@ -9,12 +9,7 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {
-        colors: {
-            sky: colors.sky,
-            cyan: colors.cyan
-        }
-    },
+    extend: {},
   },
   variants: {
     extend: {},
