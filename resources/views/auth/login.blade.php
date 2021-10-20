@@ -20,7 +20,13 @@
                             name="email"
                             id="email"
                             value="{{ old('email') }}"
-                            class="block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            class="block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 @error('email') ring ring-red-500 ring-opacity-50 @enderror">
+
+                        @error('email')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="mt-2">
                         <label
@@ -33,7 +39,13 @@
                             autocomplete="current-password"
                             name="password"
                             id="password"
-                            class="block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            class="block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 @error('password') ring ring-red-500 ring-opacity-50 @enderror">
+
+                        @error('password')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="mt-2">
                         <label
