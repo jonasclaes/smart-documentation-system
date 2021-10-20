@@ -40,7 +40,7 @@
                 <li class="hover:bg-gray-100">
                     <a
                         href="."
-                        class="h-16 px-6 flex flex justify-center items-center w-full
+                        class="h-16 px-6 flex justify-center items-center w-full
 					focus:text-orange-500">
                         <outline-cog-icon class="h-6 w-6"/>
                     </a>
@@ -49,8 +49,8 @@
 
             <div class="mt-auto h-16 flex items-center w-full">
                 <!-- Action Section -->
-                {{--                        <!-- Authentication Links -->--}}
-                {{--                        @guest--}}
+                <!-- Authentication Links -->
+                <!-- {{--                        @guest--}}
                 {{--                            @if (Route::has('login'))--}}
                 {{--                                <li class="nav-item">--}}
                 {{--                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
@@ -80,24 +80,24 @@
                 {{--                                    </form>--}}
                 {{--                                </div>--}}
                 {{--                            </li>--}}
-                {{--                        @endguest--}}
+                {{--                        @endguest--}} -->
                 @guest
                     <a
                         href="{{ route('login') }}"
-                        class="h-16 w-10 mx-auto flex flex justify-center items-center
+                        class="h-16 mx-auto flex justify-center items-center
 				        w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">
                         <outline-login-icon class="h-6 w-6"/>
                     </a>
-{{--                    <a--}}
+<!-- {{--                    <a--}}
 {{--                        href="{{ route('register') }}"--}}
-{{--                        class="h-16 w-10 mx-auto flex flex justify-center items-center--}}
+{{--                        class="h-16 w-10 mx-auto flex justify-center items-center--}}
 {{--				        w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">--}}
 {{--                        {{ __('Register') }}--}}
-{{--                    </a>--}}
+{{--                    </a>--}} -->
                 @else
                     <a
                         href="{{ route('logout') }}"
-                        class="h-16 w-10 mx-auto flex flex justify-center items-center
+                        class="h-16 mx-auto flex justify-center items-center
 				w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <outline-logout-icon class="h-6 w-6"/>
