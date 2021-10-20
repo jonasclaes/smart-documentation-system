@@ -88,6 +88,12 @@
 				        w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">
                         <outline-login-icon class="h-6 w-6"/>
                     </a>
+{{--                    <a--}}
+{{--                        href="{{ route('register') }}"--}}
+{{--                        class="h-16 w-10 mx-auto flex flex justify-center items-center--}}
+{{--				        w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">--}}
+{{--                        {{ __('Register') }}--}}
+{{--                    </a>--}}
                 @else
                     <a
                         href="{{ route('logout') }}"
@@ -106,10 +112,9 @@
 
         </aside>
 
-                <main class="py-5 w-full">
-                    @yield('content')
-                </main>
-{{--        <example-component test="{{config('app.name', 'Laravel')}}"></example-component>--}}
+        <main class="py-5 w-full">
+            @yield('content')
+        </main>
     </div>
 </div>
 </body>
