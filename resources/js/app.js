@@ -26,8 +26,18 @@ const app = createApp({});
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+// Automatically import all the outline icons.
+Object.entries(require("@heroicons/vue/outline")).map(entry => {
+    app.component('Outline' + entry[0], entry[1]);
+});
+
+// Automatically import all the solid icons.
+Object.entries(require("@heroicons/vue/solid")).map(entry => {
+    app.component('Solid' + entry[0], entry[1]);
+});
+
 import ExampleComponent from './components/ExampleComponent.vue';
-app.component("example-component", ExampleComponent);
+app.component("ExampleComponent", ExampleComponent);
 
 /**
  * Next, we will attach the Vue instance to the page.
