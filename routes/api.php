@@ -18,6 +18,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Create API token route.
+Route::post('/token/create', [App\Http\Controllers\TokenController::class, 'createToken'])->name('token_create');
+
 Route::apiResources([
     'client' => App\Http\Controllers\Api\ClientController::class
 ]);
