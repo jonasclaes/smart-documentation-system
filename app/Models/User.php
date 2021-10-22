@@ -18,7 +18,10 @@ class User extends Authenticatable
         'lastName',
         'username',
         'email',
-        'password'
+        'phoneNumber',
+        'password',
+        'active',
+        'rights'
     ];
 
     // Hide the following properties.

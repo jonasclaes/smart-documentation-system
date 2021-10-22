@@ -9,6 +9,17 @@ class RevisionRequest extends Model
 {
     use HasFactory;
 
+    // Allow mass filling of the following properties.
+    protected $fillable = [
+        'name',
+        'technicianFirstName',
+        'technicianLastName',
+        'technicianEmail',
+        'fileId',
+        'categoryId',
+        'submitted'
+    ];
+
     /**
      * Get the revision category that this request has.
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
