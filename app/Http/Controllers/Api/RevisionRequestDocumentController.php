@@ -15,7 +15,7 @@ class RevisionRequestDocumentController extends Controller
      */
     public function index()
     {
-        //
+        return RevisionRequestDocument::all();
     }
 
     /**
@@ -26,7 +26,9 @@ class RevisionRequestDocumentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $revisionRequestDocument = RevisionRequestDocument::create($request->all());
+
+        return response()->json($revisionRequestDocument, 201);
     }
 
     /**
@@ -37,7 +39,7 @@ class RevisionRequestDocumentController extends Controller
      */
     public function show(RevisionRequestDocument $revisionRequestDocument)
     {
-        //
+        return $revisionRequestDocument;
     }
 
     /**
@@ -49,7 +51,9 @@ class RevisionRequestDocumentController extends Controller
      */
     public function update(Request $request, RevisionRequestDocument $revisionRequestDocument)
     {
-        //
+        $revisionRequestDocument->update($request->all());
+
+        return response()->json($revisionRequestDocument, 200);
     }
 
     /**
@@ -60,6 +64,8 @@ class RevisionRequestDocumentController extends Controller
      */
     public function destroy(RevisionRequestDocument $revisionRequestDocument)
     {
-        //
+        $revisionRequestDocument->delete();
+
+        return response()->json(null, 204);
     }
 }

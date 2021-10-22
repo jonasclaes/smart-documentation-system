@@ -15,7 +15,7 @@ class RevisionController extends Controller
      */
     public function index()
     {
-        //
+        return Revision::all();
     }
 
     /**
@@ -26,7 +26,9 @@ class RevisionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $revision = Revision::create($request->all());
+
+        return response()->json($revision, 201);
     }
 
     /**
@@ -37,7 +39,7 @@ class RevisionController extends Controller
      */
     public function show(Revision $revision)
     {
-        //
+        return $revision;
     }
 
     /**
@@ -49,7 +51,9 @@ class RevisionController extends Controller
      */
     public function update(Request $request, Revision $revision)
     {
-        //
+        $revision->update($request->all());
+
+        return response()->json($revision, 200);
     }
 
     /**
@@ -60,6 +64,8 @@ class RevisionController extends Controller
      */
     public function destroy(Revision $revision)
     {
-        //
+        $revision->delete();
+
+        return response()->json(null, 204);
     }
 }

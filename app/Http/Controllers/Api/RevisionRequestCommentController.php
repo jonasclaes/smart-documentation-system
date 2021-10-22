@@ -15,7 +15,7 @@ class RevisionRequestCommentController extends Controller
      */
     public function index()
     {
-        //
+        return RevisionRequestComment::all();
     }
 
     /**
@@ -26,7 +26,9 @@ class RevisionRequestCommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $revisionRequestComment = RevisionRequestComment::create($request->all());
+
+        return response()->json($revisionRequestComment, 201);
     }
 
     /**
@@ -37,7 +39,7 @@ class RevisionRequestCommentController extends Controller
      */
     public function show(RevisionRequestComment $revisionRequestComment)
     {
-        //
+        return $revisionRequestComment;
     }
 
     /**
@@ -49,7 +51,9 @@ class RevisionRequestCommentController extends Controller
      */
     public function update(Request $request, RevisionRequestComment $revisionRequestComment)
     {
-        //
+        $revisionRequestComment->update($request->all());
+
+        return response()->json($revisionRequestComment, 200);
     }
 
     /**
@@ -60,6 +64,8 @@ class RevisionRequestCommentController extends Controller
      */
     public function destroy(RevisionRequestComment $revisionRequestComment)
     {
-        //
+        $revisionRequestComment->delete();
+
+        return response()->json(null, 204);
     }
 }

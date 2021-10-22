@@ -15,7 +15,7 @@ class QRCodeController extends Controller
      */
     public function index()
     {
-        //
+        return QRCode::all();
     }
 
     /**
@@ -26,18 +26,20 @@ class QRCodeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $QRCode = QRCode::create($request->all());
+
+        return response()->json($QRCode, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\QRCode  $qRCode
+     * @param  \App\Models\QRCode  $QRCode
      * @return \Illuminate\Http\Response
      */
-    public function show(QRCode $qRCode)
+    public function show(QRCode $QRCode)
     {
-        //
+        return $QRCode;
     }
 
     /**
@@ -47,9 +49,11 @@ class QRCodeController extends Controller
      * @param  \App\Models\QRCode  $qRCode
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, QRCode $qRCode)
+    public function update(Request $request, QRCode $QRCode)
     {
-        //
+        $QRCode->update($request->all());
+
+        return response()->json($QRCode, 200);
     }
 
     /**
@@ -58,8 +62,10 @@ class QRCodeController extends Controller
      * @param  \App\Models\QRCode  $qRCode
      * @return \Illuminate\Http\Response
      */
-    public function destroy(QRCode $qRCode)
+    public function destroy(QRCode $QRCode)
     {
-        //
+        $QRCode->delete();
+
+        return response()->json(null, 204);
     }
 }

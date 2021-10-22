@@ -15,7 +15,7 @@ class RevisionRequestCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return RevisionRequestCategory::all();
     }
 
     /**
@@ -26,7 +26,9 @@ class RevisionRequestCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $revisionRequestCategory = RevisionRequestCategory::create($request->all());
+
+        return response()->json($revisionRequestCategory, 201);
     }
 
     /**
@@ -37,7 +39,7 @@ class RevisionRequestCategoryController extends Controller
      */
     public function show(RevisionRequestCategory $revisionRequestCategory)
     {
-        //
+        return $revisionRequestCategory;
     }
 
     /**
@@ -49,7 +51,9 @@ class RevisionRequestCategoryController extends Controller
      */
     public function update(Request $request, RevisionRequestCategory $revisionRequestCategory)
     {
-        //
+        $revisionRequestCategory->update($request->all());
+
+        return response()->json($revisionRequestCategory, 200);
     }
 
     /**
@@ -60,6 +64,8 @@ class RevisionRequestCategoryController extends Controller
      */
     public function destroy(RevisionRequestCategory $revisionRequestCategory)
     {
-        //
+        $revisionRequestCategory->delete();
+
+        return response()->json(null, 204);
     }
 }

@@ -15,7 +15,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        //
+        return Document::all();
     }
 
     /**
@@ -26,7 +26,9 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $document = Document::create($request->all());
+
+        return response()->json($document, 201);
     }
 
     /**
@@ -37,7 +39,7 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        //
+        return $document;
     }
 
     /**
@@ -49,7 +51,9 @@ class DocumentController extends Controller
      */
     public function update(Request $request, Document $document)
     {
-        //
+        $document->update($request->all());
+
+        return response()->json($document, 200);
     }
 
     /**
@@ -60,6 +64,8 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-        //
+        $document->delete();
+
+        return response()->json(null, 204);
     }
 }

@@ -9,6 +9,15 @@ class File extends Model
 {
     use HasFactory;
 
+    // Allow mass filling of the following properties.
+    protected $fillable = [
+        'fileId',
+        'name',
+        'enclosureId',
+        'uniqueId',
+        'clientId'
+    ];
+
     /**
      * Get the client that owns the file.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class RevisionRequestComment extends Model
 {
     use HasFactory;
+
+    // Allow mass filling of the following properties.
+    protected $fillable = [
+        'content',
+        'revisionRequestId'
+    ];
 }

@@ -9,6 +9,11 @@ class RevisionRequestCategory extends Model
 {
     use HasFactory;
 
+    // Allow mass filling of the following properties.
+    protected $fillable = [
+        'name'
+    ];
+
     /**
      * Get all the revision requests with this category.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

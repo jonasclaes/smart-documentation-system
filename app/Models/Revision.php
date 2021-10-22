@@ -9,6 +9,12 @@ class Revision extends Model
 {
     use HasFactory;
 
+    // Allow mass filling of the following properties.
+    protected $fillable = [
+        'revisionNumber',
+        'fileId'
+    ];
+    
     /**
      * Get the file that owns this revision.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
