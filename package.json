@@ -10,7 +10,6 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@heroicons/vue": "^1.0.4",
         "@tailwindcss/forms": "^0.3.4",
         "autoprefixer": "^10.3.7",
         "axios": "^0.21",
@@ -22,8 +21,6 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
         "tailwindcss": "^2.2.16",
-        "vue": "^3.2.20",
-        "vue-loader": "^16.8.1",
         "postcss-viewport-height-correction": "^1.1.1"
     }
 }
