@@ -19,9 +19,7 @@
 
         <!-- Content -->
         <div class="bg-white rounded-xl p-4 w-full">
-            <ul>
-                @include('components.FilesList')
-            </ul>
+            <x-files-list files="20"></x-files-list>
         </div>
     </div>
 
