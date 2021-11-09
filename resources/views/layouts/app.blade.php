@@ -119,7 +119,7 @@
 
         </aside>
 
-        <main class="py-5 w-full">
+        <main class="py-5 w-full overflow-auto">
             @include('components.Alerts')
             @yield('content')
         </main>
