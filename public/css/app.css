@@ -6564,6 +6564,7 @@ select {
 
 .h-screen {
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 .max-h-0 {
@@ -6712,6 +6713,7 @@ select {
 
 .max-h-screen {
   max-height: 100vh;
+  max-height: calc(var(--vh, 1vh) * 100);
 }
 
 .min-h-0 {
@@ -6724,6 +6726,7 @@ select {
 
 .min-h-screen {
   min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
 }
 
 .w-0 {
@@ -37870,6 +37873,7 @@ select {
 
   .sm\:h-screen {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 
   .sm\:max-h-0 {
@@ -38018,6 +38022,7 @@ select {
 
   .sm\:max-h-screen {
     max-height: 100vh;
+    max-height: calc(var(--vh, 1vh) * 100);
   }
 
   .sm\:min-h-0 {
@@ -38030,6 +38035,7 @@ select {
 
   .sm\:min-h-screen {
     min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
   }
 
   .sm\:w-0 {
@@ -69098,6 +69104,7 @@ select {
 
   .md\:h-screen {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 
   .md\:max-h-0 {
@@ -69246,6 +69253,7 @@ select {
 
   .md\:max-h-screen {
     max-height: 100vh;
+    max-height: calc(var(--vh, 1vh) * 100);
   }
 
   .md\:min-h-0 {
@@ -69258,6 +69266,7 @@ select {
 
   .md\:min-h-screen {
     min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
   }
 
   .md\:w-0 {
@@ -100326,6 +100335,7 @@ select {
 
   .lg\:h-screen {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 
   .lg\:max-h-0 {
@@ -100474,6 +100484,7 @@ select {
 
   .lg\:max-h-screen {
     max-height: 100vh;
+    max-height: calc(var(--vh, 1vh) * 100);
   }
 
   .lg\:min-h-0 {
@@ -100486,6 +100497,7 @@ select {
 
   .lg\:min-h-screen {
     min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
   }
 
   .lg\:w-0 {
@@ -131554,6 +131566,7 @@ select {
 
   .xl\:h-screen {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 
   .xl\:max-h-0 {
@@ -131702,6 +131715,7 @@ select {
 
   .xl\:max-h-screen {
     max-height: 100vh;
+    max-height: calc(var(--vh, 1vh) * 100);
   }
 
   .xl\:min-h-0 {
@@ -131714,6 +131728,7 @@ select {
 
   .xl\:min-h-screen {
     min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
   }
 
   .xl\:w-0 {
@@ -162782,6 +162797,7 @@ select {
 
   .\32xl\:h-screen {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 
   .\32xl\:max-h-0 {
@@ -162930,6 +162946,7 @@ select {
 
   .\32xl\:max-h-screen {
     max-height: 100vh;
+    max-height: calc(var(--vh, 1vh) * 100);
   }
 
   .\32xl\:min-h-0 {
@@ -162942,6 +162959,7 @@ select {
 
   .\32xl\:min-h-screen {
     min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
   }
 
   .\32xl\:w-0 {
