@@ -42,7 +42,15 @@
                         href="."
                         class="h-16 px-6 flex justify-center items-center w-full
 					focus:text-orange-500">
-                        <outline-cog-icon class="h-6 w-6"/>
+                        <x-heroicon-o-cog class="h-6 w-6"/>
+                    </a>
+                </li>
+                <li class="hover:bg-gray-100">
+                    <a
+                        href="{{ route('files') }}"
+                        class="h-16 px-6 flex justify-center items-center w-full
+					focus:text-orange-500">
+                        <x-heroicon-o-document-duplicate class="h-6 w-6"/>
                     </a>
                 </li>
             </ul>
@@ -86,7 +94,7 @@
                         href="{{ route('login') }}"
                         class="h-16 mx-auto flex justify-center items-center
 				        w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">
-                        <outline-login-icon class="h-6 w-6"/>
+                        <x-heroicon-o-login class="h-6 w-6"/>
                     </a>
 <!-- {{--                    <a--}}
 {{--                        href="{{ route('register') }}"--}}
@@ -100,7 +108,7 @@
                         class="h-16 mx-auto flex justify-center items-center
 				w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <outline-logout-icon class="h-6 w-6"/>
+                        <x-heroicon-o-logout class="h-6 w-6"/>
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
