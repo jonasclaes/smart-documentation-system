@@ -13,9 +13,21 @@ class FileController extends Controller
      *
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('files/files');
+        $request->flash();
+
+        $documentName = $request->query('documentName', '');
+        $clientName = $request->query('clientName', '');
+
+        $files = File::with('client')
+            ->whereHas('client', function ($query) use ($clientName) {
+                $query->where('name', 'like', "%$clientName%");
+            })
+            ->where('name', 'like', "%$documentName%")
+            ->get();
+
+        return view('files.files', ['files' => $files]);
     }
 
     /**

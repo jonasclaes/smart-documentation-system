@@ -2,15 +2,21 @@
 
 namespace App\View\Components;
 
+use App\Models\File;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
 class FilesList extends Component
 {
+    /**
+     * @var File[]|Collection
+     */
     public $files;
 
     /**
      * Create a new component instance.
      *
+     * @param $files File[]|Collection
      * @return void
      */
     public function __construct($files)
