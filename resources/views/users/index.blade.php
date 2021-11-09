@@ -11,7 +11,7 @@
                            class="w-2/3 py-2 border-b-2 rounded-xl border-blueGray-600 outline-none focus:border-cyan-500">
                 </div>
                 <p>Create User</p>
-                <a href="{{route('admin.users.create')}}"><x-heroicon-o-plus-circle class="h-12 w-12"/></a>
+                <a href="{{route('users.create')}}"><x-heroicon-o-plus-circle class="h-12 w-12"/></a>
             </div>
         </div>
         <div class="bg-white rounded-xl p-4 w-full mx-auto mb-3 text-xl font-bold">

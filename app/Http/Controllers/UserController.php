@@ -1,35 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
     public function index()
     {
         $users = User::all();
 
-        return view('admin.users.index', ['users' => User::paginate(8)]);
+        return view('users.index', ['users' => User::paginate(8)]);
 
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('users.create');
     }
 
     /**
@@ -43,8 +42,7 @@ class UserController extends Controller
         $user = User::create($request->All());
         $request->session()->flash('success', 'User ' . $user->firstName . ' ' . $user->lastName . ' was successfully created.');
 
-        return redirect(route('admin.users.index'));
-
+        return redirect(route('users.index'));
     }
 
     /**
@@ -62,11 +60,11 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
     public function edit($id)
     {
-        return view('admin.users.edit',
+        return view('users.edit',
             [
                 'user' => User::find($id)
             ]);
@@ -85,7 +83,7 @@ class UserController extends Controller
         $user->update($request->All());
         $request->session()->flash('success', 'Information of user ' . $user->firstName .
             ' ' . $user->lastName . ' was successfully updated.');
-        return redirect(route('admin.users.index'));
+        return redirect(route('users.index'));
     }
 
     /**
@@ -99,6 +97,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         User::destroy($id);
         $request->session()->flash('success', 'User ' . $user->firstName . ' ' . $user->lastName . ' was successfully deleted.');
-        return redirect(route('admin.users.index'));
+        return redirect(route('users.index'));
     }
 }

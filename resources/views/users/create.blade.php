@@ -6,7 +6,7 @@
         <div class="mt-6 bg-blueGray-300 rounded-xl shadow-md p-4 mx-auto lg:w-8/12 flex-row justify-center align-middle">
             <h1 class="text-xl font-bold text-white">{{ __('Please enter user information') }}</h1>
             <div class="flex-auto">
-                <form method="POST" action="{{ route('admin.users.store') }}">
+                <form method="POST" action="{{ route('users.store') }}">
                     @include('components.UserForm', ['create' => true])
                 </form>
             </div>

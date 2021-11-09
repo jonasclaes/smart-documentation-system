@@ -6,7 +6,7 @@
         <div class="mt-6 bg-blueGray-300 rounded-xl shadow-md p-4 mx-auto lg:w-8/12 flex-row justify-center align-middle">
             <h1 class="text-xl">{{ __('Register') }}</h1>
             <div class="flex-auto">
-                <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
+                <form method="POST" action="{{ route('users.update', $user->id) }}">
                     @method("PATCH")
                     @include('components.UserForm', ['edit' => true])
                 </form>

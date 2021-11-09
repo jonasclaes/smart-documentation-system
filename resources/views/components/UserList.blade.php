@@ -19,13 +19,13 @@
                 <div class="flex justify-between">
                     <a href="">
                         <x-heroicon-s-eye class="h-6 w-6"/></a>
-                    <a href="{{route('admin.users.edit', $user->id)}}" role="button">
+                    <a href="{{route('users.edit', $user->id)}}" role="button">
                         <x-heroicon-s-pencil-alt class="h-6 w-6"/></a>
                     <a href=""
                        onclick="event.preventDefault(); document.getElementById('delete-user-form-{{$user->id}}').submit()"
                        role="button">
                         <x-heroicon-s-trash class="h-6 w-6"/></a>
-                    <form id="delete-user-form-{{$user->id}}" action="{{route('admin.users.destroy', $user->id)}}"
+                    <form id="delete-user-form-{{$user->id}}" action="{{route('users.destroy', $user->id)}}"
                           method="POST" style="display: none">
                         @csrf
                         @method("DELETE")
