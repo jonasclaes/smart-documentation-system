@@ -9,6 +9,15 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    colors: {
+        blueGray: colors.blueGray,
+        lime: colors.lime,
+        teal: colors.teal,
+        cyan: colors.cyan,
+        fuchsia: colors.fuchsia,
+        gray: colors.gray,
+        white: colors.white
+    },
     extend: {},
   },
   variants: {

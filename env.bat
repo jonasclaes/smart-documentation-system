@@ -1,0 +1,51 @@
+setx APP_NAME Laravel
+setx APP_ENV local
+setx APP_KEY base64:wXirvSnE3pnukamhYiUN7oezLoHixUnFytlgJ9g5W0E=
+setx APP_DEBUG true
+setx APP_URL http://127.0.0.1:8000
+
+setx LOG_CHANNEL stack
+setx LOG_LEVEL debug
+
+setx DB_CONNECTION mysql
+setx DB_HOST 127.0.0.1
+setx DB_PORT 3306
+setx DB_DATABASE forge
+setx DB_USERNAME root
+setx DB_PASSWORD 9817
+
+setx BROADCAST_DRIVER log
+setx CACHE_DRIVER file
+setx FILESYSTEM_DRIVER local
+setx QUEUE_CONNECTION sync
+setx SESSION_DRIVER file
+setx SESSION_LIFETIME 120
+
+setx MEMCACHED_HOST memcached
+
+@REM setx REDIS_HOST redis
+@REM setx REDIS_PASSWORD null
+@REM setx REDIS_PORT 6379
+
+setx MAIL_MAILER smtp
+setx MAIL_HOST mailhog
+setx MAIL_PORT 1025
+setx MAIL_USERNAME null
+setx MAIL_PASSWORD null
+setx MAIL_ENCRYPTION null
+setx MAIL_FROM_ADDRESS null
+setx MAIL_FROM_NAME "Laravel"
+
+@REM setx AWS_ACCESS_KEY_ID
+@REM setx AWS_SECRET_ACCESS_KEY
+@REM setx AWS_DEFAULT_REGION us-east-1
+@REM setx AWS_BUCKET
+@REM setx AWS_USE_PATH_STYLE_ENDPOINT false
+
+@REM setx PUSHER_APP_ID
+@REM setx PUSHER_APP_KEY
+@REM setx PUSHER_APP_SECRET
+@REM setx PUSHER_APP_CLUSTER mt1
+
+@REM setx MIX_PUSHER_APP_KEY "${PUSHER_APP_KEY}"
+@REM setx MIX_PUSHER_APP_CLUSTER "${PUSHER_APP_CLUSTER}"

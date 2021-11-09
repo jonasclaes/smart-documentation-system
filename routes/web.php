@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('file', App\Http\Controllers\FileController::class)
+Route::resource('file', 'FileController')
     ->name('index', 'files');
+
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function (){
+    Route::resource('/users', 'Admin\UserController');
+});

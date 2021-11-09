@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mx-auto">
-        <div class="bg-white rounded-xl shadow-md p-4 mx-auto lg:w-1/2">
+    <div class="container mx-auto ">
+        <div class="mx-auto lg:w-10/12 justify-center text-center">Please Register New User Information</div>
+        <div class="mt-6 bg-blue-200 rounded-xl shadow-md p-4 mx-auto lg:w-8/12 flex-row justify-center align-middle">
             <h1 class="text-xl">{{ __('Register') }}</h1>
             <div class="flex-auto">
                 <form method="POST" action="{{ route('register') }}">
@@ -106,10 +107,10 @@
                         </span>
                         @enderror
                     </div>
-                    <div class="grid grid-cols-1 mt-2">
+                    <div class="grid grid-cols-1 mt-2 justify-end">
                         <button
                             type="submit"
-                            class="text-base font-medium rounded-lg p-3 text-white bg-blue-700">
+                            class="text-base font-medium rounded-lg p-3 text-white bg-gray-500 w-1/6">
                             {{ __('Register') }}
                         </button>
                     </div>
