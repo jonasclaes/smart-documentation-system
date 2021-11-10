@@ -46,14 +46,6 @@
                 </li>
                 <li class="hover:bg-gray-100">
                     <a
-                        href="{{ route('files') }}"
-                        class="h-16 px-6 flex justify-center items-center w-full
-					focus:text-orange-500">
-                        <x-heroicon-o-document-duplicate class="h-6 w-6"/>
-                    </a>
-                </li>
-                <li class="hover:bg-gray-100">
-                    <a
                         href="{{ route('users.index') }}"
                         class="h-16 px-6 flex justify-center items-center w-full
 					focus:text-orange-500">
