@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +25,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('file', FileController::class)
-    ->name('index', 'files');
+Route::resource('files', FileController::class)
+    ->name('index', 'files')
+    ->name('show', 'files.show');
 
 Route::resource('users', UserController::class);

@@ -12,8 +12,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+{{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
+{{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -36,6 +36,14 @@
 
             <ul>
                 <!-- Items Section -->
+                <li class="hover:bg-gray-100">
+                    <a
+                        href="{{ route('files') }}"
+                        class="h-16 px-6 flex justify-center items-center w-full
+					focus:text-orange-500">
+                        <x-heroicon-o-document-duplicate class="h-6 w-6"/>
+                    </a>
+                </li>
                 <li class="hover:bg-gray-100">
                     <a
                         href="{{ route('files') }}"
