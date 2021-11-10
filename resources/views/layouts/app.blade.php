@@ -24,7 +24,7 @@
     <!-- Component -->
     <div class="h-screen w-screen flex bg-gray-200">
         <!-- Container -->
-        <aside class="md:flex flex-col items-center bg-white text-gray-700 shadow h-full hidden">
+        <aside class="flex flex-col items-center bg-white text-gray-700 shadow">
             <!-- Side Nav Bar-->
             <div class="h-16 flex items-center w-full">
                 <!-- Logo Section -->
@@ -112,7 +112,7 @@
 
         </aside>
 
-        <main class="py-5 w-full overflow-auto">
+        <main class="py-5 w-full overflow-y-scroll">
             @yield('content')
         </main>
     </div>
