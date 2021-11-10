@@ -8,7 +8,13 @@
         <!-- Menu bar -->
         <div class="bg-white rounded-xl p-4 w-full mb-3">
             <h1 class="text-xl font-semibold mb-2 pb-1 border-b">File</h1>
-            <p><strong>{{ $file->name }}</strong> made for client <strong>{{ $file->client->name }}</strong></p>
+            <div class="flex">
+                <p><strong>{{ $file->name }}</strong> made for client <strong>{{ $file->client->name }}</strong></p>
+                <div class="flex justify-end flex-grow gap-2">
+                    <a href="{{ route('files.edit', ['file' => $file]) }}" class="px-9 py-3 bg-blue-600 text-white rounded-md">Edit</a>
+                    <a href="" class="px-9 py-3 bg-red-600 text-white rounded-md">Delete</a>
+                </div>
+            </div>
         </div>
 
         <!-- Content -->
