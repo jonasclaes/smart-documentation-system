@@ -55,11 +55,11 @@ class FileController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
     public function show(File $file)
     {
-        //
+        return view('files.file', ['file' => $file]);
     }
 
     /**
