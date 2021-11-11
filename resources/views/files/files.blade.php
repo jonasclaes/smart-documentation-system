@@ -6,8 +6,8 @@
         <!-- Menu bar -->
         <div class="bg-white rounded-xl p-4 w-full mb-3">
             <h1 class="text-xl font-semibold mb-2 pb-1 border-b">Files</h1>
-            <form action="{{ route('files') }}" method="GET" class="flex gap-4">
-                <div class="flex-initial">
+            <form action="{{ route('files.index') }}" method="GET" class="flex gap-4">
+                <div>
                     <input
                         type="text"
                         name="clientName"
@@ -15,7 +15,7 @@
                         placeholder="Client name"
                         value="{{ old('clientName') }}">
                 </div>
-                <div class="flex-initial">
+                <div>
                     <input
                         type="text"
                         name="documentName"
