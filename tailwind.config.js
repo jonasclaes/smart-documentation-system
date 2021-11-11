@@ -11,12 +11,10 @@ module.exports = {
   theme: {
     colors: {
         blueGray: colors.blueGray,
-        lime: colors.lime,
-        teal: colors.teal,
-        cyan: colors.cyan,
-        fuchsia: colors.fuchsia,
         gray: colors.gray,
-        white: colors.white
+        white: colors.white,
+        red: colors.red,
+        green: colors.green
     },
     extend: {},
   },
