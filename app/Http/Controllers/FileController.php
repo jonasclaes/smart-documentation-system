@@ -38,7 +38,8 @@ class FileController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::all()->sortBy('name');
+        return view('files.create', ['clients' => $clients]);
     }
 
     /**
@@ -49,7 +50,9 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file = File::create($request->all());
+
+        return redirect()->route('files.show', ['file' => $file]);
     }
 
     /**
