@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use App\Models\Client;
 
 class FileController extends Controller
 {
@@ -37,7 +38,8 @@ class FileController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::all()->sortBy('name');
+        return view('files.create', ['clients' => $clients]);
     }
 
     /**
@@ -48,7 +50,9 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file = File::create($request->all());
+
+        return redirect()->route('files.show', ['file' => $file]);
     }
 
     /**
@@ -70,7 +74,8 @@ class FileController extends Controller
      */
     public function edit(File $file)
     {
-        //
+        $clients = Client::all()->sortBy('name');
+        return view('files.edit', ['file' => $file, 'clients' => $clients]);
     }
 
     /**
@@ -82,7 +87,9 @@ class FileController extends Controller
      */
     public function update(Request $request, File $file)
     {
-        //
+        $file->update($request->all());
+
+        return redirect()->route('files.show', ['file' => $file]);
     }
 
     /**
@@ -93,6 +100,8 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
-        //
+        $file->delete();
+
+        return redirect()->route('files.index');
     }
 }
