@@ -5,19 +5,29 @@
 @section('content')
 
     <div class="container mx-auto px-3">
+        <!-- Delete form -->
+        <form action="{{ route('files.destroy', ['file' => $file]) }}" method="POST" id="deleteForm">
+            @csrf
+            @method('DELETE')
+        </form>
+
+        <a href="{{ route('files.index') }}"
+            class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
+             <x-heroicon-o-chevron-left class="h-4 w-4"/><span>Back</span>
+         </a>
+
         <!-- Menu bar -->
         <div class="bg-white rounded-xl p-4 w-full mb-3">
             <h1 class="text-xl font-semibold mb-2 pb-1 border-b">File</h1>
             <div class="flex flex-wrap items-start gap-2">
                 <p class="flex-grow"><strong>{{ $file->name }}</strong> made for client <strong>{{ $file->client->name }}</strong></p>
                 <div class="flex justify-end flex-grow gap-2 w-full md:w-auto">
-{{--                    <a href="{{ route('files.edit', ['file' => $file]) }}" class="bg-blue-600 hover:bg-blue-700 px-9 py-3 text-white rounded">Edit</a>--}}
-                    <a href="#"
+                    <a href="{{ route('files.edit', ['file' => $file]) }}"
                        class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
                         <x-heroicon-o-pencil class="h-4 w-4 mr-1"/>Edit
                     </a>
-                    <a href="#"
+                    <a href="javascript:$('#deleteForm').submit();"
                        class="bg-red-600 hover:bg-red-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
                         <x-heroicon-o-trash class="h-4 w-4 mr-1"/>Delete
@@ -54,6 +64,7 @@
                     <ul>
                         @foreach($file->revisions->sortByDesc('updated_at') as $revision)
                             <li>
+                                {{-- TODO: Add link to revisions --}}
                                 <a href="#" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
                         border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
                                     <div>
@@ -80,6 +91,7 @@
                     <ul>
                         @foreach($file->revisionRequests->sortByDesc('updated_at') as $revisionRequest)
                             <li>
+                                {{-- TODO: Add link to revision requests --}}
                                 <a href="#" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
                         border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
                                     <div>
