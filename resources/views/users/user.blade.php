@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex-row justify-center mx-auto p-3 pr-6">
+    <div class="container mx-auto px-3">
         <a href="{{ route('users.index') }}"
            class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
             <x-heroicon-o-chevron-left class="h-4 w-4"/>
