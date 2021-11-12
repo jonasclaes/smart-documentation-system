@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex-row justify-center mx-auto p-3">
+    <div class="container mx-auto px-3">
         <!-- Menu bar -->
         <x-UserSearch :users="$users"></x-UserSearch>
         <div class="max-h-screen bg-white w-full rounded-2xl p-3">
