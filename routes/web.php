@@ -25,8 +25,6 @@ Auth::routes();
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('files', FileController::class)
-    ->name('index', 'files')
-    ->name('show', 'files.show');
+Route::resource('files', FileController::class);
 
 Route::resource('users', UserController::class);

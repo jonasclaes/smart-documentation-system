@@ -23,7 +23,7 @@
     <!-- Component -->
     <div class="h-screen w-screen flex bg-gray-200">
         <!-- Container -->
-        <aside class="flex flex-col items-center bg-white text-gray-700 shadow h-full">
+        <aside class="flex flex-col items-center bg-white text-gray-700 shadow">
             <!-- Side Nav Bar-->
             <div class="h-16 flex items-center w-full">
                 <!-- Logo Section -->
@@ -38,7 +38,7 @@
                 <!-- Items Section -->
                 <li class="hover:bg-gray-100">
                     <a
-                        href="{{ route('files') }}"
+                        href="{{ route('files.index') }}"
                         class="h-16 px-6 flex justify-center items-center w-full
 					focus:text-orange-500">
                         <x-heroicon-o-document-duplicate class="h-6 w-6"/>
@@ -119,7 +119,7 @@
 
         </aside>
 
-        <main class="py-5 w-full overflow-auto">
+        <main class="py-5 w-full overflow-y-scroll">
             @include('components.Alerts')
             @yield('content')
         </main>
