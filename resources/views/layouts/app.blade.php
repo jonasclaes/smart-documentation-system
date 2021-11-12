@@ -6,8 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Delta Technics Smart Docs') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -43,6 +42,14 @@
                         class="h-16 px-6 flex justify-center items-center w-full
 					focus:text-orange-500">
                         <x-heroicon-o-document-duplicate class="h-6 w-6"/>
+                    </a>
+                </li>
+                <li class="hover:bg-gray-100">
+                    <a
+                        href="{{ route('users.index') }}"
+                        class="h-16 px-6 flex justify-center items-center w-full
+					focus:text-orange-500">
+                        <x-heroicon-s-user-group class="h-6 w-6"/>
                     </a>
                 </li>
             </ul>
@@ -113,6 +120,7 @@
         </aside>
 
         <main class="py-5 w-full overflow-y-scroll">
+            @include('components.Alerts')
             @yield('content')
         </main>
     </div>

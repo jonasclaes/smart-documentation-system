@@ -2,3 +2,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* custom styling */
+#alert {
+    cursor: pointer;
+}
+
+input:disabled {
+    background-color: #f7fafc;
+    opacity: 0.6;
+}
+
+.hide {
+    display: none;
+}
+

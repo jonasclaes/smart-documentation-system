@@ -9,6 +9,13 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    colors: {
+        blueGray: colors.blueGray,
+        gray: colors.gray,
+        white: colors.white,
+        red: colors.red,
+        green: colors.green
+    },
     extend: {},
   },
   variants: {
