@@ -1,10 +1,10 @@
 @php /** @var App\Models\User[]|Illuminate\Database\Eloquent\Collection $users */ @endphp
 
-<ul>
+<ul class="grid grid-cols-1 lg:grid-cols-2 gap">
     @if(count($users) > 0)
         @foreach($users as $user)
             <li>
-                <a href="{{ route('users.show', ['user' => $user->id]) }}" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
+                <a href="{{ route('users.show', ['user' => $user->id]) }}" class="flex justify-between bg-white p-3 mx-1 rounded mb-2 shadow
                         border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out">
                     <div>
                         <span class="font-bold">{{$user->lastName}}, </span>

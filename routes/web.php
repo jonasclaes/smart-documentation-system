@@ -27,4 +27,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 Route::resource('files', FileController::class);
 
+Route::get('users/{user}/reset', 'App\Http\Controllers\UserController@resetPassword')->name('users.resetPassword');
+Route::get('users/{user}/updatePassword', 'App\Http\Controllers\UserController@updatePassword')->name('users.updatePassword');
 Route::resource('users', UserController::class);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -17,15 +18,13 @@ class UserController extends Controller
     {
         $request->flash();
 
-        $lastName = $request->query('lastName', '');
-        $firstName = $request->query('firstName', '');
-        $username = $request->query('username', '');
+        $query = $request->query('lastName', '');
 
-        $users = User::where('firstName', 'LIKE', "%$firstName%")
-            ->where('lastName', 'LIKE', "%$lastName%")
-            ->where('username', 'LIKE', "%$username%")
+        $users = User::where('firstName', 'LIKE', "%$query%")
+            ->orWhere('lastName', 'LIKE', "%$query%")
+            ->orwhere('username', 'LIKE', "%$query%")
             ->orderBy("lastName", "asc")
-            ->paginate(8);
+            ->paginate(16);
 
         return view('users.users', ['users' => $users]);
 
@@ -49,7 +48,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create($request->All());
+        $user = User::create(
+            [
+                'firstName' => $request->firstName,
+                'lastName' => $request->lastName,
+                'email' => $request -> email,
+                'phoneNumber' => $request->phoneNumber,
+                'username' => $request->username,
+                'password' => Hash::make($request->password)
+            ]
+        );
         $request->session()->flash('success', 'User ' . $user->firstName . ' ' . $user->lastName . ' was successfully created.');
         return redirect(route('users.index'));
     }
@@ -105,5 +113,34 @@ class UserController extends Controller
         $user->delete();
         $request->session()->flash('success', 'User ' . $user->firstName . ' ' . $user->lastName . ' was successfully deleted.');
         return redirect(route('users.index'));
+    }
+
+    /**
+     * Update the password voor the current user
+     *
+     * @param User $user
+     * @return Renderable
+     */
+    public function resetPassword(User $user)
+    {
+        return view('users.password',
+            [
+                'user' => $user
+            ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(Request $request, User $user)
+    {
+        $user->update(['password' => Hash::make($request->password)]);
+        $request->session()->flash('success', 'Information of user ' . $user->firstName .
+            ' ' . $user->lastName . ' was successfully updated.');
+        return redirect(route('users.show', ['user' => $user]));
     }
 }

@@ -167,7 +167,7 @@
                         <div class="grid grid-cols-8 gap-4 mt-4 justify-end align-bottom">
                             <button
                                 type="submit"
-                                class="col-end-9 col-span-1 text-base font-medium rounded-lg p-3 text-white bg-gray-600">
+                                class="col-end-9 col-span-2 text-base font-medium rounded-lg p-3 text-white bg-gray-600">
                                 {{ __('Create User') }}
                             </button>
                         </div>
