@@ -5,17 +5,18 @@
         @foreach($users as $user)
             <li>
                 <a href="{{ route('users.show', ['user' => $user->id]) }}" class="flex justify-between bg-white p-3 mx-1 rounded mb-2 shadow
-                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out">
-                    <div>
-                        <span class="font-bold">{{$user->lastName}}, </span>
-                        <span>{{$user->firstName}}</span>
-                        <span>  </span>
-                        <span class="italic text-gray-400">({{$user->username}})</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-400">User Id: {{$user->id}}</span>
-                        <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
-                    </div>
+                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out"
+                    @class([$user->active ? 'bg-white' :  'bg-gray-600'])>
+                <div>
+                    <span class="font-bold">{{$user->lastName}}, </span>
+                    <span>{{$user->firstName}}</span>
+                    <span>  </span>
+                    <span class="italic text-gray-400">({{$user->username}})</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-400">User Id: {{$user->id}}</span>
+                    <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
+                </div>
                 </a>
             </li>
         @endforeach

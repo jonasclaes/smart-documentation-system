@@ -52,7 +52,7 @@ class UserController extends Controller
             [
                 'firstName' => $request->firstName,
                 'lastName' => $request->lastName,
-                'email' => $request -> email,
+                'email' => $request->email,
                 'phoneNumber' => $request->phoneNumber,
                 'username' => $request->username,
                 'password' => Hash::make($request->password)
@@ -65,7 +65,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -142,5 +142,33 @@ class UserController extends Controller
         $request->session()->flash('success', 'Information of user ' . $user->firstName .
             ' ' . $user->lastName . ' was successfully updated.');
         return redirect(route('users.show', ['user' => $user]));
+    }
+
+    /**
+     * Update  the status of a user
+     * @param \Illuminate\Http\Request $request
+     * @param User $user
+     * @param Integer $active
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus(Request $request, User $user, $active)
+    {
+        $user->update([
+            'active' => $active
+        ]);
+
+        if ($user->update()) {
+            if($active == 1) {
+                $request->session()->flash('success', 'User ' . $user->firstName .
+                    ' ' . $user->lastName . ' is now ACTIVE.');
+            } else {
+                $request->session()->flash('success', 'User ' . $user->firstName .
+                    ' ' . $user->lastName . ' is now DEACTIVATED.');
+            }
+            return redirect(route('users.show', ['user' => $user]));
+        }
+
+        return redirect(route('users.show', ['user' => $user]))->with('error', 'failed to update the
+            status of user' . $user->firstName . ' ' . $user->lastName);
     }
 }
