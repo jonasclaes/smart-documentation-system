@@ -4,18 +4,10 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   purge: [
       './resources/**/*.blade.php',
-      './resources/**/*.js',
-      './resources/**/*.vue',
+      './resources/**/*.js'
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    colors: {
-        blueGray: colors.blueGray,
-        gray: colors.gray,
-        white: colors.white,
-        red: colors.red,
-        green: colors.green
-    },
     extend: {},
   },
   variants: {
@@ -23,5 +15,5 @@ module.exports = {
   },
   plugins: [
       require('@tailwindcss/forms')
-  ],
+  ]
 }
