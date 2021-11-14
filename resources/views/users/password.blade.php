@@ -12,7 +12,7 @@
         <div class="col-span-2 col-start-2 bg-white rounded-xl p-4">
             <form action="{{ route('users.updatePassword', ['user' => $user]) }}" method="POST" id="editPassword">
                 @csrf
-                @method("GET")
+                @method("PUT")
                 <div class="grid grid-cols-1  gap-3">
                     <div>
                         <label for="password"></label>

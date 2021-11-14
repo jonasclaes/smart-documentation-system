@@ -8,7 +8,7 @@
         <div class="flex-initial">
             <input
                 type="text"
-                name="lastName"
+                name="q"
                 class="block px-0.5 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-black"
                 placeholder="Search User"
                 value="">

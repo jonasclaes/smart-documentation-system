@@ -4,7 +4,7 @@
 
 @section('content')
     <!--Page Content-->
-    <div class="grid grid-cols-12 container mx-auto px-3">
+    <div class="container mx-auto px-3">
         <!--Back Button-->
         <a href="{{ route('users.index') }}"
            class="col-span-1 col-start-1 bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
@@ -17,35 +17,29 @@
             @csrf
             @method('DELETE')
         </form>
-        @if($user->active == 1)
-            <form action="{{ route('users.updateStatus', ['user' => $user, 'active' => 0]) }}" method="POST"
-                  id="updateStatus">
-                <input type="hidden" name="_method" value="GET">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            </form>
-        @else
-            <form action="{{ route('users.updateStatus', ['user' => $user, 'active' => 1]) }}" method="POST"
-                  id="updateStatus">
-                <input type="hidden" name="_method" value="GET">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            </form>
-        @endif
+        <form action="{{ route('users.updateStatus', ['user' => $user]) }}" method="POST"
+              id="updateStatus">
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="active" value="{{ intval(!$user->active) }}">
+        </form>
 
-    <!-- Menu bar -->
+        <!-- Menu bar -->
         <div class="col-span-12 bg-white rounded-xl p-4 w-full mb-3">
             <h1 class="text-xl font-semibold mb-2 pb-1 border-b">User Information</h1>
             <div class="flex flex-wrap items-start gap-2">
                 <p class="flex-grow">This page shows the information for an individual user.</strong></p>
                 <div class="flex justify-end flex-grow gap-2 w-full md:w-auto">
                     <!--(De)Activate User-->
-                    @if($user->active == 1)
+                    @if($user->active)
                         <button class="text-green-500 bg-white hover:bg-gray-100 text-white font-bold uppercase text-sm md:px-5 py-3
                     rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear
                     transition-all duration-150 flex-grow md:flex-grow-0
                        flex justify-center items-center"
                                 type="button"
                                 onclick="$('#updateStatus').submit();">
-                            <x-heroicon-o-check-circle class="h-4 w-4 mr-1 text-green-500"/>Active
+                            <x-heroicon-o-check-circle class="h-4 w-4 mr-1 text-green-500"/>
+                            Active
                         </button>
                     @else
                         <button class="text-red-500 bg-white hover:bg-gray-100 text-white font-bold uppercase text-sm md:px-5 py-3
@@ -54,7 +48,8 @@
                        flex justify-center items-center"
                                 type="button"
                                 onclick="$('#updateStatus').submit();">
-                            <x-heroicon-o-minus-circle class="h-4 w-4 mr-1 text-red-500"/>Inactive
+                            <x-heroicon-o-minus-circle class="h-4 w-4 mr-1 text-red-500"/>
+                            Inactive
                         </button>
                 @endif
                 <!--Reset Password button-->
@@ -72,7 +67,7 @@
                         Edit
                     </a>
                     <!--Delete Button to Modal-->
-                    <a onclick="toggleModal('modal-example-regular')"
+                    <a href="javascript:toggleModal('modal-example-regular')"
                        class="bg-red-600 hover:bg-red-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
                         <x-heroicon-o-trash class="h-4 w-4 mr-1"/>
@@ -82,32 +77,31 @@
             </div>
         </div>
 
-        <!-- User Information Section -->
-        <div class="col-span-12 lg:col-span-6 gap-4 bg-white rounded-xl p-3 lg:mr-1 mb-3 lg:mb-0 pb-5">
-            <h1 class="pl-2 font-bold text-left text-3xl">{{$user->firstName}} {{$user->lastName}} <span
-                    class="text-2xl font-normal text-gray-400">(User ID: {{$user->id}})</span></h1>
-            <p class="pl-2 text-gray-400 opacity-80 text-xl">Created on: {{$user->created_at}}</p>
-            <p class="pl-2 text-gray-400 opacity-80 text-xl">Last updated on: {{$user->updated_at}}</p>
-            <br>
-            <p class="pl-2 text-lg">First Name: <span class="font-bold">{{$user->firstName}}</span></p>
-            <p class="pl-2 text-lg">Last Name: <span class="font-bold">{{$user->lastName}}</span></p>
-            <p class="pl-2 text-lg">Username: <span class="font-bold">{{$user->username}}</span></p>
-            <p class="pl-2 text-lg">Email address: <a href="mailto:{{ $user->email }}"><span
-                        class="font-bold text-blue-500">{{$user->email}}</span></a></p>
-            <p class="pl-2 text-lg">Phone Number: <a href="tel:{{ $user->phoneNumber }}"><span
-                        class="font-bold text-blue-500">{{$user->phoneNumber}}</span></a></p>
-        </div>
-        <!-- User Logs Section -->
-        <div class="col-span-12 lg:col-span-6 gap-4 bg-white rounded-xl p-3 lg:ml-1 mb-3 lg:mb-0">
-            <h1 class="pl-2 font-bold text-left text-2xl">User Logs</h1>
-            <p class="pl-2 text-gray-400 opacity-80 text-lg">Recent activity
-                of {{$user->firstName}} {{$user->lastName}}.</p>
-        </div>
-        <!-- Projects Section -->
-        <div class="col-span-12 gap-4 bg-white rounded-xl lg:mt-2 p-3 pb-4">
-            <h1 class="pl-2 font-bold text-left text-2xl">Projects</h1>
-            <p class="pl-2 text-gray-400 opacity-80 text-lg">This section shows links to the projects/files that
-                {{$user->firstName}} {{$user->lastName}} has worked on.</p>
+        <div class="grid gap-3 grid-cols-12">
+            <!-- User Information Section -->
+            <div class="col-span-12 md:col-span-6 bg-white rounded-xl p-4">
+                <h1 class="font-semibold text-lg">{{$user->lastName}}, {{$user->firstName}}</h1>
+                <p class="opacity-40">Created on: {{$user->created_at}}</p>
+                <p class="opacity-40">Last updated on: {{$user->updated_at}}</p>
+                <br>
+                <p>First Name: {{$user->firstName}}</p>
+                <p>Last Name: {{$user->lastName}}</p>
+                <p>Username: {{$user->username}}</p>
+                <p>Email address: <a href="mailto:{{ $user->email }}" class="text-blue-500">{{$user->email}}</a></p>
+                <p>Phone Number: <a href="tel:{{ $user->phoneNumber }}" class="text-blue-500">{{$user->phoneNumber}}</a></p>
+            </div>
+            <!-- User Logs Section -->
+            <div class="col-span-12 md:col-span-6 bg-white rounded-xl p-4">
+                <h1 class="font-semibold text-lg">User Logs</h1>
+                <p class="opacity-40">Recent activity
+                    of {{$user->firstName}} {{$user->lastName}}.</p>
+            </div>
+            <!-- Projects Section -->
+            <div class="col-span-12 bg-white rounded-xl p-4">
+                <h1 class="font-semibold text-lg">Projects</h1>
+                <p class="opacity-40">This section shows links to the projects/files that
+                    {{$user->firstName}} {{$user->lastName}} has worked on.</p>
+            </div>
         </div>
     </div>
 

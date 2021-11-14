@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $request->flash();
 
-        $query = $request->query('lastName', '');
+        $query = $request->query('q', '');
 
         $users = User::where('firstName', 'LIKE', "%$query%")
             ->orWhere('lastName', 'LIKE', "%$query%")
@@ -50,15 +50,17 @@ class UserController extends Controller
     {
         $user = User::create(
             [
-                'firstName' => $request->firstName,
-                'lastName' => $request->lastName,
-                'email' => $request->email,
-                'phoneNumber' => $request->phoneNumber,
-                'username' => $request->username,
-                'password' => Hash::make($request->password)
+                'firstName' => $request->input('firstName'),
+                'lastName' => $request->input('lastName'),
+                'email' => $request->input('email'),
+                'phoneNumber' => $request->input('phoneNumber'),
+                'username' => $request->input('username'),
+                'password' => Hash::make($request->input('password'))
             ]
         );
+
         $request->session()->flash('success', 'User ' . $user->firstName . ' ' . $user->lastName . ' was successfully created.');
+
         return redirect(route('users.index'));
     }
 
@@ -81,10 +83,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit',
-            [
-                'user' => $user
-            ]);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -97,8 +96,10 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $user->update($request->All());
+
         $request->session()->flash('success', 'Information of user ' . $user->firstName .
             ' ' . $user->lastName . ' was successfully updated.');
+
         return redirect(route('users.show', ['user' => $user]));
     }
 
@@ -111,7 +112,9 @@ class UserController extends Controller
     public function destroy(Request $request, User $user)
     {
         $user->delete();
+
         $request->session()->flash('success', 'User ' . $user->firstName . ' ' . $user->lastName . ' was successfully deleted.');
+
         return redirect(route('users.index'));
     }
 
@@ -123,10 +126,7 @@ class UserController extends Controller
      */
     public function resetPassword(User $user)
     {
-        return view('users.password',
-            [
-                'user' => $user
-            ]);
+        return view('users.password', ['user' => $user]);
     }
 
     /**
@@ -138,9 +138,13 @@ class UserController extends Controller
      */
     public function updatePassword(Request $request, User $user)
     {
-        $user->update(['password' => Hash::make($request->password)]);
+        $user->update([
+            'password' => Hash::make($request->input('password'))
+        ]);
+
         $request->session()->flash('success', 'Information of user ' . $user->firstName .
             ' ' . $user->lastName . ' was successfully updated.');
+
         return redirect(route('users.show', ['user' => $user]));
     }
 
@@ -148,27 +152,20 @@ class UserController extends Controller
      * Update  the status of a user
      * @param \Illuminate\Http\Request $request
      * @param User $user
-     * @param Integer $active
      * @return \Illuminate\Http\Response
      */
-    public function updateStatus(Request $request, User $user, $active)
+    public function updateStatus(Request $request, User $user)
     {
         $user->update([
-            'active' => $active
+            'active' => $request->input('active')
         ]);
 
-        if ($user->update()) {
-            if($active == 1) {
-                $request->session()->flash('success', 'User ' . $user->firstName .
-                    ' ' . $user->lastName . ' is now ACTIVE.');
-            } else {
-                $request->session()->flash('success', 'User ' . $user->firstName .
-                    ' ' . $user->lastName . ' is now DEACTIVATED.');
-            }
-            return redirect(route('users.show', ['user' => $user]));
+        if($user->active) {
+            $request->session()->flash('success', "User has now been activated.");
+        } else {
+            $request->session()->flash('success', "User has now been deactivated.");
         }
 
-        return redirect(route('users.show', ['user' => $user]))->with('error', 'failed to update the
-            status of user' . $user->firstName . ' ' . $user->lastName);
+        return redirect(route('users.show', ['user' => $user]));
     }
 }
