@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Client;
 
@@ -12,6 +13,7 @@ class FileController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Renderable
      */
     public function index(Request $request)
@@ -34,7 +36,7 @@ class FileController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
     public function create()
     {
@@ -46,7 +48,7 @@ class FileController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -70,7 +72,7 @@ class FileController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
     public function edit(File $file)
     {
@@ -83,7 +85,7 @@ class FileController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function update(Request $request, File $file)
     {
@@ -96,7 +98,7 @@ class FileController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function destroy(File $file)
     {
