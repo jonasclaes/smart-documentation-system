@@ -8,8 +8,8 @@
             <li>
                 <a href="{{ route('users.show', ['user' => $user->id]) }}"
                 @class([
-                    'flex justify-between bg-white p-3 mx-1 rounded mb-2 shadow
-                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out',
+                    'flex justify-between bg-white p-3 rounded-xl shadow
+                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center',
                     'bg-gray-600 opacity-30' => ($user->active === 0)
                         ])>
                 <div>

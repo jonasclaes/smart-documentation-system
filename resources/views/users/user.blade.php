@@ -67,7 +67,7 @@
                         Edit
                     </a>
                     <!--Delete Button to Modal-->
-                    <a href="javascript:toggleModal('modal-example-regular')"
+                    <a href="javascript:toggleModal('modal-delete')"
                        class="bg-red-600 hover:bg-red-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
                         <x-heroicon-o-trash class="h-4 w-4 mr-1"/>

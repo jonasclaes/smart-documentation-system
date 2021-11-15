@@ -24,7 +24,8 @@ class UserController extends Controller
             ->orWhere('lastName', 'LIKE', "%$query%")
             ->orwhere('username', 'LIKE', "%$query%")
             ->orderBy("lastName", "asc")
-            ->paginate(14);
+            ->paginate(16);
+        $users->appends(['q' => $query]);
 
         return view('users.users', ['users' => $users]);
 

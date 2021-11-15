@@ -11,7 +11,7 @@
             @method('DELETE')
         </form>
 
-        <a href="{{ route('files.index') }}"
+        <a href="javascript:history.back()"
             class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
              <x-heroicon-o-chevron-left class="h-4 w-4"/><span>Back</span>
          </a>
