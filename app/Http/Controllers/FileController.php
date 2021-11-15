@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFileRequest;
+use App\Http\Requests\UpdateFileRequest;
 use App\Models\File;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
@@ -47,12 +49,12 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreFileRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreFileRequest $request)
     {
-        $file = File::create($request->all());
+        $file = File::create($request->validated());
 
         return redirect()->route('files.show', ['file' => $file]);
     }
@@ -83,13 +85,13 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UpdateFileRequest $request
      * @param  \App\Models\File  $file
      * @return RedirectResponse
      */
-    public function update(Request $request, File $file)
+    public function update(UpdateFileRequest $request, File $file)
     {
-        $file->update($request->all());
+        $file->update($request->validated());
 
         return redirect()->route('files.show', ['file' => $file]);
     }
