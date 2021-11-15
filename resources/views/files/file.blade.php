@@ -11,7 +11,8 @@
             @method('DELETE')
         </form>
 
-        <a href="javascript:history.back()"
+        <!-- Back Button -->
+        <a href="{{ route('files.index') }}"
             class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
              <x-heroicon-o-chevron-left class="h-4 w-4"/><span>Back</span>
          </a>
@@ -56,7 +57,7 @@
                 <p>Contact phone number: <a href="tel:{{ $file->client->contactPhoneNumber }}" class="text-blue-500">{{ $file->client->contactPhoneNumber }}</a></p>
             </div>
             <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-2">
-{{--                <img src="data:image/png;base64,{!! base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::size(512)->format('png')->errorCorrection('H')->generate(route('files.show', ['file' => $file]))) !!}" alt="">--}}
+                <img src="data:image/png;base64,{!! base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::size(512)->format('png')->errorCorrection('H')->generate(route('files.show', ['file' => $file]))) !!}" alt="">
             </div>
             <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-6 flex flex-col">
                 <h2 class="font-semibold text-lg mb-1">Revisions</h2>
