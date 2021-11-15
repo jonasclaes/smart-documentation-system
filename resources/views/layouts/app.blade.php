@@ -15,7 +15,7 @@
 {{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
 {{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
 
-    <!-- Styles -->
+<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -52,42 +52,50 @@
                         <x-heroicon-s-user-group class="h-6 w-6"/>
                     </a>
                 </li>
+                <li class="hover:bg-gray-100">
+                    <a
+                        href="{{ route('clients.index') }}"
+                        class="h-16 px-6 flex justify-center items-center w-full
+					focus:text-orange-500">
+                        <x-heroicon-o-office-building class="h-6 w-6"/>
+                    </a>
+                </li>
             </ul>
 
             <div class="mt-auto h-16 flex items-center w-full">
                 <!-- Action Section -->
                 <!-- Authentication Links -->
-                <!-- {{--                        @guest--}}
-                {{--                            @if (Route::has('login'))--}}
-                {{--                                <li class="nav-item">--}}
-                {{--                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
-                {{--                                </li>--}}
-                {{--                            @endif--}}
+            <!-- {{--                        @guest--}}
+            {{--                            @if (Route::has('login'))--}}
+            {{--                                <li class="nav-item">--}}
+            {{--                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
+            {{--                                </li>--}}
+            {{--                            @endif--}}
 
-                {{--                            @if (Route::has('register'))--}}
-                {{--                                <li class="nav-item">--}}
-                {{--                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
-                {{--                                </li>--}}
-                {{--                            @endif--}}
-                {{--                        @else--}}
-                {{--                            <li class="nav-item dropdown">--}}
-                {{--                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-                {{--                                    {{ Auth::user()->username }}--}}
-                {{--                                </a>--}}
+            {{--                            @if (Route::has('register'))--}}
+            {{--                                <li class="nav-item">--}}
+            {{--                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
+            {{--                                </li>--}}
+            {{--                            @endif--}}
+            {{--                        @else--}}
+            {{--                            <li class="nav-item dropdown">--}}
+            {{--                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+            {{--                                    {{ Auth::user()->username }}--}}
+            {{--                                </a>--}}
 
-                {{--                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-                {{--                                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
-                {{--                                       onclick="event.preventDefault();--}}
-                {{--                                                     document.getElementById('logout-form').submit();">--}}
-                {{--                                        {{ __('Logout') }}--}}
-                {{--                                    </a>--}}
+            {{--                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
+            {{--                                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
+            {{--                                       onclick="event.preventDefault();--}}
+            {{--                                                     document.getElementById('logout-form').submit();">--}}
+            {{--                                        {{ __('Logout') }}--}}
+            {{--                                    </a>--}}
 
-                {{--                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-                {{--                                        @csrf--}}
-                {{--                                    </form>--}}
-                {{--                                </div>--}}
-                {{--                            </li>--}}
-                {{--                        @endguest--}} -->
+            {{--                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
+            {{--                                        @csrf--}}
+            {{--                                    </form>--}}
+            {{--                                </div>--}}
+            {{--                            </li>--}}
+            {{--                        @endguest--}} -->
                 @guest
                     <a
                         href="{{ route('login') }}"
@@ -95,12 +103,12 @@
 				        w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">
                         <x-heroicon-o-login class="h-6 w-6"/>
                     </a>
-<!-- {{--                    <a--}}
-{{--                        href="{{ route('register') }}"--}}
-{{--                        class="h-16 w-10 mx-auto flex justify-center items-center--}}
-{{--				        w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">--}}
-{{--                        {{ __('Register') }}--}}
-{{--                    </a>--}} -->
+                <!-- {{--                    <a--}}
+                    {{--                        href="{{ route('register') }}"--}}
+                    {{--                        class="h-16 w-10 mx-auto flex justify-center items-center--}}
+                    {{--				        w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">--}}
+                    {{--                        {{ __('Register') }}--}}
+                    {{--                    </a>--}} -->
                 @else
                     <a
                         href="{{ route('logout') }}"

@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param \App\Models\User $user
      * @return Renderable
      */
     public function index(Request $request)
@@ -24,7 +24,7 @@ class UserController extends Controller
             ->orWhere('lastName', 'LIKE', "%$query%")
             ->orwhere('username', 'LIKE', "%$query%")
             ->orderBy("lastName", "asc")
-            ->paginate(16);
+            ->paginate(14);
 
         return view('users.users', ['users' => $users]);
 

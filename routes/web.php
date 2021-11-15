@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileController;
@@ -35,6 +36,9 @@ Route::put('users/{user}/updateStatus', 'App\Http\Controllers\UserController@upd
 Route::get('users/{user}/reset', 'App\Http\Controllers\UserController@resetPassword')->name('users.resetPassword');
 Route::put('users/{user}/updatePassword', 'App\Http\Controllers\UserController@updatePassword')->name('users.updatePassword');
 Route::resource('users', UserController::class);
+
+// Client Routes
+Route::resource('clients', ClientController::class);
 
 
 

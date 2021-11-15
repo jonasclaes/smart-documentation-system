@@ -26,7 +26,7 @@ class FileController extends Controller
                 $query->where('name', 'like', "%$clientName%");
             })
             ->where('name', 'like', "%$documentName%")
-            ->get();
+            ->paginate(40);
 
         return view('files.files', ['files' => $files]);
     }

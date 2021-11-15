@@ -118,7 +118,7 @@
                     <h3 class="text-3xl font-semibold">Confirm Delete</h3>
                     <button class="p-1 ml-auto bg-transparent border-0 text-gray-300 float-right text-3xl
                     leading-none font-semibold outline-none focus:outline-none"
-                            onclick="toggleModal('modal-example-regular')">
+                            onclick="toggleModal('modal-delete')">
                         <span class="bg-transparent h-6 w-6 text-2xl block outline-none focus:outline-none">
                             <i class="fas fa-times"></i>
                         </span>
@@ -136,7 +136,7 @@
                     <button class="text-white bg-gray-600 hover:bg-gray-500 rounded font-bold uppercase px-6
                     py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
-                            onclick="toggleModal('modal-example-regular')">
+                            onclick="toggleModal('modal-delete')">
                         Discard
                     </button>
                     <button class="bg-red-600 hover:bg-red-500 text-white font-bold uppercase text-sm px-4 py-2
