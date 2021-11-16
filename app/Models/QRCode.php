@@ -18,10 +18,11 @@ class QRCode extends Model
 {
     use HasFactory;
 
+    protected $table = 'qrcodes';
+
     // Allow mass filling of the following properties.
     protected $fillable = [
         'content',
-        'token',
         'scanCount',
         'fileId'
     ];
