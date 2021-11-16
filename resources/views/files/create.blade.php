@@ -56,8 +56,7 @@
                     </div>
                     <div>
                         <label for="clientId">Client:</label>
-                        <select name="clientId" id="clientId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
-                            placeholder="Client" value="{{ old('clientId') }}">
+                        <select name="clientId" id="clientId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
                             @foreach ($clients as $client)
                                 <option
                                     value="{{ $client->id }}"
