@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFileRequest;
+use App\Http\Requests\UpdateFileRequest;
 use App\Models\File;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Client;
 
@@ -12,6 +15,7 @@ class FileController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Renderable
      */
     public function index(Request $request)
@@ -34,7 +38,7 @@ class FileController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
     public function create()
     {
@@ -45,12 +49,12 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  StoreFileRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreFileRequest $request)
     {
-        $file = File::create($request->all());
+        $file = File::create($request->validated());
 
         return redirect()->route('files.show', ['file' => $file]);
     }
@@ -70,7 +74,7 @@ class FileController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
     public function edit(File $file)
     {
@@ -81,13 +85,13 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UpdateFileRequest $request
      * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, File $file)
+    public function update(UpdateFileRequest $request, File $file)
     {
-        $file->update($request->all());
+        $file->update($request->validated());
 
         return redirect()->route('files.show', ['file' => $file]);
     }
@@ -96,7 +100,7 @@ class FileController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function destroy(File $file)
     {

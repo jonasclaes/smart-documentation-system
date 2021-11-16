@@ -29,7 +29,7 @@
                 <!-- Logo Section -->
                 <a class="h-6 w-6 mx-auto" href="{{ url('/') }}">
                     <img class="h-6 w-6 mx-auto"
-                         src="https://www.deltatechnics.be/wp-content/uploads/2017/08/cropped-delta-technics-logo-dark-1.png"
+                         src="{{ asset('assets/delta-technics-small.png') }}"
                          alt="Delta Technics"/>
                 </a>
             </div>
