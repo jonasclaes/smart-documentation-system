@@ -53,6 +53,8 @@
                         <input type="text" name="uniqueId" id="uniqueId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                             placeholder="Unique ID" value="{{ old('uniqueId', $file->uniqueId) }}">
                         <small class="opacity-50">Fill in the unique ID of the file here. This ID will be used in the URL generated for the client, as well as in the QR-code.</small>
+                        <br>
+                        <small class="text-yellow-600"><strong>Warning!</strong> Changing this field directly updates the QR-code, only change this if you know what you're doing!</small>
                         @error('uniqueId')
                         <br>
                         <small class="text-red-600 font-semibold">{{ $message }}</small>
