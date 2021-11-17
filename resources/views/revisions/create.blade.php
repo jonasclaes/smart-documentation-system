@@ -1,0 +1,62 @@
+@extends('layouts.app')
+
+@section('content')
+
+    <div class="container mx-auto px-3">
+        <!-- Menu bar -->
+        <div class="bg-white rounded-xl p-4 w-full mb-3">
+            <h1 class="text-xl font-semibold">{{ __('Create revision') }}</h1>
+        </div>
+
+        <!-- Content -->
+        <div class="bg-white rounded-xl p-4">
+            <form action="{{ route('revisions.store') }}" method="POST" id="createForm">
+                @csrf
+                @method("POST")
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                    <div>
+                        <label for="revisionNumber">{{ __('Revision number:') }}</label>
+                        <input type="text" name="revisionNumber" id="revisionNumber" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
+                            placeholder="{{ __('Revision number') }}" value="{{ old('revisionNumber') }}">
+                        <small class="opacity-50">{{ __('Fill in the number of the revision here.') }}</small>
+                        @error('fileId')
+                        <br>
+                        <small class="text-red-600 font-semibold">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="fileId">{{ __('File:') }}</label>
+                        <select name="fileId" id="fileId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                            @foreach ($files as $file)
+                                <option
+                                    value="{{ $file->id }}"
+                                    @if(old('fileId', app('request')->input('fileId')) == $file->id) selected @endif>
+                                    {{ $file->fileId }} - {{ $file->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <small class="opacity-50">{{ __('Select the client of the file here.') }}</small>
+                        @error('clientId')
+                        <br>
+                        <small class="text-red-600 font-semibold">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <button type="submit" hidden></button>
+            </form>
+        </div>
+
+        <div class="flex justify-end flex-grow gap-2 w-full md:w-auto mt-3">
+            <a href="{{ route('files.index') }}"
+                class="bg-red-600 hover:bg-red-700 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
+                <x-heroicon-o-trash class="h-4 w-4 mr-1" /><span>{{ __('Discard') }}</span>
+            </a>
+            <a href="javascript:$('#createForm').submit();"
+                class="bg-green-600 hover:bg-green-700 md:px-9 py-3 mb-3 text-white rounded flex-grow md:flex-grow-0
+                flex justify-center items-center">
+                <x-heroicon-o-pencil class="h-4 w-4 mr-1" /><span>{{ __('Save') }}</span>
+            </a>
+        </div>
+    </div>
+
+@endsection

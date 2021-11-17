@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\NotImplementedException;
+use App\Http\Requests\StoreRevisionRequest;
+use App\Models\File;
 use App\Models\Revision;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class RevisionController extends Controller
@@ -22,22 +26,24 @@ class RevisionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
     public function create()
     {
-        //
+        return view('revisions.create', ['files' => File::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  StoreRevisionRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreRevisionRequest $request)
     {
-        //
+        $revision = Revision::create($request->validated());
+
+        return redirect()->route('files.show', ['file' => $revision->file]);
     }
 
     /**

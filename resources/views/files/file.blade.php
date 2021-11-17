@@ -93,7 +93,7 @@ $qrCodeEncoded = base64_encode($qrCode);
                     <h2 class="font-semibold text-lg mb-1">{{ __('Revisions') }}</h2>
                     <!-- Actions -->
                     <div class="grid gap-3 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-center">
-                        <a href="{{ route('revisions.create') }}"
+                        <a href="{{ route('revisions.create', ['fileId' => $file->id]) }}"
                            class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
                             <x-heroicon-o-plus class="h-4 w-4"/>&nbsp;{{ __('New') }}
                         </a>
