@@ -62,32 +62,29 @@
                 </li>
             </ul>
 
-            <div class="mt-auto h-16 flex items-center w-full">
-                <!-- Action Section -->
-                <!-- Authentication Links -->
+            <ul class="mt-auto">
+                <!-- Items Section -->
                 @guest
-                    <a
-                        href="{{ route('login') }}"
-                        class="h-16 mx-auto flex justify-center items-center
-				        w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">
+                <li class="focus:text-orange-500 hover:bg-red-200 focus:outline-none">
+                    <a href="{{ route('login') }}" class="h-16 px-6 flex justify-center items-center w-full">
                         <x-heroicon-o-login class="h-6 w-6"/>
                     </a>
+                </li>
                 @else
+                <li class="focus:text-orange-500 hover:bg-red-200 focus:outline-none">
                     <a
                         href="{{ route('logout') }}"
-                        class="h-16 mx-auto flex justify-center items-center
-				w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none"
+                        class="h-16 px-6 flex justify-center items-center w-full"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <x-heroicon-o-logout class="h-6 w-6"/>
                     </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                </li>
                 @endguest
+            </ul>
 
-            </div>
-
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </aside>
 
         <main class="py-5 w-full overflow-y-scroll">

@@ -6,7 +6,6 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileController;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,32 +20,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('localization/{locale}', LocalizationController::class);
-
 Route::get('/', function () {
     return redirect('dashboard');
 });
 
 Auth::routes();
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware([
+    'auth'
+])->group(function () {
+    // Dashboard route
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// Files
-Route::resource('files', FileController::class);
+    // Files
+    Route::resource('files', FileController::class);
 
-// Public content
+    // Users
+    Route::resource('users', UserController::class);
+    Route::get('users/{user}/reset', 'App\Http\Controllers\UserController@resetPassword')->name('users.resetPassword');
+    Route::put('users/{user}/updatePassword', 'App\Http\Controllers\UserController@updatePassword')->name('users.updatePassword');
+    Route::put('users/{user}/updateStatus', 'App\Http\Controllers\UserController@updateStatus')->name('users.updateStatus');
+
+    // Clients
+    Route::resource('clients', ClientController::class);
+});
+
+// Localization
+Route::get('localization/{locale}', LocalizationController::class);
+
+// Public
 Route::get('public/file/{file:uniqueId}', [PublicController::class, 'show'])->name('public.show');
-
-// Update User Status
-Route::put('users/{user}/updateStatus', 'App\Http\Controllers\UserController@updateStatus')->name('users.updateStatus');
-
-// User Management
-Route::get('users/{user}/reset', 'App\Http\Controllers\UserController@resetPassword')->name('users.resetPassword');
-Route::put('users/{user}/updatePassword', 'App\Http\Controllers\UserController@updatePassword')->name('users.updatePassword');
-Route::resource('users', UserController::class);
-
-// Client Routes
-Route::resource('clients', ClientController::class);
-
-
-
