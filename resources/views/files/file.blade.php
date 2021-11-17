@@ -108,7 +108,7 @@ $qrCodeEncoded = base64_encode($qrCode);
                         <ul>
                             @foreach($file->revisions->sortByDesc('updated_at') as $revision)
                                 <li>
-                                    TODO: Add link to revisions
+                                    {{-- TODO: Add link to revisions --}}
                                     <a href="#" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
                         border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
                                         <div>
