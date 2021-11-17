@@ -1,252 +1,168 @@
+@php /** @var App\Models\User[]|Illuminate\Database\Eloquent\Collection $users */ @endphp
+
 @extends('layouts.app')
 
 @section('content')
+    <!--Page Content-->
     <div class="container mx-auto px-3">
+        <!--Back Button-->
         <a href="{{ route('users.index') }}"
-           class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
+           class="col-span-1 col-start-1 bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
             <x-heroicon-o-chevron-left class="h-4 w-4"/>
             <span>Back</span>
         </a>
         <!-- Menu bar -->
-        <div class="grid grid-cols-12 gap-2 bg-white rounded-xl pl-3 pr-1 pt-4 pb-2 w-full mb-3">
-            <h1 class="col-span-12 font-semibold mb-2 pb-1 border-b w-full">User Page</h1>
-            <div class="col-span-9">Display and edit the information of the current user.</div>
-            <div class="col-span-2 col-start-12 justify-end">
-                <form method="POST" action="{{route('users.destroy', $user->id)}}">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <button type="submit" class="bg-red-600 text-base font-medium rounded p-3
-            text-white">Delete User
-                    </button>
-                </form>
-            </div>
-        </div>
+        <!-- Delete form -->
+        <form action="{{ route('users.destroy', ['user' => $user]) }}" method="POST" id="deleteUser">
+            @csrf
+            @method('DELETE')
+        </form>
+        <form action="{{ route('users.updateStatus', ['user' => $user]) }}" method="POST"
+              id="updateStatus">
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="active" value="{{ intval(!$user->active) }}">
+        </form>
 
-        <!-- User Information Section -->
-        <div class="grid grid-cols-12 gap-4 bg-white rounded-xl p-3">
-            <div class="col-span-12 md:col-span-7 lg:col-span-5 mb-1">
-                <h1 class="pl-2 font-bold text-left text-4xl">{{$user->firstName}} {{$user->lastName}} <span
-                        class="text-2xl font-normal text-gray-400">(User ID: {{$user->id}})</span></h1>
-
-            </div>
-            <div class="text-center md:text-right col-span-12 sm:col-start-1 md:col-span-5 mb-1 lg:col-end-13 px-3">
-                <p>Created at {{$user->created_at}}</p>
-                <p>Last Updated at {{$user->updated_at}}</p>
-            </div>
-            <div class="col-span-12">
-                <hr>
-                <br>
-                <form id="userEdit" method="POST" action="{{ route('users.update', ['user' => $user]) }}">
-                    @csrf
-                    @method("PUT")
-                    <div class="grid grid-cols-2">
-                        <div class="mt-2 mx-1">
-                            <label
-                                for="firstName"
-                                class="text-gray-700">
-                                {{ __('First Name') }}</label>
-                            <input
-                                type="text"
-                                autofocus
-                                required
-                                autocomplete="firstName"
-                                name="firstName"
-                                id="firstName"
-                                value="{{ old('firstName', $user->firstName) }}"
-                                class="field block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-@error('firstName') ring ring-red-500 ring-opacity-50 @enderror" disabled>
-
-                            @error('firstName')
-                            <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                        <div class="mt-2 mx-1">
-                            <label
-                                for="lastName"
-                                class="text-gray-700">
-                                {{ __('Last Name') }}</label>
-                            <input
-                                type="text"
-                                required
-                                autocomplete="lastName"
-                                name="lastName"
-                                id="lastName"
-                                value="{{ old('lastName', $user->lastName) }}"
-                                class="field block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200
-             focus:ring-opacity-50 @error('lastName') ring ring-red-500 ring-opacity-50 @enderror"
-                                disabled>
-
-                            @error('lastName')
-                            <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                        <div class="mt-2 cols-span-2 lg:col-span-6 mx-1">
-                            <label
-                                for="email"
-                                class="text-gray-700">
-                                {{ __('E-Mail Address') }}</label>
-                            <input
-                                type="email"
-                                required
-                                autocomplete="email"
-                                name="email"
-                                id="email"
-                                value="{{ old('email', $user->email)}}"
-                                class="field block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200
-             focus:ring-opacity-50 @error('email') ring ring-red-500 ring-opacity-50 @enderror"
-                                disabled>
-
-                            @error('email')
-                            <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                        <div class="mt-2 cols-span-12 lg:col-span-6 mx-1">
-                            <label
-                                for="phoneNumber"
-                                class="text-gray-700">
-                                {{ __('Phone Number') }}</label>
-                            <input
-                                type="tel"
-                                autocomplete="phoneNumber"
-                                name="phoneNumber"
-                                id="phoneNumber"
-                                value="{{ old('phoneNumber', $user->phoneNumber) }}"
-                                class="field block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200
-             focus:ring-opacity-50 @error('phoneNumber') ring ring-red-500 ring-opacity-50 @enderror"
-                                disabled>
-                            @error('phoneNumber')
-                            <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                        <div class="mt-2">
-                            <label
-                                for="username"
-                                class="text-gray-700">
-                                {{ __('Username') }}</label>
-                            <input
-                                type="text"
-                                autofocus
-                                required
-                                autocomplete="Username"
-                                name="username"
-                                id="username"
-                                value="{{ old('username', $user->username) }}"
-                                class="field block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200
-         focus:ring-opacity-50 @error('username') ring ring-red-500 ring-opacity-50 @enderror"
-                                disabled>
-                            @error('username')
-                            <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                    </div>
-                    @isset($create)
-                        <div class="mt-2">
-                            <label
-                                for="password"
-                                class="text-gray-700">
-                                {{ __('Password') }}</label>
-                            <input
-                                type="password"
-                                required
-                                autocomplete="new-password"
-                                name="password"
-                                id="password"
-                                class="field block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 @error('password') ring ring-red-500 ring-opacity-50 @enderror"
-                                disabled>
-
-                            @error('password')
-                            <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                        <div class="mt-2">
-                            <label
-                                for="password-confirm"
-                                class="text-gray-700">
-                                {{ __('Confirm Password') }}</label>
-                            <input
-                                type="password"
-                                required
-                                autocomplete="new-password"
-                                name="password_confirmation"
-                                id="password-confirm"
-                                class="field block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-indigo-200
-             focus:ring-opacity-50 @error('password') ring ring-red-500 ring-opacity-50 @enderror"
-                                disabled>
-
-                            @error('password')
-                            <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                    @endisset
-
-                    <div class="grid grid-cols-8 flex justify-end flex-grow gap-2 w-full md:w-auto mt-3">
-                        <a id="save" href="javascript:$('#userEdit').submit();"
-                           class="col-span-1 col-end-8 hide bg-green-600 hover:bg-green-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
-                flex justify-center items-center">
-                            <x-heroicon-o-pencil class="h-4 w-4 mr-1"/>
-                            <span>Save</span>
-                        </a>
-                        <a id="discard" href="{{ route('users.show', ['user' => $user])}}"
-                           class="col-span-1 col-end-9 hide bg-red-600 hover:bg-red-700 px-9 py-3 text-white rounded inline-flex justify-center items-center">
-                            <x-heroicon-o-trash class="h-4 w-4 mr-1"/>
-                            <span>Discard</span>
-                        </a>
-                        <button id="edit" type="button" onclick="toggleEnable()" class="bg-gray-500 col-end-9 col-span-1 text-base font-medium rounded p-3
-                                    text-white">Edit
+        <!-- Menu bar -->
+        <div class="col-span-12 bg-white rounded-xl p-4 w-full mb-3">
+            <h1 class="text-xl font-semibold mb-2 pb-1 border-b">User Information</h1>
+            <div class="flex flex-wrap items-start gap-2">
+                <p class="flex-grow">This page shows the information for an individual user.</strong></p>
+                <div class="flex justify-end flex-grow gap-2 w-full md:w-auto">
+                    <!--(De)Activate User-->
+                    @if($user->active)
+                        <button class="text-green-500 bg-white hover:bg-gray-100 text-white font-bold uppercase text-sm md:px-5 py-3
+                    rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear
+                    transition-all duration-150 flex-grow md:flex-grow-0
+                       flex justify-center items-center"
+                                type="button"
+                                onclick="$('#updateStatus').submit();">
+                            <x-heroicon-o-check-circle class="h-4 w-4 mr-1 text-green-500"/>
+                            Active
                         </button>
-                    </div>
-
-                    {{--                    <div class="grid grid-cols-8 gap-4 mt-4 justify-end align-bottom">--}}
-                    {{--                        <button id="discard" onclick="window.location='{{route('users.update', $user)}}'" class="bg-gray-500 col-end-8 col-span-1 text-base font-medium rounded p-3--}}
-                    {{--                                text-white hidden">Save</button>--}}
-
-
-                    {{--                    </div>--}}
-                </form>
+                    @else
+                        <button class="text-red-500 bg-white hover:bg-gray-100 text-white font-bold uppercase text-sm md:px-5 py-3
+                    rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear
+                    transition-all duration-150 flex-grow md:flex-grow-0
+                       flex justify-center items-center"
+                                type="button"
+                                onclick="$('#updateStatus').submit();">
+                            <x-heroicon-o-minus-circle class="h-4 w-4 mr-1 text-red-500"/>
+                            Inactive
+                        </button>
+                @endif
+                <!--Reset Password button-->
+                    <a href="{{ route('users.resetPassword', ['user' => $user]) }}"
+                       class="bg-gray-600 hover:bg-gray-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
+                       flex justify-center items-center">
+                        <x-heroicon-o-key class="h-4 w-4 mr-1"/>
+                        Reset Password
+                    </a>
+                    <!--Edit Button-->
+                    <a href="{{ route('users.edit', ['user' => $user]) }}"
+                       class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
+                       flex justify-center items-center">
+                        <x-heroicon-o-pencil class="h-4 w-4 mr-1"/>
+                        Edit
+                    </a>
+                    <!--Delete Button to Modal-->
+                    <a href="javascript:toggleModal('modal-delete')"
+                       class="bg-red-600 hover:bg-red-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
+                       flex justify-center items-center">
+                        <x-heroicon-o-trash class="h-4 w-4 mr-1"/>
+                        Delete
+                    </a>
+                </div>
             </div>
         </div>
-        <script>
-            // Function for saving and editing to unlock all input fields
-            function toggleEnable() {
-                var fields = document.querySelectorAll('input');
-                var editButton = document.getElementById('edit');
-                var discard = document.getElementById('discard');
-                var save = document.getElementById('save');
-                console.log(fields);
-                fields.forEach(function (field) {
-                    if (field.disabled) {
-                        // If disabled, do this
-                        if (field.classList.contains('field')) {
-                            field.disabled = false;
-                        }
-                        editButton.classList.add('hide');
-                        discard.classList.remove('hide');
-                        save.classList.remove('hide');
-                    } else {
-                        // Enter code here
-                        if (field.classList.contains('field')) {
-                            field.disabled = true;
-                        }
-                        editButton.classList.remove('hide');
-                        discard.classList.add('hide');
-                        save.classList.add('hide');
 
-                    }
-                })
-            }
-        </script>
+        <div class="grid gap-3 grid-cols-12">
+            <!-- User Information Section -->
+            <div class="col-span-12 md:col-span-6 bg-white rounded-xl p-4">
+                <h1 class="font-semibold text-lg">{{$user->lastName}}, {{$user->firstName}}</h1>
+                <p class="opacity-40">Created on: {{$user->created_at}}</p>
+                <p class="opacity-40">Last updated on: {{$user->updated_at}}</p>
+                <br>
+                <p>First Name: {{$user->firstName}}</p>
+                <p>Last Name: {{$user->lastName}}</p>
+                <p>Username: {{$user->username}}</p>
+                <p>Email address: <a href="mailto:{{ $user->email }}" class="text-blue-500">{{$user->email}}</a></p>
+                <p>Phone Number: <a href="tel:{{ $user->phoneNumber }}" class="text-blue-500">{{$user->phoneNumber}}</a></p>
+            </div>
+            <!-- User Logs Section -->
+            <div class="col-span-12 md:col-span-6 bg-white rounded-xl p-4">
+                <h1 class="font-semibold text-lg">User Logs</h1>
+                <p class="opacity-40">Recent activity
+                    of {{$user->firstName}} {{$user->lastName}}.</p>
+            </div>
+            <!-- Projects Section -->
+            <div class="col-span-12 bg-white rounded-xl p-4">
+                <h1 class="font-semibold text-lg">Projects</h1>
+                <p class="opacity-40">This section shows links to the projects/files that
+                    {{$user->firstName}} {{$user->lastName}} has worked on.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal-delete" class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50
+     outline-none focus:outline-none justify-center items-center">
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+            <!--content-->
+            <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none
+            focus:outline-none">
+                <!--header-->
+                <div class="flex items-start justify-between p-5 border-b border-solid border-gray-200
+                rounded-t">
+                    <h3 class="text-3xl font-semibold">Confirm Delete</h3>
+                    <button class="p-1 ml-auto bg-transparent border-0 text-gray-300 float-right text-3xl
+                    leading-none font-semibold outline-none focus:outline-none"
+                            onclick="toggleModal('modal-delete')">
+                        <span class="bg-transparent h-6 w-6 text-2xl block outline-none focus:outline-none">
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </button>
+                </div>
+                <!--body-->
+                <div class="relative p-6 flex-auto">
+                    <p class="my-4 text-gray-500 text-lg leading-relaxed">
+                        Do you really want to delete user {{$user->firstName}} {{$user->lastName}}?
+                        This action cannot be undone.
+                    </p>
+                </div>
+                <!--footer-->
+                <div class="flex items-center justify-end p-6 border-t border-solid border-gray-200 rounded-b">
+                    <button class="text-white bg-gray-600 hover:bg-gray-500 rounded font-bold uppercase px-6
+                    py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button"
+                            onclick="toggleModal('modal-delete')">
+                        Discard
+                    </button>
+                    <button class="bg-red-600 hover:bg-red-500 text-white font-bold uppercase text-sm px-4 py-2
+                    rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear
+                    transition-all duration-150"
+                            type="button"
+                            onclick="$('#deleteUser').submit();">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--gray overlay for modal backgrounds-->
+    <div
+        class="hidden opacity-50 fixed inset-0 z-40 bg-gray-900"
+        id="modal-delete-backdrop"
+    ></div>
+    <script type="text/javascript">
+        function toggleModal(modalID) {
+            document.getElementById(modalID).classList.toggle("hidden");
+            document
+                .getElementById(modalID + "-backdrop")
+                .classList.toggle("hidden");
+            document.getElementById(modalID).classList.toggle("flex");
+            document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+        }
+    </script>
 @endsection

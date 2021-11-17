@@ -39,6 +39,10 @@
 
         <!-- Content -->
         <div class="bg-white rounded-xl p-4 w-full">
+            {{ $files->links() }}
+            <br>
+            <hr>
+            <br>
             <x-files-list :files="$files"></x-files-list>
         </div>
     </div>

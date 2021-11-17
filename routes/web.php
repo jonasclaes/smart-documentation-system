@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +37,16 @@ Route::resource('files', FileController::class);
 // Public content
 Route::get('public/file/{file:uniqueId}', [PublicController::class, 'show'])->name('public.show');
 
+// Update User Status
+Route::put('users/{user}/updateStatus', 'App\Http\Controllers\UserController@updateStatus')->name('users.updateStatus');
+
+// User Management
+Route::get('users/{user}/reset', 'App\Http\Controllers\UserController@resetPassword')->name('users.resetPassword');
+Route::put('users/{user}/updatePassword', 'App\Http\Controllers\UserController@updatePassword')->name('users.updatePassword');
 Route::resource('users', UserController::class);
+
+// Client Routes
+Route::resource('clients', ClientController::class);
+
+
+
