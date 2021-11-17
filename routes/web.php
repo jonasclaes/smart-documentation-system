@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileController;
@@ -19,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('localization/{locale}', LocalizationController::class);
+
 Route::get('/', function () {
     return redirect('dashboard');
 });
@@ -27,7 +31,11 @@ Auth::routes();
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+// Files
 Route::resource('files', FileController::class);
+
+// Public content
+Route::get('public/file/{file:uniqueId}', [PublicController::class, 'show'])->name('public.show');
 
 // Update User Status
 Route::put('users/{user}/updateStatus', 'App\Http\Controllers\UserController@updateStatus')->name('users.updateStatus');

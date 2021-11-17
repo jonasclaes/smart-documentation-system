@@ -10,6 +10,7 @@
         "blade-ui-kit/blade-icons": "^1.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "kkomelin/laravel-translatable-string-exporter": "^1.14",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
@@ -17,6 +18,7 @@
         "simplesoftwareio/simple-qrcode": "~4"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.11",
