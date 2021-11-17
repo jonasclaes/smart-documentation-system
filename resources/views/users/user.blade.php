@@ -28,7 +28,7 @@
         <div class="col-span-12 bg-white rounded-xl p-4 w-full mb-3">
             <h1 class="text-xl font-semibold mb-2 pb-1 border-b">User Information</h1>
             <div class="flex flex-wrap items-start gap-2">
-                <p class="flex-grow">This page shows the information for an individual user.</strong></p>
+                <p class="flex-grow">This page shows the information for an individual user.</p>
                 <div class="flex justify-end flex-grow gap-2 w-full md:w-auto">
                     <!--(De)Activate User-->
                     @if($user->active)
