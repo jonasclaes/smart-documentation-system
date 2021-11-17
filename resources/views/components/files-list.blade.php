@@ -15,7 +15,7 @@
                                 <span> - {{ $file->enclosureId }}</span>
                             @endif
                         </span>
-                        
+
                     </div>
                     <div>
                         <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
@@ -24,6 +24,6 @@
             </li>
         @endforeach
     @else
-        <p>No files have been found.</p>
+        <p>{{ __('No files have been found.') }}</p>
     @endif
 </ul>
