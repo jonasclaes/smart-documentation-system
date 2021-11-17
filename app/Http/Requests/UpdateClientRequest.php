@@ -14,7 +14,7 @@ class UpdateClientRequest extends StoreClientRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

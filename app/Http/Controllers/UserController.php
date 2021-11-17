@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +49,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreUserRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(StoreUserRequest $request)
     {
@@ -66,7 +67,7 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\User $user
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
     public function show(User $user)
     {
@@ -89,7 +90,7 @@ class UserController extends Controller
      *
      * @param UpdateUserRequest $request
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function update(UpdateUserRequest $request, User $user)
     {
@@ -105,7 +106,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function destroy(Request $request, User $user)
     {
@@ -132,7 +133,7 @@ class UserController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function updatePassword(Request $request, User $user)
     {
@@ -150,7 +151,7 @@ class UserController extends Controller
      * Update  the status of a user
      * @param \Illuminate\Http\Request $request
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function updateStatus(Request $request, User $user)
     {

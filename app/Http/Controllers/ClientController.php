@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
@@ -24,7 +25,6 @@ class ClientController extends Controller
 
         $clients = Client::where('clientNumber', 'LIKE', "%$query%")
             ->orWhere('name', 'LIKE', "%$query%")
-            ->orderBy("name", "asc")
             ->paginate(50);
         $clients->appends(['q' => $query]);
 
@@ -45,18 +45,11 @@ class ClientController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreClientRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(StoreClientRequest $request)
     {
-        $client = Client::create(
-            [
-                'clientNumber' => $request->input('clientNumber'),
-                'name' => $request->input('name'),
-                'contactEmail' => $request->input('contactEmail'),
-                'contactPhoneNumber' => $request->input('contactPhoneNumber'),
-            ]
-        );
+        $client = Client::create($request->validated());
 
         $request->session()->flash('success', 'Cient ' . $client->name . ' was successfully created.');
 
@@ -67,7 +60,7 @@ class ClientController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Client $client
-     * @return Response
+     * @return Renderable
      */
     public function show(Client $client)
     {
@@ -90,11 +83,11 @@ class ClientController extends Controller
      *
      * @param UpdateClientRequest $request
      * @param Client $client
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        $client->update($request->All());
+        $client->update($request->validated());
 
         $request->session()->flash('success', 'Information of client ' . $client->id .
             ' - ' . $client->name . ' was successfully updated.');
@@ -106,7 +99,7 @@ class ClientController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Client $client
-     * @return Response
+     * @return RedirectResponse
      */
     public function destroy(Request $request, Client $client)
     {
