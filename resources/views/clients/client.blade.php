@@ -61,7 +61,7 @@
                         @foreach($client->files->sortBy('name') as $file)
                             <li>
                                 <!-- Link to actual file information -->
-                                <a href="{{ route('files.show', ['file' => $file->id]) }}" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
+                                <a href="{{ route('files.show', ['file' => $file]) }}" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
                         border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
                                     <div>
                                         <span>{{ $file->fileId }} - {{ $file->name }}</span>

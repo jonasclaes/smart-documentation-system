@@ -50,6 +50,16 @@ class File extends Model
     ];
 
     /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'uniqueId';
+    }
+
+    /**
      * Get the client that owns the file.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -72,4 +72,14 @@ class User extends Authenticatable
         'active' => false,
         'rights' => 0
     ];
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
 }

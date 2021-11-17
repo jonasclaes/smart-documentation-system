@@ -65,75 +65,107 @@ $qrCodeEncoded = base64_encode($qrCode);
                 <p>{{ trans_choice('This file has been opened once.|This file has been opened :amount times.', $file->QRCode->scanCount, ['amount' => $file->QRCode->scanCount]) }}</p>
                 <p class="break-all">{{ __('Public link:') }} <a href="{{ $file->QRCode->content }}" class="text-blue-500">{{ $file->QRCode->content }}</a></p>
             </div>
-            <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-5">
+            <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-5">
                 <h2 class="font-semibold text-lg mb-1">{{ __('Client information') }}</h2>
                 <p>{{ __('Client number:') }} {{ $file->client->clientNumber }}</p>
                 <p>{{ __('Client name:') }} {{ $file->client->name }}</p>
                 <p>{{ __('Contact email:') }} <a href="mailto:{{ $file->client->contactEmail }}" class="text-blue-500">{{ $file->client->contactEmail }}</a></p>
                 <p>{{ __('Contact phone number:') }} <a href="tel:{{ $file->client->contactPhoneNumber }}" class="text-blue-500">{{ $file->client->contactPhoneNumber }}</a></p>
             </div>
-            <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-2">
+            <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
                 <img id="qr-code" src="data:image/png;base64,{!! $qrCodeEncoded !!}" alt="{{ $file->QRCode->content }}">
-                <a href="javascript:printJS('qr-code', 'html')"
-                   class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex justify-center items-center mt-3">
-                    <x-heroicon-o-printer class="h-4 w-4 mr-1"/>{{ __('Print') }}
-                </a>
-                <a href="data:image/png;base64,{!! $qrCodeEncoded !!}" download="qr-code.png"
-                   class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex justify-center items-center mt-3">
-                    <x-heroicon-o-download class="h-4 w-4 mr-1"/>{{ __('Download') }}
-                </a>
+                <div class="grid gap-3 grid-cols-1 mt-3 justify-items-center">
+                    <a href="javascript:printJS('qr-code', 'html')"
+                       class="bg-blue-600 hover:bg-blue-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                        <x-heroicon-o-printer class="h-4 w-4"/>&nbsp;{{ __('Print') }}
+                    </a>
+                    <a href="data:image/png;base64,{!! $qrCodeEncoded !!}" download="qr-code.png"
+                       class="bg-blue-600 hover:bg-blue-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                        <x-heroicon-o-download class="h-4 w-4"/>&nbsp;{{ __('Download') }}
+                    </a>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-6 flex flex-col">
-                <h2 class="font-semibold text-lg mb-1">{{ __('Revisions') }}</h2>
-                @if(count($file->revisions) > 0)
-                    <ul>
-                        @foreach($file->revisions->sortByDesc('updated_at') as $revision)
-                            <li>
-                                {{-- TODO: Add link to revisions --}}
-                                <a href="#" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
-                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
-                                    <div>
-                                        <span>{{ $revision->revisionNumber }}</span>
-                                        <br>
-                                        <span class="opacity-50">{{ __('Updated at:') }} {{ $revision->updated_at }}</span>
-                                    </div>
-                                    <div>
-                                        <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
-                                    </div>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @else
-                    <div class="flex-grow flex items-center">
-                        <span class="text-center w-full">{{ __('There are currently no revisions.') }}</span>
+
+            <!-- Section: Revisions -->
+            <div class="col-span-12 md:col-span-6 grid gap-3 grid-cols-1 self-start">
+                <!-- Title bar -->
+                <div class="bg-white rounded-xl p-4">
+                    <h2 class="font-semibold text-lg mb-1">{{ __('Revisions') }}</h2>
+                    <!-- Actions -->
+                    <div class="grid gap-3 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-center">
+                        <a href="{{ route('revisions.create') }}"
+                           class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                            <x-heroicon-o-plus class="h-4 w-4"/>&nbsp;{{ __('New') }}
+                        </a>
+                        <div class="bg-gray-100 rounded hidden md:block"></div>
+                        <div class="bg-gray-100 rounded hidden xl:block"></div>
                     </div>
-                @endif
+                </div>
+
+                <!-- Revisions -->
+                <div class="bg-white rounded-xl p-4 flex flex-col">
+                    @if(count($file->revisions) > 0)
+                        <ul>
+                            @foreach($file->revisions->sortByDesc('updated_at') as $revision)
+                                <li>
+                                    TODO: Add link to revisions
+                                    <a href="#" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
+                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
+                                        <div>
+                                            <span>{{ $revision->revisionNumber }}</span>
+                                            <br>
+                                            <span class="opacity-50">{{ __('Updated at:') }} {{ $revision->updated_at }}</span>
+                                        </div>
+                                        <div>
+                                            <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
+                                        </div>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <div class="flex-grow flex items-center">
+                            <span class="text-center w-full">{{ __('There are currently no revisions.') }}</span>
+                        </div>
+                    @endif
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-6 flex flex-col">
-                <h2 class="font-semibold text-lg mb-1">{{ __('Revision requests') }}</h2>
-                @if(count($file->revisionRequests) > 0)
-                    <ul>
-                        @foreach($file->revisionRequests->sortByDesc('updated_at') as $revisionRequest)
-                            <li>
-                                {{-- TODO: Add link to revision requests --}}
-                                <a href="#" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
-                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
-                                    <div>
-                                        <span class="opacity-50">{{ __('Updated at:') }} {{ $revisionRequest->updated_at }}</span>
-                                    </div>
-                                    <div>
-                                        <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
-                                    </div>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @else
-                    <div class="flex-grow flex items-center">
-                        <span class="text-center w-full">{{ __('There are currently no revision requests.') }}</span>
+
+            <!-- Section: Revision requests -->
+            <div class="col-span-12 md:col-span-6 grid gap-3 grid-cols-1 self-start">
+                <div class="bg-white rounded-xl p-4">
+                    <h2 class="font-semibold text-lg mb-1">{{ __('Revision requests') }}</h2>
+                    <!-- Actions -->
+                    <div class="grid gap-3 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-center">
+                        <div class="bg-gray-100 rounded h-10"></div>
+                        <div class="bg-gray-100 rounded hidden md:block"></div>
+                        <div class="bg-gray-100 rounded hidden xl:block"></div>
                     </div>
-                @endif
+                </div>
+                <div class="bg-white rounded-xl p-4 flex flex-col">
+                    @if(count($file->revisionRequests) > 0)
+                        <ul>
+                            @foreach($file->revisionRequests->sortByDesc('updated_at') as $revisionRequest)
+                                <li>
+                                    {{-- TODO: Add link to revision requests --}}
+                                    <a href="#" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
+                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
+                                        <div>
+                                            <span class="opacity-50">{{ __('Updated at:') }} {{ $revisionRequest->updated_at }}</span>
+                                        </div>
+                                        <div>
+                                            <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
+                                        </div>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <div class="flex-grow flex items-center">
+                            <span class="text-center w-full">{{ __('There are currently no revision requests.') }}</span>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

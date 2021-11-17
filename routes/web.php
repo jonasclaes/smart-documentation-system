@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\RevisionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileController;
@@ -34,6 +35,9 @@ Route::middleware([
 
     // Files
     Route::resource('files', FileController::class);
+
+    // Revisions
+    Route::resource('revisions', RevisionController::class);
 
     // Users
     Route::resource('users', UserController::class);
