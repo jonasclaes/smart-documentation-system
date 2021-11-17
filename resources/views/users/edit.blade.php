@@ -23,30 +23,55 @@
                         <input type="text" name="firstName" id="firstName" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                                placeholder="First Name" value="{{ old('firstName', $user->firstName) }}" required>
                         <small class="opacity-50">Fill in user first name here.</small>
+                        @error('firstName')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div>
                         <label for="lastName">Last Name:</label>
                         <input type="text" name="lastName" id="lastName" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                                placeholder="Last Name" value="{{ old('lastName', $user->lastName) }}" required>
                         <small class="opacity-50">Fill in user last name here.</small>
+                        @error('lastName')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div>
                         <label for="username">Username:</label>
                         <input type="text" name="username" id="username" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                                placeholder="Username" value="{{ old('username', $user->username) }}">
                         <small class="opacity-50">Fill in username. If left blank, a username will be generated (format: firstname.lastname).</small>
+                        @error('username')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div>
                         <label for="email">Email:</label>
                         <input type="email" name="email" id="email" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                                placeholder="Email address" value="{{ old('email', $user->email) }}" required>
                         <small class="opacity-50">Please enter a valid email address</small>
+                        @error('email')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div>
                         <label for="phoneNumber">Phone Number:</label>
                         <input type="tel" name="phoneNumber" id="phoneNumber" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                                placeholder="Phone Number" value="{{ old('phoneNumber', $user->phoneNumber) }}">
                         <small class="opacity-50">Fill in a valid phone number</small>
+                        @error('phoneNumber')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
             </form>

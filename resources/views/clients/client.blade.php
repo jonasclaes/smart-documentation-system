@@ -58,7 +58,7 @@
                 <!-- Files loop for all the files attached to current client, display message if no files found. -->
                 @if(count($client->files) > 0)
                     <ul>
-                        @foreach($client->files->sortByDesc('updated_at') as $file)
+                        @foreach($client->files->sortBy('name') as $file)
                             <li>
                                 <!-- Link to actual file information -->
                                 <a href="{{ route('files.show', ['file' => $file->id]) }}" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow

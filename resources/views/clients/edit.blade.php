@@ -23,24 +23,44 @@
                         <input type="number" name="clientNumber" id="clientNumber" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                                placeholder="Client Number" value="{{ old('clientNumber', $client->clientNumber) }}" min="1000" max="9999" required>
                         <small class="opacity-50">Fill in the number of the client here.</small>
+                        @error('clientNumber')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div>
                         <label for="name">Client Name</label>
                         <input type="text" name="name" id="name" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                                    placeholder="Client Name" value="{{ old('name', $client->name) }}" required>
                         <small class="opacity-50">Fill in the name of the file here.</small>
+                        @error('name')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div>
                         <label for="contactEmail">Contact Email:</label>
                         <input type="email" name="contactEmail" id="contactEmail" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                                placeholder="Contact Email" value="{{ old('contactEmail', $client->contactEmail) }}" required">
                         <small class="opacity-50">Fill in a valid contact email address here.</small>
+                        @error('contactEmail')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div>
                         <label for="contactPhoneNumber">Contact Phone Number:</label>
                         <input type="tel" name="contactPhoneNumber" id="contactPhoneNumber" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                                placeholder="Contact Phone Number" value="{{ old('contactPhoneNumber', $client->contactPhoneNumber) }}" required>
                         <small class="opacity-50">Please provide a valid phone Number of a client Contact.</small>
+                        @error('contactPhoneNumber')
+                        <span class="text-red-600" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
             </form>

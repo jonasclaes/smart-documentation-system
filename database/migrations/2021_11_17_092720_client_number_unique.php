@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CascadeDeleteClient extends Migration
+class ClientNumberUnique extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class CascadeDeleteClient extends Migration
     public function up()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->dropForeign('clientId');
-
+            $table->unique('clientNumber', 'clients_clientNumber_unique');
         });
     }
 
@@ -26,8 +25,8 @@ class CascadeDeleteClient extends Migration
      */
     public function down()
     {
-        Schema::table('clients', function (Blueprint $table) {
-            //
+        Schema::table('clients', function($table) {
+            $table->dropUnique('clients_clientNumber_unique');
         });
     }
 }

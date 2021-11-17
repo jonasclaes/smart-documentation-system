@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param \App\Models\User $user
+     * @param Request $request
      * @return Renderable
      */
     public function index(Request $request)
@@ -24,7 +27,7 @@ class UserController extends Controller
             ->orWhere('lastName', 'LIKE', "%$query%")
             ->orwhere('username', 'LIKE', "%$query%")
             ->orderBy("lastName", "asc")
-            ->paginate(16);
+            ->paginate(50);
         $users->appends(['q' => $query]);
 
         return view('users.users', ['users' => $users]);
@@ -44,25 +47,19 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param StoreUserRequest $request
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $user = User::create(
-            [
-                'firstName' => $request->input('firstName'),
-                'lastName' => $request->input('lastName'),
-                'email' => $request->input('email'),
-                'phoneNumber' => $request->input('phoneNumber'),
-                'username' => $request->input('username'),
-                'password' => Hash::make($request->input('password'))
-            ]
-        );
+        $input = $request->validated();
+        $input['password'] = Hash::make($input['password']);
+
+        $user = User::create($input);
 
         $request->session()->flash('success', 'User ' . $user->firstName . ' ' . $user->lastName . ' was successfully created.');
 
-        return redirect(route('users.index'));
+        return redirect(route('users.show', ['user' => $user]));
     }
 
     /**
@@ -90,13 +87,13 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param UpdateUserRequest $request
      * @param User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->All());
+        $user->update($request->validated());
 
         $request->session()->flash('success', 'Information of user ' . $user->firstName .
             ' ' . $user->lastName . ' was successfully updated.');
@@ -140,7 +137,7 @@ class UserController extends Controller
     public function updatePassword(Request $request, User $user)
     {
         $user->update([
-            'password' => Hash::make($request->input('password'))
+            'password' => Hash::make($request->input('password')->validated())
         ]);
 
         $request->session()->flash('success', 'Information of user ' . $user->firstName .

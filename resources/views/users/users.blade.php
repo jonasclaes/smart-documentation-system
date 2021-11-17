@@ -20,7 +20,7 @@
                        flex justify-center items-center">
                         <x-heroicon-o-search class="h-4 w-4 mr-1"/>Search
                     </a>
-                    <a href="{{ route('files.create') }}"
+                    <a href="{{ route('users.create') }}"
                        class="bg-green-600 hover:bg-green-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
                         <x-heroicon-o-plus class="h-4 w-4 mr-1"/>New
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="lg:max-h-screen h-full bg-white w-full rounded-2xl p-3">
+        <div class="h-full bg-white w-full rounded-2xl p-3">
             <div class="col-span-12">
                 <div class="overflow-auto lg:overflow-visible border-separate">
                     {{ $users->links() }}

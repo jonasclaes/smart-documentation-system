@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Response;
 
 class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param \App\Models\Client $client
+     * @param Request $request
      * @return Renderable
      */
     public function index(Request $request)
@@ -22,7 +25,7 @@ class ClientController extends Controller
         $clients = Client::where('clientNumber', 'LIKE', "%$query%")
             ->orWhere('name', 'LIKE', "%$query%")
             ->orderBy("name", "asc")
-            ->paginate(16);
+            ->paginate(50);
         $clients->appends(['q' => $query]);
 
         return view('clients.clients', ['clients' => $clients]);
@@ -41,10 +44,10 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param StoreClientRequest $request
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(StoreClientRequest $request)
     {
         $client = Client::create(
             [
@@ -64,7 +67,7 @@ class ClientController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Client $client
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Client $client)
     {
@@ -85,11 +88,11 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param UpdateClientRequest $request
      * @param Client $client
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function update(Request $request, Client $client)
+    public function update(UpdateClientRequest $request, Client $client)
     {
         $client->update($request->All());
 
@@ -103,7 +106,7 @@ class ClientController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Client $client
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Request $request, Client $client)
     {
