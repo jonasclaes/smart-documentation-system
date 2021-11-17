@@ -120,7 +120,7 @@
                     leading-none font-semibold outline-none focus:outline-none"
                             onclick="toggleModal('modal-delete')">
                         <span class="bg-transparent h-6 w-6 text-2xl block outline-none focus:outline-none">
-                            <i class="fas fa-times"></i>
+                            <x-heroicon-o-x class="h-6 w-6"/>
                         </span>
                     </button>
                 </div>
