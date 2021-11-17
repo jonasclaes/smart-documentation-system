@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\NotImplementedException;
 use App\Models\Revision;
 use Illuminate\Http\Request;
 
@@ -11,10 +12,11 @@ class RevisionController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws NotImplementedException
      */
     public function index()
     {
-        //
+        throw new NotImplementedException();
     }
 
     /**
