@@ -23,8 +23,6 @@ class UpdateRevisionRequest extends StoreRevisionRequest
      */
     public function rules()
     {
-        $rules = parent::rules();
-
-        return $rules;
+        return parent::rules();
     }
 }
