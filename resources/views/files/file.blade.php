@@ -61,7 +61,7 @@ $qrCodeEncoded = base64_encode($qrCode);
                 @if($file->enclosureId)
                     <p>{{ __('Enclosure:') }} {{ $file->enclosureId }}</p>
                 @endif
-                <p>{{ __('Unique ID:') }} {{ $file->uniqueId }}</p>
+                <p class="break-all">{{ __('Unique ID:') }} {{ $file->uniqueId }}</p>
                 <p>{{ trans_choice('This file has been opened once.|This file has been opened :amount times.', $file->QRCode->scanCount, ['amount' => $file->QRCode->scanCount]) }}</p>
                 <p class="break-all">{{ __('Public link:') }} <a href="{{ $file->QRCode->content }}" class="text-blue-500">{{ $file->QRCode->content }}</a></p>
             </div>
