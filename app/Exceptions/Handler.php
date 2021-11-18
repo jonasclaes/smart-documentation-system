@@ -48,6 +48,10 @@ class Handler extends ExceptionHandler
             ], 404);
         }
 
+        if ($e instanceof NotImplementedException) {
+            return response()->view('errors.501', [], 501);
+        }
+
         return parent::render($request, $e);
     }
 }

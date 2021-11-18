@@ -8,7 +8,7 @@
         <!--Back Button-->
         <a href="{{ route('users.index') }}"
            class="col-span-1 col-start-1 bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
-            <x-heroicon-o-chevron-left class="h-4 w-4"/>
+            <x-heroicon-s-chevron-left class="h-4 w-4"/>
             <span>Back</span>
         </a>
         <!-- Menu bar -->
@@ -28,7 +28,7 @@
         <div class="col-span-12 bg-white rounded-xl p-4 w-full mb-3">
             <h1 class="text-xl font-semibold mb-2 pb-1 border-b">User Information</h1>
             <div class="flex flex-wrap items-start gap-2">
-                <p class="flex-grow">This page shows the information for an individual user.</strong></p>
+                <p class="flex-grow">This page shows the information for an individual user.</p>
                 <div class="flex justify-end flex-grow gap-2 w-full md:w-auto">
                     <!--(De)Activate User-->
                     @if($user->active)
@@ -38,7 +38,7 @@
                        flex justify-center items-center"
                                 type="button"
                                 onclick="$('#updateStatus').submit();">
-                            <x-heroicon-o-check-circle class="h-4 w-4 mr-1 text-green-500"/>
+                            <x-heroicon-s-check-circle class="h-4 w-4 mr-1 text-green-500"/>
                             Active
                         </button>
                     @else
@@ -48,7 +48,7 @@
                        flex justify-center items-center"
                                 type="button"
                                 onclick="$('#updateStatus').submit();">
-                            <x-heroicon-o-minus-circle class="h-4 w-4 mr-1 text-red-500"/>
+                            <x-heroicon-s-minus-circle class="h-4 w-4 mr-1 text-red-500"/>
                             Inactive
                         </button>
                 @endif
@@ -56,21 +56,21 @@
                     <a href="{{ route('users.resetPassword', ['user' => $user]) }}"
                        class="bg-gray-600 hover:bg-gray-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-key class="h-4 w-4 mr-1"/>
+                        <x-heroicon-s-key class="h-4 w-4 mr-1"/>
                         Reset Password
                     </a>
                     <!--Edit Button-->
                     <a href="{{ route('users.edit', ['user' => $user]) }}"
                        class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-pencil class="h-4 w-4 mr-1"/>
+                        <x-heroicon-s-pencil class="h-4 w-4 mr-1"/>
                         Edit
                     </a>
                     <!--Delete Button to Modal-->
                     <a href="javascript:toggleModal('modal-delete')"
                        class="bg-red-600 hover:bg-red-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-trash class="h-4 w-4 mr-1"/>
+                        <x-heroicon-s-trash class="h-4 w-4 mr-1"/>
                         Delete
                     </a>
                 </div>
@@ -120,7 +120,7 @@
                     leading-none font-semibold outline-none focus:outline-none"
                             onclick="toggleModal('modal-delete')">
                         <span class="bg-transparent h-6 w-6 text-2xl block outline-none focus:outline-none">
-                            <x-heroicon-o-x class="h-6 w-6"/>
+                            <x-heroicon-s-x class="h-6 w-6"/>
                         </span>
                     </button>
                 </div>

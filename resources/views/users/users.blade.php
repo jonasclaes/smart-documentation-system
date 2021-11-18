@@ -18,12 +18,12 @@
                     <a href="javascript:$('#userSearch').submit();"
                        class="bg-gray-600 hover:bg-gray-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-search class="h-4 w-4 mr-1"/>Search
+                        <x-heroicon-s-search class="h-4 w-4 mr-1"/>Search
                     </a>
                     <a href="{{ route('users.create') }}"
                        class="bg-green-600 hover:bg-green-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-plus class="h-4 w-4 mr-1"/>New
+                        <x-heroicon-s-plus class="h-4 w-4 mr-1"/>New
                     </a>
                 </div>
             </div>

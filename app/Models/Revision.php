@@ -38,7 +38,17 @@ class Revision extends Model
         'revisionNumber',
         'fileId'
     ];
-    
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'revisionNumber';
+    }
+
     /**
      * Get the file that owns this revision.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

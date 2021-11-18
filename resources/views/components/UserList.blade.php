@@ -6,7 +6,7 @@
     @if(count($users) > 0)
         @foreach($users as $user)
             <li>
-                <a href="{{ route('users.show', ['user' => $user->id]) }}"
+                <a href="{{ route('users.show', ['user' => $user]) }}"
                 @class([
                     'flex justify-between bg-white p-3 rounded-xl shadow
                         border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center',
@@ -19,7 +19,7 @@
                     <span class="opacity-50">{{$user->username}}</span>
                 </div>
                 <div>
-                    <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
+                    <x-heroicon-s-chevron-right class="h-6 w-6 opacity-25"/>
                 </div>
                 </a>
             </li>

@@ -8,7 +8,7 @@
         <!-- Back Button -->
         <a href="{{ route('clients.index') }}"
            class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
-            <x-heroicon-o-chevron-left class="h-4 w-4"/>
+            <x-heroicon-s-chevron-left class="h-4 w-4"/>
             <span>Back</span>
         </a>
 
@@ -27,13 +27,13 @@
                     <a href="{{ route('clients.edit', ['client' => $client]) }}"
                        class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-pencil class="h-4 w-4 mr-1"/>
+                        <x-heroicon-s-pencil class="h-4 w-4 mr-1"/>
                         Edit
                     </a>
                     <a href="javascript:toggleModal('modal-delete')"
                        class="bg-red-600 hover:bg-red-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-trash class="h-4 w-4 mr-1"/>
+                        <x-heroicon-s-trash class="h-4 w-4 mr-1"/>
                         Delete
                     </a>
                 </div>
@@ -61,7 +61,7 @@
                         @foreach($client->files->sortBy('name') as $file)
                             <li>
                                 <!-- Link to actual file information -->
-                                <a href="{{ route('files.show', ['file' => $file->id]) }}" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
+                                <a href="{{ route('files.show', ['file' => $file]) }}" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
                         border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
                                     <div>
                                         <span>{{ $file->fileId }} - {{ $file->name }}</span>
@@ -69,7 +69,7 @@
 
                                     </div>
                                     <div>
-                                        <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
+                                        <x-heroicon-s-chevron-right class="h-6 w-6 opacity-25"/>
                                     </div>
                                 </a>
                             </li>
@@ -98,7 +98,7 @@
                     leading-none font-semibold outline-none focus:outline-none"
                             onclick="toggleModal('modal-delete')">
                         <span class="bg-transparent h-6 w-6 text-2xl block outline-none focus:outline-none">
-                            <x-heroicon-o-x class="h-6 w-6"/>
+                            <x-heroicon-s-x class="h-6 w-6"/>
                         </span>
                     </button>
                 </div>

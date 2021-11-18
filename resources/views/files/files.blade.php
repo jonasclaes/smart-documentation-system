@@ -26,12 +26,12 @@
                     <a href="javascript:$('#searchForm').submit();"
                        class="bg-gray-600 hover:bg-gray-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-search class="h-4 w-4 mr-1"/>{{ __('Search') }}
+                        <x-heroicon-s-search class="h-4 w-4 mr-1"/>{{ __('Search') }}
                     </a>
                     <a href="{{ route('files.create') }}"
                        class="bg-green-600 hover:bg-green-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-plus class="h-4 w-4 mr-1"/>{{ __('New') }}
+                        <x-heroicon-s-plus class="h-4 w-4 mr-1"/>{{ __('New') }}
                     </a>
                 </div>
             </div>
