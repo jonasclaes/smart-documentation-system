@@ -95,9 +95,12 @@ $qrCodeEncoded = base64_encode($qrCode);
                     <div class="grid gap-3 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-center">
                         <a href="{{ route('revisions.create', ['file' => $file]) }}"
                            class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
-                            <x-heroicon-o-plus class="h-4 w-4"/>&nbsp;{{ __('New') }}
+                            <x-heroicon-s-plus class="h-4 w-4"/>&nbsp;{{ __('New') }}
                         </a>
-                        <div class="bg-gray-100 rounded hidden md:block"></div>
+                        <a href="{{ route('revisions.copy', ['file' => $file]) }}"
+                           class="bg-sky-600 hover:bg-sky-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                            <x-heroicon-s-document-duplicate class="h-4 w-4"/>&nbsp;{{ __('Copy') }}
+                        </a>
                         <div class="bg-gray-100 rounded hidden xl:block"></div>
                     </div>
                 </div>

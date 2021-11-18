@@ -10,7 +10,7 @@
     <div class="container mx-auto px-3">
         <!-- Menu bar -->
         <div class="bg-white rounded-xl p-4 w-full mb-3">
-            <h1 class="text-xl font-semibold">{{ __('Edit file') }}</h1>
+            <h1 class="text-xl font-semibold">{{ __('Edit revision') }}</h1>
         </div>
 
         <!-- Content -->
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="fileId">{{ __('Client:') }}</label>
+                        <label for="fileId">{{ __('File:') }}</label>
                         <select name="fileId" id="fileId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
                             @foreach ($files as $fileEntry)
                                 <option

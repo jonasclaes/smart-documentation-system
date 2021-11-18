@@ -37,6 +37,8 @@ Route::middleware([
     Route::resource('files', FileController::class);
 
     // Revisions
+    Route::get('files/{file}/revisions/copy', [RevisionController::class, 'copy'])->name('revisions.copy');
+    Route::post('files/{file}/revisions/copy', [RevisionController::class, 'performCopy'])->name('revisions.performCopy');
     Route::resource('files/{file}/revisions', RevisionController::class);
 
     // Users

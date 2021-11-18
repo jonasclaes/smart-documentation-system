@@ -9,6 +9,7 @@ use App\Models\File;
 use App\Models\Revision;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class RevisionController extends Controller
 {
@@ -96,6 +97,42 @@ class RevisionController extends Controller
     public function destroy(File $file, Revision $revision)
     {
         $revision->delete();
+
+        return redirect()->route('files.show', ['file' => $file]);
+    }
+
+
+    /**
+     * Copy a revision.
+     *
+     * @param File $file
+     * @return Renderable
+     */
+    public function copy(File $file)
+    {
+        $revisions = Revision::where('fileId', $file->id)->get();
+
+        return view('revisions.copy', ['revisions' => $revisions, 'file' => $file]);
+    }
+
+
+    /**
+     * Perform a deep copy of a revision.
+     *
+     * @param Request $request
+     * @param File $file
+     * @return RedirectResponse
+     */
+    public function performCopy(Request $request, File $file)
+    {
+        $sourceRevision = Revision::find($request->input('sourceRevisionId'));
+
+        // Copy to new revision
+        $newRevision = $sourceRevision->replicate();
+
+        $newRevision->revisionNumber = $request->input('revisionNumber');
+
+        $newRevision->push();
 
         return redirect()->route('files.show', ['file' => $file]);
     }
