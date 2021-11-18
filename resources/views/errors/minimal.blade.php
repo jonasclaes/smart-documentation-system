@@ -30,7 +30,7 @@
                 </div>
                 <div class="flex items-center justify-center mt-3">
                     <div class="text-lg text-gray-900 uppercase tracking-wider">
-                        <a href="{{ url()->previous() }}" class="flex items-center bg-gray-200 py-1 px-3 rounded"><x-heroicon-o-chevron-left class="h-6 w-6" />&nbsp;Back</a>
+                        <a href="{{ url()->previous() }}" class="flex items-center bg-gray-200 py-1 px-3 rounded"><x-heroicon-s-chevron-left class="h-6 w-6" />&nbsp;Back</a>
                     </div>
                 </div>
             </div>

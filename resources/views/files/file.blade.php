@@ -27,7 +27,7 @@ $qrCodeEncoded = base64_encode($qrCode);
         <!-- Back Button -->
         <a href="{{ route('files.index') }}"
             class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
-             <x-heroicon-o-chevron-left class="h-4 w-4"/><span>{{ __('Back') }}</span>
+             <x-heroicon-s-chevron-left class="h-4 w-4"/><span>{{ __('Back') }}</span>
          </a>
 
         <!-- Menu bar -->
@@ -39,12 +39,12 @@ $qrCodeEncoded = base64_encode($qrCode);
                     <a href="{{ route('files.edit', ['file' => $file]) }}"
                        class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-pencil class="h-4 w-4 mr-1"/>{{ __('Edit') }}
+                        <x-heroicon-s-pencil class="h-4 w-4 mr-1"/>{{ __('Edit') }}
                     </a>
                     <a href="javascript:$('#deleteForm').submit();"
                        class="bg-red-600 hover:bg-red-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-o-trash class="h-4 w-4 mr-1"/>{{ __('Delete') }}
+                        <x-heroicon-s-trash class="h-4 w-4 mr-1"/>{{ __('Delete') }}
                     </a>
                 </div>
             </div>
@@ -77,11 +77,11 @@ $qrCodeEncoded = base64_encode($qrCode);
                 <div class="grid gap-3 grid-cols-1 mt-3 justify-items-center">
                     <a href="javascript:printJS('qr-code', 'html')"
                        class="bg-blue-600 hover:bg-blue-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
-                        <x-heroicon-o-printer class="h-4 w-4"/>&nbsp;{{ __('Print') }}
+                        <x-heroicon-s-printer class="h-4 w-4"/>&nbsp;{{ __('Print') }}
                     </a>
                     <a href="data:image/png;base64,{!! $qrCodeEncoded !!}" download="qr-code.png"
                        class="bg-blue-600 hover:bg-blue-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
-                        <x-heroicon-o-download class="h-4 w-4"/>&nbsp;{{ __('Download') }}
+                        <x-heroicon-s-download class="h-4 w-4"/>&nbsp;{{ __('Download') }}
                     </a>
                 </div>
             </div>
@@ -119,7 +119,7 @@ $qrCodeEncoded = base64_encode($qrCode);
                                             <span class="opacity-50">{{ __('Created at:') }} {{ $revision->created_at }}</span>
                                         </div>
                                         <div>
-                                            <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
+                                            <x-heroicon-s-chevron-right class="h-6 w-6 opacity-25"/>
                                         </div>
                                     </a>
                                 </li>
@@ -156,7 +156,7 @@ $qrCodeEncoded = base64_encode($qrCode);
                                             <span class="opacity-50">{{ __('Updated at:') }} {{ $revisionRequest->updated_at }}</span>
                                         </div>
                                         <div>
-                                            <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
+                                            <x-heroicon-s-chevron-right class="h-6 w-6 opacity-25"/>
                                         </div>
                                     </a>
                                 </li>

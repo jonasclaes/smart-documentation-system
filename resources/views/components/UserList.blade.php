@@ -19,7 +19,7 @@
                     <span class="opacity-50">{{$user->username}}</span>
                 </div>
                 <div>
-                    <x-heroicon-o-chevron-right class="h-6 w-6 opacity-25"/>
+                    <x-heroicon-s-chevron-right class="h-6 w-6 opacity-25"/>
                 </div>
                 </a>
             </li>
