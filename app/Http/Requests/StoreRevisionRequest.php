@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRevisionRequest extends FormRequest
 {
@@ -24,7 +25,15 @@ class StoreRevisionRequest extends FormRequest
     public function rules()
     {
         return [
-            'revisionNumber' => ['required', 'max:255', 'string'],
+            'revisionNumber' => [
+                'required',
+                'max:255',
+                'string',
+                Rule::unique('revisions', 'revisionNumber')
+                    ->where(function ($query) {
+                        return $query->where('fileId', $this->fileId);
+                    })->ignore($this->revision)
+            ],
             'fileId' => ['required', 'numeric', 'exists:files,id']
         ];
     }

@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\NotImplementedException;
 use App\Http\Requests\StoreRevisionRequest;
+use App\Http\Requests\UpdateRevisionRequest;
 use App\Models\File;
 use App\Models\Revision;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class RevisionController extends Controller
 {
@@ -50,6 +50,7 @@ class RevisionController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \App\Models\File      $file
      * @param  \App\Models\Revision  $revision
      * @return Renderable
      */
@@ -61,34 +62,41 @@ class RevisionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \App\Models\File      $file
      * @param  \App\Models\Revision  $revision
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
-    public function edit(Revision $revision)
+    public function edit(File $file, Revision $revision)
     {
-        //
+        return view('revisions.edit', ['revision' => $revision, 'file' => $file, 'files' => File::all()]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UpdateRevisionRequest $request
+     * @param  \App\Models\File      $file
      * @param  \App\Models\Revision  $revision
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, Revision $revision)
+    public function update(UpdateRevisionRequest $request, File $file, Revision $revision)
     {
-        //
+        $revision->update($request->validated());
+
+        return redirect()->route('revisions.show', ['file' => $file, 'revision' => $revision]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\Models\File      $file
      * @param  \App\Models\Revision  $revision
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function destroy(Revision $revision)
+    public function destroy(File $file, Revision $revision)
     {
-        //
+        $revision->delete();
+
+        return redirect()->route('files.show', ['file' => $file]);
     }
 }
