@@ -37,7 +37,7 @@ Route::middleware([
     Route::resource('files', FileController::class);
 
     // Revisions
-    Route::resource('revisions', RevisionController::class);
+    Route::resource('files/{file}/revisions', RevisionController::class);
 
     // Users
     Route::resource('users', UserController::class);

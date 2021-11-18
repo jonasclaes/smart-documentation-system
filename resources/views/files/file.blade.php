@@ -93,7 +93,7 @@ $qrCodeEncoded = base64_encode($qrCode);
                     <h2 class="font-semibold text-lg mb-1">{{ __('Revisions') }}</h2>
                     <!-- Actions -->
                     <div class="grid gap-3 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-center">
-                        <a href="{{ route('revisions.create', ['fileId' => $file->id]) }}"
+                        <a href="{{ route('revisions.create', ['file' => $file]) }}"
                            class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
                             <x-heroicon-o-plus class="h-4 w-4"/>&nbsp;{{ __('New') }}
                         </a>
@@ -108,8 +108,7 @@ $qrCodeEncoded = base64_encode($qrCode);
                         <ul>
                             @foreach($file->revisions->sortByDesc('updated_at') as $revision)
                                 <li>
-                                    {{-- TODO: Add link to revisions --}}
-                                    <a href="#" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
+                                    <a href="{{ route('revisions.show', ['revision' => $revision, 'file' => $file]) }}" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
                         border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
                                         <div>
                                             <span>{{ $revision->revisionNumber }}</span>

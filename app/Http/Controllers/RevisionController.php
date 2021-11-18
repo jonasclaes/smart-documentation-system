@@ -26,11 +26,12 @@ class RevisionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param File $file
      * @return Renderable
      */
-    public function create()
+    public function create(File $file)
     {
-        return view('revisions.create', ['files' => File::all()]);
+        return view('revisions.create', ['files' => File::all(), 'file' => $file]);
     }
 
     /**
@@ -50,11 +51,11 @@ class RevisionController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Revision  $revision
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
-    public function show(Revision $revision)
+    public function show(File $file, Revision $revision)
     {
-        //
+        return view('revisions.revision', ['revision' => $revision, 'file' => $file]);
     }
 
     /**
