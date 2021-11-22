@@ -56,30 +56,20 @@
             <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-6 flex flex-col">
                 <h2 class="font-semibold text-lg mb-1">Files</h2>
                 <!-- Files loop for all the files attached to current client, display message if no files found. -->
-                @if(count($client->files) > 0)
-                    <ul>
+                <div class="grid grid-cols-1 gap-2">
+                    @if(count($client->files) > 0)
                         @foreach($client->files->sortBy('name') as $file)
-                            <li>
-                                <!-- Link to actual file information -->
-                                <a href="{{ route('files.show', ['file' => $file]) }}" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
-                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
-                                    <div>
-                                        <span>{{ $file->fileId }} - {{ $file->name }}</span>
-                                        <br>
-
-                                    </div>
-                                    <div>
-                                        <x-heroicon-s-chevron-right class="h-6 w-6 opacity-25"/>
-                                    </div>
-                                </a>
-                            </li>
+                            <x-list-item
+                                to="{{ route('files.show', ['file' => $file]) }}"
+                                title="{{ $file->fileId }} - {{ $file->name }}">
+                            </x-list-item>
                         @endforeach
-                    </ul>
-                @else
-                    <div class="flex-grow flex items-center">
-                        <span class="text-center w-full">There are currently no files for this client.</span>
-                    </div>
-                @endif
+                    @else
+                        <div class="flex-grow flex items-center">
+                            <span class="text-center w-full">There are currently no files for this client.</span>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

@@ -2,8 +2,16 @@
 
 namespace App\Models;
 
+use Database\Factories\FileFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\File
@@ -14,27 +22,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $enclosureId
  * @property string $uniqueId
  * @property int $clientId
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\QRCode|null $QRCode
- * @property-read \App\Models\Client $client
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\RevisionRequest[] $revisionRequests
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read QRCode|null $QRCode
+ * @property-read Client $client
+ * @property-read Collection|RevisionRequest[] $revisionRequests
  * @property-read int|null $revision_requests_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Revision[] $revisions
+ * @property-read Collection|Revision[] $revisions
  * @property-read int|null $revisions_count
- * @method static \Database\Factories\FileFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|File newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|File newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|File query()
- * @method static \Illuminate\Database\Eloquent\Builder|File whereClientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|File whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|File whereEnclosureId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|File whereFileId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|File whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|File whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|File whereUniqueId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|File whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @method static FileFactory factory(...$parameters)
+ * @method static Builder|File newModelQuery()
+ * @method static Builder|File newQuery()
+ * @method static Builder|File query()
+ * @method static Builder|File whereClientId($value)
+ * @method static Builder|File whereCreatedAt($value)
+ * @method static Builder|File whereEnclosureId($value)
+ * @method static Builder|File whereFileId($value)
+ * @method static Builder|File whereId($value)
+ * @method static Builder|File whereName($value)
+ * @method static Builder|File whereUniqueId($value)
+ * @method static Builder|File whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class File extends Model
 {
@@ -61,7 +69,7 @@ class File extends Model
 
     /**
      * Get the client that owns the file.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function client()
     {
@@ -70,7 +78,7 @@ class File extends Model
 
     /**
      * Get the revisions belonging to the file.
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function revisions()
     {
@@ -79,7 +87,7 @@ class File extends Model
 
     /**
      * Get the revisions requests belonging to the file.
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function revisionRequests()
     {
@@ -88,7 +96,7 @@ class File extends Model
 
     /**
      * Get the QR-code belonging to the file.
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function QRCode()
     {

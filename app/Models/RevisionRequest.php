@@ -2,8 +2,14 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\RevisionRequest
@@ -16,27 +22,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $submitted
  * @property int $fileId
  * @property int $categoryId
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\RevisionRequestCategory|null $revisionCategory
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\RevisionRequestComment[] $revisionComments
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read RevisionRequestCategory|null $revisionCategory
+ * @property-read Collection|RevisionRequestComment[] $revisionComments
  * @property-read int|null $revision_comments_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\RevisionRequestDocument[] $revisionDocuments
+ * @property-read Collection|RevisionRequestDocument[] $revisionDocuments
  * @property-read int|null $revision_documents_count
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest query()
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest whereFileId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest whereSubmitted($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest whereTechnicianEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest whereTechnicianFirstName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest whereTechnicianLastName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequest whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @method static Builder|RevisionRequest newModelQuery()
+ * @method static Builder|RevisionRequest newQuery()
+ * @method static Builder|RevisionRequest query()
+ * @method static Builder|RevisionRequest whereCategoryId($value)
+ * @method static Builder|RevisionRequest whereCreatedAt($value)
+ * @method static Builder|RevisionRequest whereFileId($value)
+ * @method static Builder|RevisionRequest whereId($value)
+ * @method static Builder|RevisionRequest whereName($value)
+ * @method static Builder|RevisionRequest whereSubmitted($value)
+ * @method static Builder|RevisionRequest whereTechnicianEmail($value)
+ * @method static Builder|RevisionRequest whereTechnicianFirstName($value)
+ * @method static Builder|RevisionRequest whereTechnicianLastName($value)
+ * @method static Builder|RevisionRequest whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class RevisionRequest extends Model
 {
@@ -55,7 +61,7 @@ class RevisionRequest extends Model
 
     /**
      * Get the revision category that this request has.
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function revisionCategory()
     {
@@ -64,7 +70,7 @@ class RevisionRequest extends Model
 
     /**
      * Get the documents connected to this revision request.
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function revisionDocuments()
     {
@@ -73,7 +79,7 @@ class RevisionRequest extends Model
 
     /**
      * Get the comments connected to this revision request.
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function revisionComments()
     {

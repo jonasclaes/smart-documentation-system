@@ -2,8 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\RevisionFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Revision
@@ -11,23 +17,23 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $revisionNumber
  * @property int $fileId
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|Comment[] $comments
  * @property-read int|null $comments_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Document[] $documents
+ * @property-read Collection|Document[] $documents
  * @property-read int|null $documents_count
- * @property-read \App\Models\File $file
- * @method static \Database\Factories\RevisionFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Revision newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Revision newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Revision query()
- * @method static \Illuminate\Database\Eloquent\Builder|Revision whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Revision whereFileId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Revision whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Revision whereRevisionNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Revision whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property-read File $file
+ * @method static RevisionFactory factory(...$parameters)
+ * @method static Builder|Revision newModelQuery()
+ * @method static Builder|Revision newQuery()
+ * @method static Builder|Revision query()
+ * @method static Builder|Revision whereCreatedAt($value)
+ * @method static Builder|Revision whereFileId($value)
+ * @method static Builder|Revision whereId($value)
+ * @method static Builder|Revision whereRevisionNumber($value)
+ * @method static Builder|Revision whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class Revision extends Model
 {
@@ -51,7 +57,7 @@ class Revision extends Model
 
     /**
      * Get the file that owns this revision.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function file() {
         return $this->belongsTo(File::class, 'fileId');

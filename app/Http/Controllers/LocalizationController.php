@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class LocalizationController extends Controller
@@ -10,7 +11,7 @@ class LocalizationController extends Controller
      * Set the session locale.
      *
      * @param string $locale
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function __invoke(string $locale)
     {

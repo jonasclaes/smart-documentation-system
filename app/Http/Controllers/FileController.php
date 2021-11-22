@@ -62,7 +62,7 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\File  $file
+     * @param File $file
      * @return Renderable
      */
     public function show(File $file)
@@ -73,7 +73,7 @@ class FileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\File  $file
+     * @param File $file
      * @return Renderable
      */
     public function edit(File $file)
@@ -86,7 +86,7 @@ class FileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  UpdateFileRequest $request
-     * @param  \App\Models\File  $file
+     * @param File $file
      * @return RedirectResponse
      */
     public function update(UpdateFileRequest $request, File $file)
@@ -99,7 +99,7 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\File  $file
+     * @param File $file
      * @return RedirectResponse
      */
     public function destroy(File $file)

@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\QRCode;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class QRCodeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,8 +22,8 @@ class QRCodeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -34,8 +35,8 @@ class QRCodeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\QRCode  $QRCode
-     * @return \Illuminate\Http\Response
+     * @param QRCode $QRCode
+     * @return Response
      */
     public function show(QRCode $QRCode)
     {
@@ -45,9 +46,9 @@ class QRCodeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\QRCode  $qRCode
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param QRCode $qRCode
+     * @return Response
      */
     public function update(Request $request, QRCode $QRCode)
     {
@@ -59,8 +60,8 @@ class QRCodeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\QRCode  $qRCode
-     * @return \Illuminate\Http\Response
+     * @param QRCode $qRCode
+     * @return Response
      */
     public function destroy(QRCode $QRCode)
     {

@@ -10,13 +10,14 @@ use App\Models\Revision;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RevisionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      * @throws NotImplementedException
      */
     public function index()
@@ -51,8 +52,8 @@ class RevisionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\File      $file
-     * @param  \App\Models\Revision  $revision
+     * @param File $file
+     * @param Revision $revision
      * @return Renderable
      */
     public function show(File $file, Revision $revision)
@@ -63,8 +64,8 @@ class RevisionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\File      $file
-     * @param  \App\Models\Revision  $revision
+     * @param File $file
+     * @param Revision $revision
      * @return Renderable
      */
     public function edit(File $file, Revision $revision)
@@ -76,8 +77,8 @@ class RevisionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  UpdateRevisionRequest $request
-     * @param  \App\Models\File      $file
-     * @param  \App\Models\Revision  $revision
+     * @param File $file
+     * @param Revision $revision
      * @return RedirectResponse
      */
     public function update(UpdateRevisionRequest $request, File $file, Revision $revision)
@@ -90,8 +91,8 @@ class RevisionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\File      $file
-     * @param  \App\Models\Revision  $revision
+     * @param File $file
+     * @param Revision $revision
      * @return RedirectResponse
      */
     public function destroy(File $file, Revision $revision)

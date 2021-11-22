@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\QRCode
  *
- * @property-read \App\Models\File $file
- * @method static \Illuminate\Database\Eloquent\Builder|QRCode newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|QRCode newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|QRCode query()
- * @mixin \Eloquent
+ * @property-read File $file
+ * @method static Builder|QRCode newModelQuery()
+ * @method static Builder|QRCode newQuery()
+ * @method static Builder|QRCode query()
+ * @mixin Eloquent
  */
 class QRCode extends Model
 {
@@ -29,7 +32,7 @@ class QRCode extends Model
 
     /**
      * Get the file belonging to the QR-code.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function file() {
         return $this->belongsTo(File::class, 'fileId');

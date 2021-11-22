@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\RevisionRequestDocument
@@ -13,19 +16,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $path
  * @property int $size
  * @property int $revisionRequestId
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequestDocument newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequestDocument newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequestDocument query()
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequestDocument whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequestDocument whereFileName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequestDocument whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequestDocument wherePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequestDocument whereRevisionRequestId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequestDocument whereSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RevisionRequestDocument whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|RevisionRequestDocument newModelQuery()
+ * @method static Builder|RevisionRequestDocument newQuery()
+ * @method static Builder|RevisionRequestDocument query()
+ * @method static Builder|RevisionRequestDocument whereCreatedAt($value)
+ * @method static Builder|RevisionRequestDocument whereFileName($value)
+ * @method static Builder|RevisionRequestDocument whereId($value)
+ * @method static Builder|RevisionRequestDocument wherePath($value)
+ * @method static Builder|RevisionRequestDocument whereRevisionRequestId($value)
+ * @method static Builder|RevisionRequestDocument whereSize($value)
+ * @method static Builder|RevisionRequestDocument whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class RevisionRequestDocument extends Model
 {

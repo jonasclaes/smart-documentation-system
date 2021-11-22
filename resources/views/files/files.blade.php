@@ -26,12 +26,12 @@
                     <a href="javascript:$('#searchForm').submit();"
                        class="bg-gray-600 hover:bg-gray-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-s-search class="h-4 w-4 mr-1"/>{{ __('Search') }}
+                        <x-heroicon-s-search class="h-4 w-4 mr-1"></x-heroicon-s-search>{{ __('Search') }}
                     </a>
                     <a href="{{ route('files.create') }}"
                        class="bg-green-600 hover:bg-green-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-s-plus class="h-4 w-4 mr-1"/>{{ __('New') }}
+                        <x-heroicon-s-plus class="h-4 w-4 mr-1"></x-heroicon-s-plus>{{ __('New') }}
                     </a>
                 </div>
             </div>
@@ -43,7 +43,19 @@
             <br>
             <hr>
             <br>
-            <x-files-list :files="$files"></x-files-list>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+                @if(count($files) > 0)
+                    @foreach($files as $file)
+                        <x-list-item
+                            to="{{ route('files.show', ['file' => $file]) }}"
+                            title="{{ $file->fileId }} - {{ $file->name }}"
+                            subtitle="{{ $file->client->name }}{{ $file->enclosureId ? ' - '.$file->enclosureId : '' }}">
+                        </x-list-item>
+                    @endforeach
+                @else
+                    <p>{{ __('No files have been found.') }}</p>
+                @endif
+            </div>
         </div>
     </div>
 

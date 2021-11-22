@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\RevisionRequestComment;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RevisionRequestCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,8 +22,8 @@ class RevisionRequestCommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -34,8 +35,8 @@ class RevisionRequestCommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RevisionRequestComment  $revisionRequestComment
-     * @return \Illuminate\Http\Response
+     * @param RevisionRequestComment $revisionRequestComment
+     * @return Response
      */
     public function show(RevisionRequestComment $revisionRequestComment)
     {
@@ -45,9 +46,9 @@ class RevisionRequestCommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RevisionRequestComment  $revisionRequestComment
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param RevisionRequestComment $revisionRequestComment
+     * @return Response
      */
     public function update(Request $request, RevisionRequestComment $revisionRequestComment)
     {
@@ -59,8 +60,8 @@ class RevisionRequestCommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\RevisionRequestComment  $revisionRequestComment
-     * @return \Illuminate\Http\Response
+     * @param RevisionRequestComment $revisionRequestComment
+     * @return Response
      */
     public function destroy(RevisionRequestComment $revisionRequestComment)
     {

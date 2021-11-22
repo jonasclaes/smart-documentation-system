@@ -59,7 +59,7 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Client $client
+     * @param Client $client
      * @return Renderable
      */
     public function show(Client $client)

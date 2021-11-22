@@ -15,7 +15,7 @@ class PublicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\File  $file
+     * @param File $file
      * @return Renderable
      */
     public function show(File $file)

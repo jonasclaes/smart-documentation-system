@@ -106,25 +106,14 @@ $qrCodeEncoded = base64_encode($qrCode);
                 </div>
 
                 <!-- Revisions -->
-                <div class="bg-white rounded-xl p-4 flex flex-col">
+                <div class="bg-white rounded-xl p-4 flex flex-col gap-3">
                     @if(count($file->revisions) > 0)
-                        <ul>
-                            @foreach($file->revisions->sortByDesc('created_at') as $revision)
-                                <li>
-                                    <a href="{{ route('revisions.show', ['revision' => $revision, 'file' => $file]) }}" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
-                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
-                                        <div>
-                                            <span>{{ $revision->revisionNumber }}</span>
-                                            <br>
-                                            <span class="opacity-50">{{ __('Created at:') }} {{ $revision->created_at }}</span>
-                                        </div>
-                                        <div>
-                                            <x-heroicon-s-chevron-right class="h-6 w-6 opacity-25"/>
-                                        </div>
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
+                        @foreach($file->revisions->sortByDesc('created_at') as $revision)
+                            <x-list-item
+                                to="{{ route('revisions.show', ['revision' => $revision, 'file' => $file]) }}"
+                                title="{{ $revision->revisionNumber }}"
+                                subtitle="{{ __('Created at:') }} {{ $revision->created_at }}"></x-list-item>
+                        @endforeach
                     @else
                         <div class="flex-grow flex items-center">
                             <span class="text-center w-full">{{ __('There are currently no revisions.') }}</span>
@@ -146,22 +135,11 @@ $qrCodeEncoded = base64_encode($qrCode);
                 </div>
                 <div class="bg-white rounded-xl p-4 flex flex-col">
                     @if(count($file->revisionRequests) > 0)
-                        <ul>
-                            @foreach($file->revisionRequests->sortByDesc('updated_at') as $revisionRequest)
-                                <li>
-                                    {{-- TODO: Add link to revision requests --}}
-                                    <a href="#" class="flex justify-between bg-white p-3 rounded-xl mb-2 shadow
-                        border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
-                                        <div>
-                                            <span class="opacity-50">{{ __('Updated at:') }} {{ $revisionRequest->updated_at }}</span>
-                                        </div>
-                                        <div>
-                                            <x-heroicon-s-chevron-right class="h-6 w-6 opacity-25"/>
-                                        </div>
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
+                        @foreach($file->revisionRequests->sortByDesc('updated_at') as $revisionRequest)
+                            <x-list-item
+                                title="{{ $revisionRequest->name }}"
+                                subtitle="{{ __('Created at:') }} {{ $revisionRequest->created_at }}"></x-list-item>
+                        @endforeach
                     @else
                         <div class="flex-grow flex items-center">
                             <span class="text-center w-full">{{ __('There are currently no revision requests.') }}</span>

@@ -19,12 +19,12 @@
                     <a href="javascript:$('#clientSearch').submit();"
                        class="bg-gray-600 hover:bg-gray-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-s-search class="h-4 w-4 mr-1"/>Search
+                        <x-heroicon-s-search class="h-4 w-4 mr-1"></x-heroicon-s-search>{{ __('Search') }}
                     </a>
                     <a href="{{ route('clients.create') }}"
                        class="bg-green-600 hover:bg-green-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
-                        <x-heroicon-s-plus class="h-4 w-4 mr-1"/>New
+                        <x-heroicon-s-plus class="h-4 w-4 mr-1"></x-heroicon-s-plus>{{ __('New') }}
                     </a>
                 </div>
             </div>
@@ -36,7 +36,19 @@
             <br>
             <hr>
             <br>
-            <x-ClientList :clients="$clients"></x-ClientList>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+                @if(count($clients) > 0)
+                    @foreach($clients as $client)
+                        <x-list-item
+                            to="{{ route('clients.show', ['client' => $client->id]) }}"
+                            title="{{ $client->clientNumber }} - {{ $client->name }}"
+                            subtitle="{{ $client->contactEmail }}">
+                        </x-list-item>
+                    @endforeach
+                @else
+                    <p>No clients have been found.</p>
+                @endif
+            </div>
         </div>
     </div>
 
