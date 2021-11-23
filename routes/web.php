@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\RevisionAttachmentController;
 use App\Http\Controllers\RevisionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -40,6 +41,12 @@ Route::middleware([
     Route::get('files/{file}/revisions/copy', [RevisionController::class, 'copy'])->name('revisions.copy');
     Route::post('files/{file}/revisions/copy', [RevisionController::class, 'performCopy'])->name('revisions.performCopy');
     Route::resource('files/{file}/revisions', RevisionController::class);
+
+    // Revision attachments
+    Route::name('revisions')
+        ->resource('files/{file}/revisions/{revision}/attachments', RevisionAttachmentController::class);
+    Route::get('files/{file}/revisions/{revision}/attachments/download/{document}', [RevisionAttachmentController::class, 'download'])
+        ->name('revisions.attachments.download');
 
     // Users
     Route::resource('users', UserController::class);
