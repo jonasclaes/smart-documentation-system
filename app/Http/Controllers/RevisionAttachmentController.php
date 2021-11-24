@@ -15,16 +15,6 @@ use Storage;
 class RevisionAttachmentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return Renderable
@@ -68,34 +58,11 @@ class RevisionAttachmentController extends Controller
      * Display the specified resource.
      *
      * @param Document $document
-     * @return Response
+     * @return Renderable
      */
-    public function show(Document $document)
+    public function show(File $file, Revision $revision, Document $document)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Document $document
-     * @return Response
-     */
-    public function edit(Document $document)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Document $document
-     * @return Response
-     */
-    public function update(Request $request, Document $document)
-    {
-        //
+        return view('revisions.attachments.attachment', ['file' => $file, 'revision' => $revision, 'document' => $document]);
     }
 
     /**
@@ -104,9 +71,17 @@ class RevisionAttachmentController extends Controller
      * @param Document $document
      * @return Response
      */
-    public function destroy(Document $document)
+    public function destroy(File $file, Revision $revision, Document $document)
     {
-        //
+        if (count($document->revisions) === 1) {
+            Storage::delete($document->path);
+            $document->revisions()->detach();
+            $document->delete();
+        } else {
+            $document->revisions()->detach($revision);
+        }
+
+        return redirect()->route('revisions.show', ['file' => $file, 'revision' => $revision]);
     }
 
 

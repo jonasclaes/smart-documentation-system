@@ -19,11 +19,19 @@
                         <label for="sourceRevisionId">{{ __('Revision number:') }}</label>
                         <select name="sourceRevisionId" id="sourceRevisionId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
                             @foreach ($revisions as $revisionEntry)
-                                <option
-                                    value="{{ $revisionEntry->id }}"
-                                    @if(old('sourceRevisionId') == $revisionEntry->id) selected @endif>
-                                    {{ $revisionEntry->file->name }} | {{ $revisionEntry->revisionNumber }}
-                                </option>
+                                @if( ! old('sourceRevisionId', false) && $loop->last)
+                                    <option
+                                        value="{{ $revisionEntry->id }}"
+                                        selected>
+                                        {{ $revisionEntry->file->name }} | {{ $revisionEntry->revisionNumber }}
+                                    </option>
+                                @else
+                                    <option
+                                        value="{{ $revisionEntry->id }}"
+                                        @if(old('sourceRevisionId') == $revisionEntry->id) selected @endif>
+                                        {{ $revisionEntry->file->name }} | {{ $revisionEntry->revisionNumber }}
+                                    </option>
+                                @endif
                             @endforeach
                         </select>
                         <small class="opacity-50">{{ __('Select the source revision here.') }}</small>

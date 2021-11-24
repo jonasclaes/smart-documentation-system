@@ -60,9 +60,7 @@ class RevisionController extends Controller
      */
     public function show(File $file, Revision $revision)
     {
-        $documents = $revision->documents;
-
-        return view('revisions.revision', ['revision' => $revision, 'file' => $file, 'documents' => $documents]);
+        return view('revisions.revision', ['revision' => $revision, 'file' => $file]);
     }
 
     /**

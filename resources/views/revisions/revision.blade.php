@@ -53,11 +53,11 @@
                 <p>{{ __('Belongs to file: :fileUniqueId', ['fileUniqueId' => $file->uniqueId]) }}</p>
             </div>
 
-            <!-- Section: Files -->
+            <!-- Section: Attachments -->
             <div class="grid gap-3 grid-cols-1 self-start">
                 <!-- Title block -->
                 <div class="bg-white rounded-xl p-4">
-                    <h2 class="font-semibold text-lg mb-1">{{ __('Files') }}</h2>
+                    <h2 class="font-semibold text-lg mb-1">{{ __('Attachments') }}</h2>
 
                     <!-- Action buttons -->
                     <div class="grid gap-3 grid-cols-1 xl:grid-cols-2 justify-center">
@@ -69,23 +69,52 @@
                     </div>
                 </div>
 
-                <!-- Files -->
+                <!-- Attachments -->
                 <div class="bg-white rounded-xl p-4">
                     <div class="grid grid-cols-1 gap-2">
-                        @foreach($documents as $document)
-                            <x-list-item
-                                to="{{ route('revisions.attachments.download', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}"
-                                title="{{ $document->fileName }}"
-                                subtitle="Size: {{ \App\Helpers\ByteHelper::toHuman($document->size) }}">
-                            </x-list-item>
-                        @endforeach
+                        @if(count($revision->documents) > 0)
+                            @foreach($revision->documents as $document)
+                                <x-list-item
+{{--                                    to="{{ route('revisions.attachments.download', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}"--}}
+                                    to="{{ route('revisions.attachments.show', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}"
+                                    title="{{ $document->fileName }}"
+                                    subtitle="{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($document->size) }}">
+                                </x-list-item>
+                            @endforeach
+                        @else
+                            <div class="flex-grow flex items-center">
+                                <span class="text-center w-full">{{ __('There are no attachments.') }}</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
 
             <!-- Section: Comments -->
-            <div class="bg-white rounded-xl p-4">
-                <h2 class="font-semibold text-lg mb-1">{{ __('Comments') }}</h2>
+            <div class="grid gap-3 grid-cols-1 self-start">
+                <!-- Title block -->
+                <div class="bg-white rounded-xl p-4">
+                    <h2 class="font-semibold text-lg mb-1">{{ __('Comments') }}</h2>
+
+                    <!-- Action buttons -->
+                    <div class="grid gap-3 grid-cols-1 xl:grid-cols-2 justify-center">
+                        <div class="bg-gray-100 rounded h-10"></div>
+                        <div class="bg-gray-100 rounded hidden xl:block"></div>
+                    </div>
+                </div>
+
+                <!-- Comments -->
+                <div class="bg-white rounded-xl p-4">
+                    <div class="grid grid-cols-1 gap-2">
+                        @if(count($revision->comments) > 0)
+                            <!-- TODO: Comment for loop here -->
+                        @else
+                            <div class="flex-grow flex items-center">
+                                <span class="text-center w-full">{{ __('There are no comments.') }}</span>
+                            </div>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </div>

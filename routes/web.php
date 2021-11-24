@@ -43,10 +43,20 @@ Route::middleware([
     Route::resource('files/{file}/revisions', RevisionController::class);
 
     // Revision attachments
-    Route::name('revisions')
-        ->resource('files/{file}/revisions/{revision}/attachments', RevisionAttachmentController::class);
-    Route::get('files/{file}/revisions/{revision}/attachments/download/{document}', [RevisionAttachmentController::class, 'download'])
-        ->name('revisions.attachments.download');
+    Route::name('revisions.attachments')->group(function () {
+        // Attachment create
+        Route::post('files/{file}/revisions/{revision}/attachments', [RevisionAttachmentController::class, 'store'])->name('.store');
+        Route::get('files/{file}/revisions/{revision}/attachments/create', [RevisionAttachmentController::class, 'create'])->name('.create');
+
+        // Attachment show
+        Route::get('files/{file}/revisions/{revision}/attachments/{document}', [RevisionAttachmentController::class, 'show'])->name('.show');
+
+        // Attachment delete
+        Route::delete('files/{file}/revisions/{revision}/attachments/{document}', [RevisionAttachmentController::class, 'destroy'])->name('.destroy');
+
+        // Attachment download
+        Route::get('files/{file}/revisions/{revision}/attachments/{document}/download', [RevisionAttachmentController::class, 'download'])->name('.download');
+    });
 
     // Users
     Route::resource('users', UserController::class);
