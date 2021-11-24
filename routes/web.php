@@ -47,6 +47,7 @@ Route::middleware([
         // Attachment create
         Route::post('files/{file}/revisions/{revision}/attachments', [RevisionAttachmentController::class, 'store'])->name('.store');
         Route::get('files/{file}/revisions/{revision}/attachments/create', [RevisionAttachmentController::class, 'create'])->name('.create');
+        Route::get('files/{file}/revisions/{revision}/attachments/createDirectory', [RevisionAttachmentController::class, 'createDirectory'])->name('.createDirectory');
 
         // Attachment show
         Route::get('files/{file}/revisions/{revision}/attachments/{document}', [RevisionAttachmentController::class, 'show'])->name('.show');

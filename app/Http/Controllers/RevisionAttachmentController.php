@@ -27,6 +27,18 @@ class RevisionAttachmentController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return Renderable
+     */
+    public function createDirectory(File $file, Revision $revision)
+    {
+        $revisions = Revision::where('fileId', $file->id)->get();
+
+        return view('revisions.attachments.createDirectory', ['file' => $file, 'revision' => $revision, 'revisions' => $revisions]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
@@ -37,19 +49,23 @@ class RevisionAttachmentController extends Controller
      */
     public function store(File $file, Revision $revision, Request $request)
     {
-        if ( ! $request->hasFile('file') || ! $request->file('file')->isValid()) {
+        if ( ! $request->hasFile('files')) {
             throw new FileNotFoundException();
         }
 
-        $inputFile = $request->file('file');
+        foreach ($request->file('files') as $inputFile) {
+            if ( ! $inputFile->isValid()) {
+                throw new FileNotFoundException();
+            }
 
-        $path = $inputFile->store('data/revisions/documents');
+            $path = $inputFile->store('data/revisions/documents');
 
-        $revision->documents()->create([
-            "fileName" => $inputFile->getClientOriginalName(),
-            "path" => $path,
-            "size" => $inputFile->getSize()
-        ]);
+            $revision->documents()->create([
+                "fileName" => $inputFile->getClientOriginalName(),
+                "path" => $path,
+                "size" => $inputFile->getSize()
+            ]);
+        }
 
         return redirect()->route('revisions.show', ['file' => $file, 'revision' => $revision]);
     }

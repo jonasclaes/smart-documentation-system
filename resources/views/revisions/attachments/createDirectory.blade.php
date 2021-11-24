@@ -18,7 +18,7 @@
                         label="Attachment:"
                         name="files[]"
                         helpText="Select the attachment(s) to be uploaded here."
-                        customProperties="multiple">
+                        customProperties='multiple directory="" webkitdirectory="" moxdirectory=""'>
                     </x-forms.input-block.file>
                     <div>
                         <label for="revisionId">{{ __('Revision:') }}</label>

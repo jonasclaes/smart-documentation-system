@@ -20,15 +20,24 @@ class Input extends Component
      */
     public $placeholder;
 
+
+    /**
+     * Input custom properties.
+     *
+     * @var
+     */
+    public $customProperties;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name = "", $placeholder = "")
+    public function __construct(string $name = "", string $placeholder = "", string $customProperties = "")
     {
         $this->name = $name;
         $this->placeholder = $placeholder;
+        $this->customProperties = $customProperties;
     }
 
     /**

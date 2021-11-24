@@ -63,9 +63,12 @@
                     <div class="grid gap-3 grid-cols-1 xl:grid-cols-2 justify-center">
                         <a href="{{ route('revisions.attachments.create', ['file' => $file, 'revision' => $revision]) }}"
                            class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
-                            <x-heroicon-s-upload class="h-4 w-4 mr-1"></x-heroicon-s-upload>{{ __('Upload') }}
+                            <x-heroicon-s-upload class="h-4 w-4 mr-1"></x-heroicon-s-upload>{{ __('Upload file(s)') }}
                         </a>
-                        <div class="bg-gray-100 rounded hidden xl:block"></div>
+                        <a href="{{ route('revisions.attachments.createDirectory', ['file' => $file, 'revision' => $revision]) }}"
+                           class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                            <x-heroicon-s-upload class="h-4 w-4 mr-1"></x-heroicon-s-upload>{{ __('Upload directory') }}
+                        </a>
                     </div>
                 </div>
 

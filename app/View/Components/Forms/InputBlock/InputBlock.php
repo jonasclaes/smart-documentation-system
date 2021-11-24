@@ -25,9 +25,9 @@ class InputBlock extends Input
      *
      * @return void
      */
-    public function __construct(string $name = "", string $placeholder = "", string $label = "", string $helpText = "")
+    public function __construct(string $name = "", string $placeholder = "", string $customProperties = "", string $label = "", string $helpText = "")
     {
-        parent::__construct($name, $placeholder);
+        parent::__construct($name, $placeholder, $customProperties);
 
         $this->label = $label;
         $this->helpText = $helpText;
