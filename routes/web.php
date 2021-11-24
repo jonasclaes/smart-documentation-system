@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\RevisionAttachmentController;
 use App\Http\Controllers\RevisionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -40,6 +41,23 @@ Route::middleware([
     Route::get('files/{file}/revisions/copy', [RevisionController::class, 'copy'])->name('revisions.copy');
     Route::post('files/{file}/revisions/copy', [RevisionController::class, 'performCopy'])->name('revisions.performCopy');
     Route::resource('files/{file}/revisions', RevisionController::class);
+
+    // Revision attachments
+    Route::name('revisions.attachments')->group(function () {
+        // Attachment create
+        Route::post('files/{file}/revisions/{revision}/attachments', [RevisionAttachmentController::class, 'store'])->name('.store');
+        Route::get('files/{file}/revisions/{revision}/attachments/create', [RevisionAttachmentController::class, 'create'])->name('.create');
+        Route::get('files/{file}/revisions/{revision}/attachments/createDirectory', [RevisionAttachmentController::class, 'createDirectory'])->name('.createDirectory');
+
+        // Attachment show
+        Route::get('files/{file}/revisions/{revision}/attachments/{document}', [RevisionAttachmentController::class, 'show'])->name('.show');
+
+        // Attachment delete
+        Route::delete('files/{file}/revisions/{revision}/attachments/{document}', [RevisionAttachmentController::class, 'destroy'])->name('.destroy');
+
+        // Attachment download
+        Route::get('files/{file}/revisions/{revision}/attachments/{document}/download', [RevisionAttachmentController::class, 'download'])->name('.download');
+    });
 
     // Users
     Route::resource('users', UserController::class);

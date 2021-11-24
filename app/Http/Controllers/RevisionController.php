@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Exceptions\NotImplementedException;
 use App\Http\Requests\StoreRevisionRequest;
 use App\Http\Requests\UpdateRevisionRequest;
+use App\Models\Document;
 use App\Models\File;
 use App\Models\Revision;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Storage;
 
 class RevisionController extends Controller
 {
@@ -97,6 +99,30 @@ class RevisionController extends Controller
      */
     public function destroy(File $file, Revision $revision)
     {
+        // Seems a little bit hacky, that's because
+        // Laravel doesn't have a function to check
+        // if it is the last relationship on a pivot
+        // table.
+        foreach ($revision->documents as $document) {
+            // If this is the last relationship, delete the file!
+            if (count($document->revisions) === 1) {
+                Storage::delete($document->path);
+                $revision->documents()->detach($document->id);
+                $document->delete();
+            }
+        }
+
+        foreach ($revision->comments as $comment) {
+            // If this is the last relationship, delete the file!
+            if (count($comment->revisions) === 1) {
+                $revision->comments()->detach($comment->id);
+                $comment->delete();
+            }
+        }
+
+        $revision->documents()->detach();
+        $revision->comments()->detach();
+
         $revision->delete();
 
         return redirect()->route('files.show', ['file' => $file]);
@@ -131,9 +157,15 @@ class RevisionController extends Controller
         // Copy to new revision
         $newRevision = $sourceRevision->replicate();
 
+        // Change the revision number to the new one.
         $newRevision->revisionNumber = $request->input('revisionNumber');
 
+        // Throw it into the database.
         $newRevision->push();
+
+        // Copy all the old documents and comments over to the new revision.
+        $newRevision->documents()->attach($sourceRevision->documents);
+        $newRevision->comments()->attach($sourceRevision->comments);
 
         return redirect()->route('files.show', ['file' => $file]);
     }
