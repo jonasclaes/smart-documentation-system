@@ -73,4 +73,4 @@ Route::middleware([
 Route::get('localization/{locale}', LocalizationController::class);
 
 // Public
-Route::get('public/file/{file:uniqueId}', [PublicController::class, 'show'])->name('public.show');
+Route::get('public/files/{file:uniqueId}', [PublicController::class, 'show'])->name('public.show');

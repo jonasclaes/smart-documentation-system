@@ -22,6 +22,6 @@ class PublicController extends Controller
     {
         $file->QRCode->increment('scanCount');
 
-        return view('files.file', ['file' => $file]);
+        return view('public.files.file', ['file' => $file]);
     }
 }
