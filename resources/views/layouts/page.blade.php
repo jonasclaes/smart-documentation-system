@@ -17,8 +17,22 @@
 <body>
 <div id="app">
     <!-- Component -->
-    <div class="h-screen w-screen flex bg-gray-200">
-        <main class="p-3 w-full overflow-y-auto">
+    <div class="min-h-screen w-screen bg-gray-200">
+        @if($topnav ?? false)
+            <nav class="bg-white shadow-md flex justify-center md:justify-start h-12 p-3">
+                <div class="container mx-auto">
+                    <div class="h-full flex items-center gap-2">
+                        <!-- Logo Section -->
+                        <img class="h-full"
+                             src="{{ asset('assets/delta-technics-small.png') }}"
+                             alt="Delta Technics"/>
+                        <h1 class="text-xl capitalize">Delta technics</h1>
+                    </div>
+                </div>
+            </nav>
+        @endif
+
+        <main class="p-3 overflow-y-auto">
             @yield('content')
         </main>
     </div>
