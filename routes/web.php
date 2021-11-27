@@ -73,4 +73,7 @@ Route::middleware([
 Route::get('localization/{locale}', LocalizationController::class);
 
 // Public
-Route::get('public/files/{file:uniqueId}', [PublicController::class, 'show'])->name('public.show');
+Route::prefix('public/')->name('public.')->group(function () {
+    Route::get('theme/update', [PublicController::class, 'updateTheme'])->name('theme.update');
+    Route::get('files/{file:uniqueId}', [PublicController::class, 'show'])->name('show');
+});

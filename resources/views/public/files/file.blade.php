@@ -53,9 +53,8 @@
                             <x-list-item
                                 title="{{ $revision->revisionNumber }}"
                                 subtitle="{{ __('Created at:') }} {{ $revision->created_at }}"
-                                class="flex justify-between p-3 rounded-xl shadow border border-gray-400
-                                border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out
-                                items-center w-full my-2 text-black"></x-list-item>
+                                class="bg-white dark:bg-coolGray-700 dark:text-white flex justify-between p-3
+                                rounded-xl shadow border border-gray-400 dark:border-gray-800 border-opacity-25 hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-150 ease-in-out items-center w-full my-2 text-black"></x-list-item>
                         </div>
                     @endforeach
                 </div>

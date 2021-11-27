@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Delta Technics Smart Docs') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -15,7 +15,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
+<div id="app" @class(['dark' => Session::get('theme') === "dark"])>
     <!-- Component -->
     <div class="min-h-screen w-full bg-gray-200 dark:bg-coolGray-900">
         @if($topnav ?? false)
@@ -26,7 +26,7 @@
                         <img class="h-full"
                              src="{{ asset('assets/delta-technics-small.png') }}"
                              alt="Delta Technics"/>
-                        <h1 class="text-xl capitalize">Delta technics</h1>
+                        <h1 class="text-xl capitalize">Delta Technics</h1>
                     </div>
                 </div>
             </nav>
