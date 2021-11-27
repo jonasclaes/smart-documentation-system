@@ -31,6 +31,13 @@ class ListItem extends Component
     public $subtitle;
 
     /**
+     * The ListItem classes.
+     *
+     * @var
+     */
+    public $class;
+
+    /**
      * Create a new component instance.
      *
      * @param string $to
@@ -38,11 +45,12 @@ class ListItem extends Component
      * @param string $subtitle
      * @return void
      */
-    public function __construct(string $to = "#", string $title = "", string $subtitle = "")
+    public function __construct(string $to = "#", string $title = "", string $subtitle = "", string $class = "")
     {
         $this->to = $to;
         $this->title = $title;
         $this->subtitle = $subtitle;
+        $this->class = $class;
     }
 
     /**

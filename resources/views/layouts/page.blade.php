@@ -14,10 +14,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="dark">
+<body>
 <div id="app">
     <!-- Component -->
-    <div class="min-h-screen w-screen bg-gray-200 dark:bg-coolGray-900">
+    <div class="min-h-screen w-full bg-gray-200 dark:bg-coolGray-900">
         @if($topnav ?? false)
             <nav class="bg-white dark:bg-sky-600 dark:text-white shadow-md px-3">
                 <div class="container mx-auto h-12 py-3 flex justify-center md:justify-start">

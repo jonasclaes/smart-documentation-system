@@ -1,7 +1,11 @@
 <a
     href="{{ $to }}"
+    @if($class)
+        class="{{ $class }}"
+    @else
     class="flex justify-between bg-white p-3 rounded-xl shadow border border-gray-400 border-opacity-25
-        hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center">
+        hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center"
+    @endif>
     <div>
         <span>{{ $title }}</span>
         @if($subtitle)
