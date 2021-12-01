@@ -31,18 +31,36 @@ class ListItem extends Component
     public $subtitle;
 
     /**
+     * The ListItem classes.
+     *
+     * @var
+     */
+    public $class;
+
+    /**
+     * The ListItem labels.
+     *
+     * @var
+     */
+    public $labels;
+
+    /**
      * Create a new component instance.
      *
      * @param string $to
      * @param string $title
      * @param string $subtitle
+     * @param string $class
+     * @param array  $labels
      * @return void
      */
-    public function __construct(string $to = "#", string $title = "", string $subtitle = "")
+    public function __construct(string $to = "#", string $title = "", string $subtitle = "", string $class = "", array $labels = [])
     {
         $this->to = $to;
         $this->title = $title;
         $this->subtitle = $subtitle;
+        $this->class = $class;
+        $this->labels = $labels;
     }
 
     /**

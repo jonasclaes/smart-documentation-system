@@ -5,10 +5,11 @@ module.exports = {
       './resources/**/*.blade.php',
       './resources/**/*.js',
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
         colors: {
+            coolGray: colors.coolGray,
             cyan: colors.cyan,
             sky: colors.sky
         }
