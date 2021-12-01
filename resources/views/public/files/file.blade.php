@@ -28,17 +28,35 @@
                        class="bg-sky-600 hover:bg-sky-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
                         <x-heroicon-s-paper-airplane class="h-4 w-4 transform rotate-45"></x-heroicon-s-paper-airplane>&nbsp;{{ __('E-mail me this page') }}
                     </a>
-                    <div class="bg-gray-100 dark:bg-coolGray-500 rounded hidden sm:block"></div>
+                    <a href="#"
+                       class="bg-sky-600 hover:bg-sky-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                        <x-heroicon-s-pencil-alt class="h-4 w-4"></x-heroicon-s-pencil-alt>&nbsp;{{ __('New change request') }}
+                    </a>
                     <div class="bg-gray-100 dark:bg-coolGray-500 rounded hidden lg:block"></div>
                     <div class="bg-gray-100 dark:bg-coolGray-500 rounded hidden xl:block"></div>
                 </div>
             </div>
 
+            <!-- Section: Revision requests -->
+            <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4 flex flex-col">
+                <h1 class="text-xl font-semibold">{{ __('Revision requests') }}</h1>
+                <!-- Revision requests -->
+                <div class="grid grid-cols-1 mt-1">
+                    @foreach($file->revisionRequests->sortByDesc('created_at') as $revisionRequest)
+                        <!-- Revision request -->
+                        <x-list-item
+                            title="{{ $revisionRequest->name }}"
+                            subtitle="{{ __('Created on') }}: {{ $revisionRequest->created_at }} by {{ $revisionRequest->technicianLastName }}, {{ $revisionRequest->technicianFirstName }}."
+                            :labels="[['color' => 'sky', 'text' => 'Status: awaiting approval']]"></x-list-item>
+                    @endforeach
+                </div>
+            </div>
+
             <!-- Section: Revisions -->
-            <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4 flex flex-col gap-3">
+            <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4 flex flex-col">
                 <h1 class="text-xl font-semibold">{{ __('Revisions') }}</h1>
                 <!-- Timeline -->
-                <div class="grid grid-cols-1 text-gray-50 p-4">
+                <div class="grid grid-cols-1 mt-1">
                     @foreach($file->revisions->sortByDesc('created_at') as $revision)
                         <!-- Timeline item -->
                         <div class="flex">
@@ -51,8 +69,10 @@
                             </div>
                             <!-- Revision -->
                             <x-list-item
+                                to="{{ route('public.showRevision', ['file' => $file, 'revision' => $revision]) }}"
                                 title="{{ $revision->revisionNumber }}"
-                                subtitle="{{ __('Created at:') }} {{ $revision->created_at }}"
+                                subtitle="{{ __('Created on') }}: {{ $revision->created_at }}"
+                                :labels="$loop->first ? [['color' => 'sky', 'text' => 'Latest']] : []"
                                 class="bg-white dark:bg-coolGray-700 dark:text-white flex justify-between p-3
                                 rounded-xl shadow border border-gray-400 dark:border-gray-800 border-opacity-25 hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-150 ease-in-out items-center w-full my-2 text-black"></x-list-item>
                         </div>

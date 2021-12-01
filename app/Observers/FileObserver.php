@@ -18,7 +18,7 @@ class FileObserver
     {
         // Create a QR-code.
         QRCode::create([
-            'content' => URL::signedRoute('public.show', ['file' => $file]),
+            'content' => URL::signedRoute('public.showFileVerifier', ['file' => $file]),
             'fileId' => $file->id
         ]);
     }
@@ -32,7 +32,7 @@ class FileObserver
     public function updated(File $file)
     {
         $file->QRCode->update([
-            'content' => URL::signedRoute('public.show', ['file' => $file]),
+            'content' => URL::signedRoute('public.showFileVerifier', ['file' => $file]),
         ]);
     }
 
