@@ -24,7 +24,7 @@
                 <p>{{ __('This documentation is applicable for client') }}: <strong>{{ $file->client->name }}</strong></p>
                 <!-- Actions -->
                 <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center mt-2">
-                    <a href="#"
+                    <a href="{{ route('public.shareFile', ['file' => $file]) }}"
                        class="bg-sky-600 hover:bg-sky-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
                         <x-heroicon-s-paper-airplane class="h-4 w-4 transform rotate-45"></x-heroicon-s-paper-airplane>&nbsp;{{ __('E-mail me this page') }}
                     </a>

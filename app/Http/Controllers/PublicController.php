@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PublicShareFileRequest;
 use App\Http\Requests\ThemeUpdateRequest;
+use App\Mail\Public\ShareFile;
 use App\Models\Document;
 use App\Models\File;
 use App\Models\Revision;
@@ -10,13 +12,19 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class PublicController extends Controller
 {
+    private function checkAccess(File $file) {
+        if ( ! Session::has('fileAccess') || ! in_array($file->id, Session::get('fileAccess')) ) {
+            abort(403);
+        }
+    }
+
     public function showFileVerifier(Request $request, File $file)
     {
         // Looks complicated, but it isn't.
@@ -51,9 +59,7 @@ class PublicController extends Controller
      */
     public function showFile(File $file)
     {
-        if ( ! Session::has('fileAccess') || ! in_array($file->id, Session::get('fileAccess')) ) {
-            abort(403);
-        }
+        $this->checkAccess($file);
 
         return view('public.files.file', ['file' => $file]);
     }
@@ -67,6 +73,8 @@ class PublicController extends Controller
      */
     public function showRevision(File $file, Revision $revision)
     {
+        $this->checkAccess($file);
+
         return view('public.files.revision', ['file' => $file, 'revision' => $revision]);
     }
 
@@ -80,7 +88,38 @@ class PublicController extends Controller
      */
     public function downloadDocument(File $file, Revision $revision, Document $document)
     {
+        $this->checkAccess($file);
+
         return Storage::download($document->path, $document->fileName);
+    }
+
+    /**
+     * Send an email containing the link to the file.
+     *
+     * @param File $file
+     */
+    public function shareFile(File $file)
+    {
+        $this->checkAccess($file);
+
+        return view('public.files.share-file', ['file' => $file]);
+    }
+
+    /**
+     * Send an email containing the link to the file.
+     *
+     * @param PublicShareFileRequest $request
+     * @param File $file
+     */
+    public function doShareFile(PublicShareFileRequest $request, File $file)
+    {
+        $this->checkAccess($file);
+
+        $input = $request->validated();
+
+        Mail::to($input['email'])->send(new ShareFile($file));
+
+        return redirect()->route('public.showFile', ['file' => $file]);
     }
 
     /**
