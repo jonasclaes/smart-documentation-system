@@ -9,7 +9,7 @@
     <div class="container mx-auto px-3">
         <!-- Menu bar -->
         <div class="bg-white rounded-xl p-4 w-full mb-3">
-            <h1 class="text-xl font-semibold">Edit Client Information</h1>
+            <h1 class="text-xl font-semibold">{{ __('Edit client') }}</h1>
         </div>
 
         <!-- Content -->
@@ -19,10 +19,10 @@
                 @method("PUT")
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
                     <div>
-                        <label for="clientNumber">Client Number: </label>
+                        <label for="clientNumber">{{ __('Client number') }} ({{ __('required') }}):</label>
                         <input type="number" name="clientNumber" id="clientNumber" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
-                               placeholder="Client Number" value="{{ old('clientNumber', $client->clientNumber) }}" min="1000" max="9999" required>
-                        <small class="opacity-50">Fill in the number of the client here.</small>
+                               placeholder="{{ __('Client number') }}" value="{{ old('clientNumber', $client->clientNumber) }}" min="1000" max="9999" required>
+                        <small class="text-gray-400">{{ __('Fill in the client number here.') }}</small>
                         @error('clientNumber')
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
@@ -30,33 +30,11 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="name">Client Name</label>
+                        <label for="name">{{ __('Client name') }} ({{ __('required') }}):</label>
                         <input type="text" name="name" id="name" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
-                                   placeholder="Client Name" value="{{ old('name', $client->name) }}" required>
-                        <small class="opacity-50">Fill in the name of the file here.</small>
+                                   placeholder="{{ __('Client name') }}" value="{{ old('name', $client->name) }}" required>
+                        <small class="text-gray-400">{{ __('Fill in the client name here.') }}</small>
                         @error('name')
-                        <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div>
-                        <label for="contactEmail">Contact Email:</label>
-                        <input type="email" name="contactEmail" id="contactEmail" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
-                               placeholder="Contact Email" value="{{ old('contactEmail', $client->contactEmail) }}" required">
-                        <small class="opacity-50">Fill in a valid contact email address here.</small>
-                        @error('contactEmail')
-                        <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div>
-                        <label for="contactPhoneNumber">Contact Phone Number:</label>
-                        <input type="tel" name="contactPhoneNumber" id="contactPhoneNumber" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
-                               placeholder="Contact Phone Number" value="{{ old('contactPhoneNumber', $client->contactPhoneNumber) }}" required>
-                        <small class="opacity-50">Please provide a valid phone Number of a client Contact.</small>
-                        @error('contactPhoneNumber')
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

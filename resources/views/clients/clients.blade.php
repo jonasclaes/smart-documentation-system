@@ -41,12 +41,12 @@
                     @foreach($clients as $client)
                         <x-list-item
                             to="{{ route('clients.show', ['client' => $client->id]) }}"
-                            title="{{ $client->clientNumber }} - {{ $client->name }}"
-                            subtitle="{{ $client->contactEmail }}">
+                            title="{{ $client->name }}"
+                            subtitle="{{ __('Client number') }}: {{ $client->clientNumber }}">
                         </x-list-item>
                     @endforeach
                 @else
-                    <p>No clients have been found.</p>
+                    <p>{{ __('No clients have been found.') }}</p>
                 @endif
             </div>
         </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientContactController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PublicController;
@@ -67,6 +68,9 @@ Route::middleware([
 
     // Clients
     Route::resource('clients', ClientController::class);
+
+    // Client contacts
+    Route::resource('clients/{client}/clientContacts', ClientContactController::class);
 });
 
 // Localization
