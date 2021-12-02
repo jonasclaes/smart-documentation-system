@@ -1,16 +1,16 @@
 @component('mail::message')
-# Hello!
+# {{ __('Hello!') }}
 
-Here is your reference to the file that you just requested.
-This link is valid for the next 24 hours.
+{{ __('Here is your reference to the file that you just requested.') }}
+{{ __('This link is valid for the next 24 hours.') }}
 
 @component('mail::button', ['url' => $url])
-Open file
+{{ __('Open file') }}
 @endcomponent
 
-Thanks,<br>
+{{ __('Thanks,') }}<br>
 {{ config('app.name') }}
 
 <br>
-<small>If the link does not work, you can copy and paste this link in your browser of choice: <a href="{{ $url }}">{{ $url }}</a></small>
+<small>{{ __('If the link does not work, you can copy and paste this link in your browser of choice:') }} <a href="{{ $url }}" style="word-break: break-all">{{ $url }}</a></small>
 @endcomponent
