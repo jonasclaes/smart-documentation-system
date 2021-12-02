@@ -64,7 +64,7 @@ class File extends Model
      */
     public function getRouteKeyName()
     {
-        return 'uniqueId';
+        return 'id';
     }
 
     /**
