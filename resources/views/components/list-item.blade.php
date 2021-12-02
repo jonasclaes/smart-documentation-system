@@ -16,7 +16,8 @@
         @if(count($labels) > 0)
             <div class="mt-1">
                 @foreach($labels as $label)
-                    <span class="bg-gradient-to-br from-{{ $label['color'] }}-500 to-{{ $label['color'] }}-600 text-white rounded-md shadow px-3 py-1 inline-block text-sm">{{ $label['text'] }}</span>
+                    <span
+                        class="bg-blue-500 text-white rounded-md shadow px-3 py-1 inline-block text-sm">{{ $label['text'] }}</span>
                 @endforeach
             </div>
         @endif
