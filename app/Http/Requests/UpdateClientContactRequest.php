@@ -2,10 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-
-class StoreClientRequest extends FormRequest
+class UpdateClientContactRequest extends StoreClientContactRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +21,6 @@ class StoreClientRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'clientNumber' => ['required', 'max:255', 'string', Rule::unique('clients', 'clientNumber')],
-            'name' => ['required', 'max:255', 'string']
-        ];
+        return parent::rules();
     }
 }

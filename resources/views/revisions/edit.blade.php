@@ -20,7 +20,7 @@
                 @method("PUT")
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
                     <div>
-                        <label for="revisionNumber">{{ __('Revision number:') }}</label>
+                        <label for="revisionNumber">{{ __('Revision number') }} ({{ __('required') }}):</label>
                         <input type="text" name="revisionNumber" id="revisionNumber" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                             placeholder="{{ __('Revision number') }}" value="{{ old('revisionNumber', $revision->revisionNumber) }}">
                         <small class="opacity-50">{{ __('Fill in the number of the revision here.') }}</small>
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="fileId">{{ __('File:') }}</label>
+                        <label for="fileId">{{ __('File') }} ({{ __('required') }}):</label>
                         <select name="fileId" id="fileId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
                             @foreach ($files as $fileEntry)
                                 <option

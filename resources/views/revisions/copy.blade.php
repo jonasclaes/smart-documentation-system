@@ -16,7 +16,7 @@
                 <div class="bg-white rounded-xl p-4 grid grid-cols-1 gap-3">
                     <h2 class="font-semibold text-lg mb-1 pb-1 border-b">{{ __('Source') }}</h2>
                     <div>
-                        <label for="sourceRevisionId">{{ __('Revision number:') }}</label>
+                        <label for="sourceRevisionId">{{ __('Revision number') }} ({{ __('required') }}):</label>
                         <select name="sourceRevisionId" id="sourceRevisionId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
                             @foreach ($revisions as $revisionEntry)
                                 @if( ! old('sourceRevisionId', false) && $loop->last)
@@ -44,7 +44,7 @@
                 <div class="bg-white rounded-xl p-4 grid grid-cols-1 gap-3">
                     <h2 class="font-semibold text-lg mb-1 pb-1 border-b">{{ __('Destination') }}</h2>
                     <div>
-                        <label for="revisionNumber">{{ __('Revision number:') }}</label>
+                        <label for="revisionNumber">{{ __('Revision number') }} ({{ __('required') }}):</label>
                         <input type="text" name="revisionNumber" id="revisionNumber" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
                                placeholder="{{ __('Revision number') }}" value="{{ old('revisionNumber') }}">
                         <small class="opacity-50">{{ __('Fill in the number of the revision here.') }}</small>

@@ -25,11 +25,11 @@ class StoreFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'fileId' => ['required', 'max:255'],
-            'name' => ['required', 'max:255'],
-            'enclosureId' => ['max:255'],
-            'uniqueId' => ['required', 'max:255', Rule::unique('files', 'uniqueId')],
-            'clientId' => ['required']
+            'fileId' => ['required', 'max:255', 'string'],
+            'name' => ['required', 'max:255', 'string'],
+            'enclosureId' => ['nullable', 'max:255', 'string'],
+            'uniqueId' => ['required', 'max:255', 'string', Rule::unique('files', 'uniqueId')],
+            'clientId' => ['required', 'integer', 'exists:clients,id']
         ];
     }
 }

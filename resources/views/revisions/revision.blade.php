@@ -63,7 +63,7 @@
                     <div class="grid gap-3 grid-cols-1 xl:grid-cols-2 justify-center">
                         <a href="{{ route('revisions.attachments.create', ['file' => $file, 'revision' => $revision]) }}"
                            class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
-                            <x-heroicon-s-upload class="h-4 w-4 mr-1"></x-heroicon-s-upload>{{ __('Upload file(s)') }}
+                            <x-heroicon-s-upload class="h-4 w-4 mr-1"></x-heroicon-s-upload>{{ __('Upload attachment(s)') }}
                         </a>
                         <a href="{{ route('revisions.attachments.createDirectory', ['file' => $file, 'revision' => $revision]) }}"
                            class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
@@ -78,7 +78,6 @@
                         @if(count($revision->documents) > 0)
                             @foreach($revision->documents as $document)
                                 <x-list-item
-{{--                                    to="{{ route('revisions.attachments.download', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}"--}}
                                     to="{{ route('revisions.attachments.show', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}"
                                     title="{{ $document->fileName }}"
                                     subtitle="{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($document->size) }}">

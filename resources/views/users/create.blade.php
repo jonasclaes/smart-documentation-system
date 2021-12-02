@@ -4,7 +4,7 @@
     <div class="container mx-auto px-3">
         <!-- Menu bar -->
         <div class="bg-white rounded-xl p-4 w-full mb-3">
-            <h1 class="text-xl font-semibold">Create user</h1>
+            <h1 class="text-xl font-semibold">{{ __('Create user') }}</h1>
         </div>
 
         <div class="bg-white rounded-xl p-4">
@@ -16,7 +16,7 @@
                         <label
                             for="firstName"
                             class="text-gray-700">
-                            {{ __('First Name') }}</label>
+                            {{ __('First name') }} ({{ __('required') }}):</label>
                         <input
                             type="text"
                             autofocus
@@ -38,7 +38,7 @@
                         <label
                             for="lastName"
                             class="text-gray-700">
-                            {{ __('Last Name') }}</label>
+                            {{ __('Last name') }} ({{ __('required') }}):</label>
                         <input
                             type="text"
                             required
@@ -59,7 +59,7 @@
                         <label
                             for="email"
                             class="text-gray-700">
-                            {{ __('E-Mail Address') }}</label>
+                            {{ __('E-mail address') }} ({{ __('required') }}):</label>
                         <input
                             type="email"
                             required
@@ -80,7 +80,7 @@
                         <label
                             for="phoneNumber"
                             class="text-gray-700">
-                            {{ __('Phone Number') }}</label>
+                            {{ __('Phone number') }} ({{ __('optional') }}):</label>
                         <input
                             type="tel"
                             autocomplete="phoneNumber"
@@ -99,7 +99,7 @@
                         <label
                             for="username"
                             class="text-gray-700">
-                            {{ __('Username') }}</label>
+                            {{ __('Username') }} ({{ __('required') }}):</label>
                         <input
                             type="text"
                             autofocus
@@ -120,7 +120,7 @@
                         <label
                             for="password"
                             class="text-gray-700">
-                            {{ __('Password') }}</label>
+                            {{ __('Password') }} ({{ __('required') }}):</label>
                         <input
                             type="password"
                             required
@@ -140,7 +140,7 @@
                         <label
                             for="password-confirm"
                             class="text-gray-700">
-                            {{ __('Confirm Password') }}</label>
+                            {{ __('Confirm password') }} ({{ __('required') }}):</label>
                         <input
                             type="password"
                             required
@@ -164,13 +164,13 @@
             <a href="{{ route('users.index') }}"
                class="bg-red-600 hover:bg-red-700 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
                 <x-heroicon-s-trash class="h-4 w-4 mr-1"/>
-                <span>Discard</span>
+                <span>{{ __('Discard') }}</span>
             </a>
             <a href="javascript:$('#createForm').submit();"
                class="bg-green-600 hover:bg-green-700 md:px-9 py-3 mb-3 text-white rounded flex-grow md:flex-grow-0
                 flex justify-center items-center">
                 <x-heroicon-s-pencil class="h-4 w-4 mr-1"/>
-                <span>{{ __('Create User') }}</span>
+                <span>{{ __('Create user') }}</span>
             </a>
         </div>
     </div>

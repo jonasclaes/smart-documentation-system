@@ -52,6 +52,15 @@ class Client extends Model
      * Get the files that the client owns.
      * @return HasMany
      */
+    public function contacts()
+    {
+        return $this->hasMany(ClientContact::class, 'clientId');
+    }
+
+    /**
+     * Get the files that the client owns.
+     * @return HasMany
+     */
     public function files()
     {
         return $this->hasMany(File::class, 'clientId');
