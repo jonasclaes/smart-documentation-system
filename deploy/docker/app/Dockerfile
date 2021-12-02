@@ -41,12 +41,6 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY . .
-
-RUN composer install && \
-    npm install && \
-    npm run production
-
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.0
 
 RUN groupadd --force -g $WWWGROUP sail
@@ -58,5 +52,11 @@ COPY deploy/docker/app/php.ini /etc/php/8.0/cli/conf.d/99-sail.ini
 RUN chmod +x /usr/local/bin/start-container
 
 EXPOSE 8000
+
+COPY . .
+
+RUN composer install && \
+    npm install && \
+    npm run production
 
 ENTRYPOINT ["start-container"]
