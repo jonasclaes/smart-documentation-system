@@ -20,21 +20,21 @@
 
         <!-- Menu bar -->
         <div class="bg-white rounded-xl p-4 w-full mb-3">
-            <h1 class="text-xl font-semibold mb-2 pb-1 border-b">Client</h1>
+            <h1 class="text-xl font-semibold mb-2 pb-1 border-b">{{ __('Client') }}</h1>
             <div class="flex flex-wrap items-start gap-2">
-                <p class="flex-grow text-gray-400">This page displays all the information of a particular client.</p>
+                <p class="flex-grow text-gray-400">{{ __('This page displays all the information of a particular client') }}.</p>
                 <div class="flex justify-end flex-grow gap-2 w-full md:w-auto">
                     <a href="{{ route('clients.edit', ['client' => $client]) }}"
                        class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
                         <x-heroicon-s-pencil class="h-4 w-4 mr-1"/>
-                        Edit
+                        {{ __('Edit') }}
                     </a>
                     <a href="javascript:toggleModal('modal-delete')"
                        class="bg-red-600 hover:bg-red-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
                         <x-heroicon-s-trash class="h-4 w-4 mr-1"/>
-                        Delete
+                        {{ __('Delete') }}
                     </a>
                 </div>
             </div>
@@ -105,7 +105,7 @@
             </div>
             <!-- Files List for Particular Client -->
             <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-6 flex flex-col">
-                <h2 class="font-semibold text-lg mb-1">Files</h2>
+                <h2 class="font-semibold text-lg mb-1">{{ __('Files') }}</h2>
                 <!-- Files loop for all the files attached to current client, display message if no files found. -->
                 <div class="grid grid-cols-1 gap-2">
                     @if(count($client->files) > 0)
@@ -135,7 +135,7 @@
                 <!--header-->
                 <div class="flex items-start justify-between p-5 border-b border-solid border-gray-200
                 rounded-t">
-                    <h3 class="text-3xl font-semibold">Confirm Delete</h3>
+                    <h3 class="text-3xl font-semibold">{{ __('Confirm delete') }}</h3>
                     <button class="p-1 ml-auto bg-transparent border-0 text-gray-300 float-right text-3xl
                     leading-none font-semibold outline-none focus:outline-none"
                             onclick="toggleModal('modal-delete')">
@@ -147,8 +147,8 @@
                 <!--body-->
                 <div class="relative p-6 flex-auto">
                     <p class="my-4 text-gray-500 text-lg leading-relaxed">
-                        Do you really want to delete client {{$client->clientNumber}} {{$client->name}}?
-                        This action cannot be undone.
+                        {{ __('Do you really want to delete client') }} {{$client->clientNumber}} {{$client->name}}?
+                        {{ __('This action cannot be undone.') }}
                     </p>
                 </div>
                 <!--footer-->
@@ -157,14 +157,14 @@
                     py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
                             onclick="toggleModal('modal-delete')">
-                        Discard
+                        {{ __('Discard') }}
                     </button>
                     <button class="bg-red-600 hover:bg-red-500 text-white font-bold uppercase text-sm px-4 py-2
                     rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear
                     transition-all duration-150"
                             type="button"
                             onclick="$('#deleteClient').submit();">
-                        Delete
+                        {{ __('Delete') }}
                     </button>
                 </div>
             </div>
