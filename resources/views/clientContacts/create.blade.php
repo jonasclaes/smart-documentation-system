@@ -65,7 +65,7 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="clientId">{{ __('Client:') }}</label>
+                        <label for="clientId">{{ __('Client') }} ({{ __('required') }}):</label>
                         <select name="clientId" id="clientId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
                             @foreach ($clients as $clientEntry)
                                 <option
