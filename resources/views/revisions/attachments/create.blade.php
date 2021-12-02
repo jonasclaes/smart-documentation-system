@@ -15,13 +15,13 @@
                 @method("POST")
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
                     <x-forms.input-block.file
-                        label="Attachment:"
+                        label="Attachment ({{ __('required') }}):"
                         name="files[]"
                         helpText="Select the attachment(s) to be uploaded here."
                         customProperties="multiple">
                     </x-forms.input-block.file>
                     <div>
-                        <label for="revisionId">{{ __('Revision:') }}</label>
+                        <label for="revisionId">{{ __('Revision') }} ({{ __('required') }}):</label>
                         <select name="revisionId" id="revisionId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
                             @foreach ($revisions as $revisionEntry)
                                 <option
