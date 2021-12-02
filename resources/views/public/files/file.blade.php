@@ -47,7 +47,7 @@
                         <x-list-item
                             title="{{ $revisionRequest->name }}"
                             subtitle="{{ __('Created on') }}: {{ $revisionRequest->created_at }} by {{ $revisionRequest->technicianLastName }}, {{ $revisionRequest->technicianFirstName }}."
-                            :labels="[['color' => 'sky', 'text' => 'Status: awaiting approval']]"></x-list-item>
+                            :labels="[['color' => 'blue', 'text' => 'Status: awaiting approval']]"></x-list-item>
                     @endforeach
                 </div>
             </div>
@@ -72,7 +72,7 @@
                                 to="{{ route('public.showRevision', ['file' => $file, 'revision' => $revision]) }}"
                                 title="{{ $revision->revisionNumber }}"
                                 subtitle="{{ __('Created on') }}: {{ $revision->created_at }}"
-                                :labels="$loop->first ? [['color' => 'sky', 'text' => 'Latest']] : []"
+                                :labels="$loop->first ? [['color' => 'blue', 'text' => 'Latest']] : []"
                                 class="bg-white dark:bg-coolGray-700 dark:text-white flex justify-between p-3
                                 rounded-xl shadow border border-gray-400 dark:border-gray-800 border-opacity-25 hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-150 ease-in-out items-center w-full my-2 text-black"></x-list-item>
                         </div>
