@@ -69,8 +69,25 @@ $qrCodeEncoded = base64_encode($qrCode);
                 <h2 class="font-semibold text-lg mb-1">{{ __('Client information') }}</h2>
                 <p>{{ __('Client number:') }} {{ $file->client->clientNumber }}</p>
                 <p>{{ __('Client name:') }} {{ $file->client->name }}</p>
-                <p>{{ __('Contact email:') }} <a href="mailto:{{ $file->client->contactEmail }}" class="text-blue-500">{{ $file->client->contactEmail }}</a></p>
-                <p>{{ __('Contact phone number:') }} <a href="tel:{{ $file->client->contactPhoneNumber }}" class="text-blue-500">{{ $file->client->contactPhoneNumber }}</a></p>
+
+                <h2 class="font-semibold text-lg mb-1">{{ __('Contacts') }}</h2>
+                <div class="grid grid-cols-1 gap-3 max-h-60 overflow-y-auto">
+                    @foreach($file->client->contacts as $contact)
+                        <!-- Contact -->
+                        <div class="col-span-full">
+                            <p>{{ __('Name') }}: {{ $contact->lastName }}, {{ $contact->firstName }}</p>
+                            @if($contact->role)
+                                <p class="pl-2">{{ __('Role') }}: {{ $contact->role }}</p>
+                            @endif
+                            @if($contact->email)
+                                <p class="pl-2">{{ __('E-mail') }}: <a href="mailto:{{ $contact->email }}" class="text-blue-500">{{ $contact->email }}</a></p>
+                            @endif
+                            @if($contact->phoneNumber)
+                                <p class="pl-2">{{ __('Phone number') }}: <a href="tel:{{ $contact->phoneNumber }}" class="text-blue-500">{{ $contact->phoneNumber }}</a></p>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
             </div>
             <div class="bg-white rounded-xl p-4 col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2">
                 <img id="qr-code" src="data:image/png;base64,{!! $qrCodeEncoded !!}" alt="{{ $file->QRCode->content }}">
