@@ -51,7 +51,7 @@
                 <p>{{ __('Created on:') }} {{ $revision->created_at }}</p>
                 <p>{{ __('Last edit:') }} {{ $revision->updated_at }}</p>
                 <p>{{ __('Revision number:') }} {{ $revision->revisionNumber }}</p>
-                <p>{{ __('Belongs to file: :fileUniqueId', ['fileUniqueId' => $file->uniqueId]) }}</p>
+                <p class="break-all">{{ __('Belongs to file: :fileUniqueId', ['fileUniqueId' => $file->uniqueId]) }}</p>
             </div>
 
             <!-- Section: Attachments -->
