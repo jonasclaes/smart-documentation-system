@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
 use App\Models\File;
 use App\Models\Revision;
@@ -62,12 +63,29 @@ class RevisionCommentController extends Controller
      * @param Comment $comment
      * @return Renderable
      */
-    public function edit(File $file, Revision $revision)
+    public function edit(File $file, Revision $revision, Comment $comment)
     {
-        $revisions = Revision::where('fileId', $file->id)->get();
-
-        return view('revisions.comments.update', ['file' => $file, 'revision' => $revision, 'revisions' => $revisions]);
+        return view('revisions.comments.edit', ['file' => $file, 'revision' => $revision, 'comment' => $comment]);
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  UpdateCommentRequest $request
+     * @param File $file
+     * @param Revision $revision
+     * @return RedirectResponse
+     */
+    public function update(UpdateCommentRequest $request, File $file, Revision $revision, Comment $comment)
+    {
+        $comment->update($request->validated());
+
+        $request->session()->flash('success', 'Comment ' . $comment->id . ' for Revision ' . $revision->revisionNumber . ' was successfully updated.');
+
+        return redirect()->route('revisions.show', ['file' => $file, 'revision' => $revision]);
+    }
+
+
 
     /**
      * Remove the specified resource from storage.

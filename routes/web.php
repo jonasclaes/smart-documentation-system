@@ -68,6 +68,7 @@ Route::middleware([
 
         // Comment Edit
         Route::get('files/{file}/revisions/{revision}/comments/{comment}/edit', [RevisionCommentController::class, 'edit'])->name('.edit');
+        Route::post('files/{file}/revisions/{revision}/comments/{comment}/update', [RevisionCommentController::class, 'update'])->name('.update');
 
         // Comment show
         Route::get('files/{file}/revisions/{revision}/comments/{comment}', [RevisionCommentController::class, 'show'])-> name('.show');

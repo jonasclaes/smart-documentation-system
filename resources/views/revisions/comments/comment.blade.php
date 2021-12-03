@@ -30,7 +30,7 @@
             <div class="flex flex-wrap items-start gap-2">
                 <p class="flex-grow text-gray-400">{{ __('Comment :id was created on :created_at for file :file ', ['id' => $comment->id, 'created_at' => $comment->created_at, 'file'=> $file->name] )}}</p>
                 <div class="flex justify-end flex-grow gap-2 w-full md:w-auto">
-                    <a href="{{ route('revisions.edit', ['revision' => $revision, 'file' => $file]) }}"
+                    <a href="{{ route('revisions.comments.edit', ['revision' => $revision, 'file' => $file, 'comment' => $comment]) }}"
                        class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
                        flex justify-center items-center">
                         <x-heroicon-s-pencil class="h-4 w-4 mr-1"></x-heroicon-s-pencil>{{ __('Edit') }}
