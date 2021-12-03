@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\RevisionAttachmentController;
+use App\Http\Controllers\RevisionCommentController;
 use App\Http\Controllers\RevisionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -57,6 +58,22 @@ Route::middleware([
 
         // Attachment download
         Route::get('files/{file}/revisions/{revision}/attachments/{document}/download', [RevisionAttachmentController::class, 'download'])->name('.download');
+    });
+
+    // Revision Comments
+    Route::name('revisions.comments')->group(function () {
+        // Comment Create
+        Route::post('files/{file}/revisions/{revision}/comments', [RevisionCommentController::class, 'store'])->name('.store');
+        Route::get('files/{file}/revisions/{revision}/comments/create', [RevisionCommentController::class, 'create'])->name('.create');
+
+        // Comment Edit
+        Route::get('files/{file}/revisions/{revision}/comments/{comment}/edit', [RevisionCommentController::class, 'edit'])->name('.edit');
+
+        // Comment show
+        Route::get('files/{file}/revisions/{revision}/comments/{comment}', [RevisionCommentController::class, 'show'])-> name('.show');
+
+        // Comment delete
+        Route::delete('files/{file}/revisions/{revision}/comments/{comment}', [RevisionCommentController::class, 'destroy'])->name('.destroy');
     });
 
     // Users

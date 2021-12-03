@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\NotImplementedException;
 use App\Http\Requests\StoreRevisionRequest;
 use App\Http\Requests\UpdateRevisionRequest;
+use App\Models\Comment;
 use App\Models\Document;
 use App\Models\File;
 use App\Models\Revision;
