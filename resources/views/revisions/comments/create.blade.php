@@ -11,7 +11,7 @@
     <div class="container mx-auto px-3">
         <!-- Menu bar -->
         <div class="bg-white rounded-xl p-4 w-full mb-3">
-            <h1 class="text-xl font-semibold">{{ __('Create Comment') }}</h1>
+            <h1 class="text-xl font-semibold">{{ __('Create comment') }}</h1>
         </div>
 
         <!-- Content -->
@@ -33,6 +33,7 @@
                                 </option>
                             @endforeach
                         </select>
+                        <small>{{ __('Select the revision that this comment needs to be attached to.') }}</small>
                         @error('fileId')
                         <br>
                         <small class="text-red-600 font-semibold">{{ $message }}</small>
@@ -40,8 +41,9 @@
                     </div>
                 </div>
                 <div class="grid-cols-12 pt-3">
-                    <h1>Comment</h1>
-                    <textarea form="createComment" name="content" id="content" rows="10" class="border p-2 rounded w-full" placeholder="Write something..."></textarea>
+                    <label for="content">{{ __('Comment') }}</label>
+                    <textarea form="createComment" name="content" id="content" rows="10" class="border p-2 rounded w-full" placeholder="{{ __('Enter your comment here.') }}"></textarea>
+                    <small>{{ __('Fill in the comment you want to attach here.') }}</small>
                 </div>
                 <button type="submit" hidden></button>
             </form>

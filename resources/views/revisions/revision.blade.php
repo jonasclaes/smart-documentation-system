@@ -103,8 +103,8 @@
                     <!-- Action buttons -->
                     <div class="grid gap-3 grid-cols-1 xl:grid-cols-2 justify-center">
                         <a href="{{ route('revisions.comments.create', ['file' => $file, 'revision' => $revision]) }}"
-                           class="bg-gray-600 hover:bg-gray-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
-                            <x-heroicon-s-plus class="h-4 w-4 mr-1"></x-heroicon-s-plus>{{ __('New Comment') }}
+                           class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                            <x-heroicon-s-plus class="h-4 w-4 mr-1"></x-heroicon-s-plus>{{ __('New comment') }}
                         </a>
                         <div class="bg-gray-100 rounded h-10"></div>
                     </div>
