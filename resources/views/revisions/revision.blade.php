@@ -2,6 +2,7 @@
     /**
      * @var App\Models\Revision $revision
      * @var App\Models\File     $file
+     *
      */
 @endphp
 
@@ -50,7 +51,7 @@
                 <p>{{ __('Created on:') }} {{ $revision->created_at }}</p>
                 <p>{{ __('Last edit:') }} {{ $revision->updated_at }}</p>
                 <p>{{ __('Revision number:') }} {{ $revision->revisionNumber }}</p>
-                <p>{{ __('Belongs to file: :fileUniqueId', ['fileUniqueId' => $file->uniqueId]) }}</p>
+                <p class="break-all">{{ __('Belongs to file: :fileUniqueId', ['fileUniqueId' => $file->uniqueId]) }}</p>
             </div>
 
             <!-- Section: Attachments -->
@@ -100,8 +101,11 @@
 
                     <!-- Action buttons -->
                     <div class="grid gap-3 grid-cols-1 xl:grid-cols-2 justify-center">
+                        <a href="{{ route('revisions.comments.create', ['file' => $file, 'revision' => $revision]) }}"
+                           class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                            <x-heroicon-s-plus class="h-4 w-4 mr-1"></x-heroicon-s-plus>{{ __('New comment') }}
+                        </a>
                         <div class="bg-gray-100 rounded h-10"></div>
-                        <div class="bg-gray-100 rounded hidden xl:block"></div>
                     </div>
                 </div>
 
@@ -109,7 +113,13 @@
                 <div class="bg-white rounded-xl p-4">
                     <div class="grid grid-cols-1 gap-2">
                         @if(count($revision->comments) > 0)
-                            <!-- TODO: Comment for loop here -->
+                            @foreach($revision->comments->sortByDesc('updated_at') as $comment)
+                                <x-list-item
+                                    to="{{ route('revisions.comments.show', ['file' => $file, 'revision' => $revision, 'comment' => $comment]) }}"
+                                    title="{{ $comment->content }}"
+                                    subtitle="{{ __('Last Update') }}: {{ $comment->created_at }}">
+                                </x-list-item>
+                            @endforeach
                         @else
                             <div class="flex-grow flex items-center">
                                 <span class="text-center w-full">{{ __('There are no comments.') }}</span>
