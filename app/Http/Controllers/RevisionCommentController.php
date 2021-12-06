@@ -15,6 +15,14 @@ use Illuminate\Http\Response;
 class RevisionCommentController extends Controller
 {
     /**
+     * Setup controller.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Comment::class);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param Comment $comment
@@ -91,7 +99,7 @@ class RevisionCommentController extends Controller
      * Remove the specified resource from storage.
      * @param Request $request
      * @param Comment $comment
-     * @return Response
+     * @return RedirectResponse
      */
     public function destroy(Request $request, File $file, Revision $revision, Comment $comment)
     {

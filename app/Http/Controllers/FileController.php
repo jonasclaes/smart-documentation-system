@@ -13,6 +13,14 @@ use App\Models\Client;
 class FileController extends Controller
 {
     /**
+     * Setup controller.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(File::class);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param Request $request

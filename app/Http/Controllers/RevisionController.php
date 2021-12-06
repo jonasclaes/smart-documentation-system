@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Document;
 use App\Models\File;
 use App\Models\Revision;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,6 +18,14 @@ use Storage;
 
 class RevisionController extends Controller
 {
+    /**
+     * Setup controller.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Revision::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -135,9 +144,13 @@ class RevisionController extends Controller
      *
      * @param File $file
      * @return Renderable
+     * @throws AuthorizationException
      */
     public function copy(File $file)
     {
+        $this->authorize('view-any', Revision::class);
+        $this->authorize('create', Revision::class);
+
         $revisions = Revision::where('fileId', $file->id)->get();
 
         return view('revisions.copy', ['revisions' => $revisions, 'file' => $file]);
@@ -150,9 +163,13 @@ class RevisionController extends Controller
      * @param Request $request
      * @param File $file
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function performCopy(Request $request, File $file)
     {
+        $this->authorize('view-any', Revision::class);
+        $this->authorize('create', Revision::class);
+
         $sourceRevision = Revision::find($request->input('sourceRevisionId'));
 
         // Copy to new revision

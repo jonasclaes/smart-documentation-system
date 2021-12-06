@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
+     * Setup controller.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(User::class);
+    }
+
+    /**
      * Display a listing of the resource.
      * @param Request $request
      * @return Renderable
