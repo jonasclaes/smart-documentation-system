@@ -14,6 +14,14 @@ use Illuminate\Http\Request;
 class ClientContactController extends Controller
 {
     /**
+     * Setup controller.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(ClientContact::class);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @param Client $client

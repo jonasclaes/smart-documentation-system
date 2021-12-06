@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
@@ -93,11 +94,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the UserPreference belonging to the user.
-     * @return HasOne
+     * Get the UserPermissions belonging to the User.
+     * @return HasMany
      */
-    public function userPreference()
+    public function permissions()
     {
-        return $this->hasOne(UserPreference::class, 'userId');
+        return $this->hasMany(UserPermission::class, 'userId');
     }
 }

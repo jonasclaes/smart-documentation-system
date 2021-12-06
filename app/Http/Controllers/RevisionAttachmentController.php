@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Models\File;
 use App\Models\Revision;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
@@ -14,6 +15,14 @@ use Storage;
 
 class RevisionAttachmentController extends Controller
 {
+    /**
+     * Setup controller.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Document::class);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -30,9 +39,11 @@ class RevisionAttachmentController extends Controller
      * Show the form for creating a new resource.
      *
      * @return Renderable
+     * @throws AuthorizationException
      */
     public function createDirectory(File $file, Revision $revision)
     {
+        $this->authorize('create', Document::class);
         $revisions = Revision::where('fileId', $file->id)->get();
 
         return view('revisions.attachments.createDirectory', ['file' => $file, 'revision' => $revision, 'revisions' => $revisions]);
@@ -85,7 +96,7 @@ class RevisionAttachmentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Document $document
-     * @return Response
+     * @return RedirectResponse
      */
     public function destroy(File $file, Revision $revision, Document $document)
     {
@@ -108,6 +119,7 @@ class RevisionAttachmentController extends Controller
      */
     public function download(File $file, Revision $revision, Document $document)
     {
+        $this->authorize('view', $document);
         return Storage::download($document->path, $document->fileName);
     }
 }

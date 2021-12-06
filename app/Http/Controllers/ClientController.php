@@ -13,6 +13,14 @@ use Illuminate\Http\Response;
 class ClientController extends Controller
 {
     /**
+     * Setup controller.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Client::class);
+    }
+
+    /**
      * Display a listing of the resource.
      * @param Request $request
      * @return Renderable
