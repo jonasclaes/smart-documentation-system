@@ -57,7 +57,13 @@ class RevisionRequest extends Model
         'technicianEmail',
         'fileId',
         'categoryId',
-        'submitted'
+        'submitted',
+        'description'
+    ];
+
+    // Set default values for attributes.
+    protected $attributes = [
+        'submitted' => false
     ];
 
     /**

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PublicShareFileRequest;
+use App\Http\Requests\StorePublicRevisionRequestRequest;
 use App\Http\Requests\ThemeUpdateRequest;
+use App\Http\Requests\UpdatePublicRevisionRequestRequest;
 use App\Mail\Public\ShareFile;
 use App\Models\Document;
 use App\Models\File;
 use App\Models\Revision;
 use App\Models\RevisionRequest;
+use App\Models\RevisionRequestCategory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -91,6 +94,66 @@ class PublicController extends Controller
         $this->checkAccess($file);
 
         return view('public.files.revisionRequests.revisionRequest', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param File $file
+     * @return Renderable
+     */
+    public function createRevisionRequest(File $file)
+    {
+        $this->checkAccess($file);
+
+        return view('public.files.revisionRequests.create', ['file' => $file, 'categories' => RevisionRequestCategory::all()]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param StorePublicRevisionRequestRequest $request
+     * @param File $file
+     * @return RedirectResponse
+     */
+    public function storeRevisionRequest(StorePublicRevisionRequestRequest $request, File $file)
+    {
+        $this->checkAccess($file);
+
+        $revisionRequest = RevisionRequest::create($request->validated());
+
+        return redirect()->route('public.showRevisionRequest', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return Renderable
+     */
+    public function editRevisionRequest(File $file, RevisionRequest $revisionRequest)
+    {
+        $this->checkAccess($file);
+
+        return view('public.files.revisionRequests.edit', ['file' => $file, 'revisionRequest' => $revisionRequest, 'categories' => RevisionRequestCategory::all()]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param UpdatePublicRevisionRequestRequest $request
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return RedirectResponse
+     */
+    public function updateRevisionRequest(UpdatePublicRevisionRequestRequest $request, File $file, RevisionRequest $revisionRequest)
+    {
+        $this->checkAccess($file);
+
+        $revisionRequest->update($request->validated());
+
+        return redirect()->route('public.showRevisionRequest', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }
 
     /**
