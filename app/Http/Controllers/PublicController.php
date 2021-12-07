@@ -8,6 +8,7 @@ use App\Mail\Public\ShareFile;
 use App\Models\Document;
 use App\Models\File;
 use App\Models\Revision;
+use App\Models\RevisionRequest;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -76,6 +77,20 @@ class PublicController extends Controller
         $this->checkAccess($file);
 
         return view('public.files.revision', ['file' => $file, 'revision' => $revision]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return Renderable
+     */
+    public function showRevisionRequest(File $file, RevisionRequest $revisionRequest)
+    {
+        $this->checkAccess($file);
+
+        return view('public.files.revisionRequests.revisionRequest', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }
 
     /**

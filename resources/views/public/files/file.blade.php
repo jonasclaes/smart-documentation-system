@@ -45,6 +45,7 @@
                     @foreach($file->revisionRequests->sortByDesc('created_at') as $revisionRequest)
                         <!-- Revision request -->
                         <x-list-item
+                            to="{{ route('public.showRevisionRequest', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}"
                             title="{{ $revisionRequest->name }}"
                             subtitle="{{ __('Created on') }}: {{ $revisionRequest->created_at }} by {{ $revisionRequest->technicianLastName }}, {{ $revisionRequest->technicianFirstName }}."
                             :labels="[['color' => 'sky', 'text' => 'Status: awaiting approval']]"></x-list-item>

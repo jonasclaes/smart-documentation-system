@@ -104,6 +104,7 @@ Route::prefix('public/')->name('public.')->group(function () {
     Route::get('files/{file}/verify', [PublicController::class, 'showFileVerifier'])->name('showFileVerifier');
     Route::get('files/{file}', [PublicController::class, 'showFile'])->name('showFile');
     Route::get('files/{file}/revisions/{revision}', [PublicController::class, 'showRevision'])->name('showRevision');
+    Route::get('files/{file}/revisionRequests/{revisionRequest}', [PublicController::class, 'showRevisionRequest'])->name('showRevisionRequest');
     Route::get('files/{file}/revisions/{revision}/attachments/{document}/download', [PublicController::class, 'downloadDocument'])->name('downloadDocument');
 
     Route::get('files/{file}/shareFile', [PublicController::class, 'shareFile'])->name('shareFile');
