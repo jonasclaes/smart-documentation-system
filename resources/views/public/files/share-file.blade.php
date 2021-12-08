@@ -17,7 +17,7 @@
 
             <!-- Section: General -->
             <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4">
-                <form action="{{ route('public.doShareFile', ['file' => $file]) }}" method="POST" id="shareFileForm">
+                <form action="{{ route('public.revisionRequests.performShareFile', ['file' => $file]) }}" method="POST" id="shareFileForm">
                     @csrf
                     @method("POST")
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">

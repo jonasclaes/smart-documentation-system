@@ -24,11 +24,11 @@
                 <p>{{ __('This documentation is applicable for client') }}: <strong>{{ $file->client->name }}</strong></p>
                 <!-- Actions -->
                 <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center mt-2">
-                    <a href="{{ route('public.shareFile', ['file' => $file]) }}"
+                    <a href="{{ route('public.revisionRequests.shareFile', ['file' => $file]) }}"
                        class="bg-sky-600 hover:bg-sky-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
                         <x-heroicon-s-paper-airplane class="h-4 w-4 transform rotate-45"></x-heroicon-s-paper-airplane>&nbsp;{{ __('E-mail me this page') }}
                     </a>
-                    <a href="{{ route('public.createRevisionRequest', ['file' => $file]) }}"
+                    <a href="{{ route('public.revisionRequests.create', ['file' => $file]) }}"
                        class="bg-sky-600 hover:bg-sky-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
                         <x-heroicon-s-pencil-alt class="h-4 w-4"></x-heroicon-s-pencil-alt>&nbsp;{{ __('New change request') }}
                     </a>
@@ -45,7 +45,7 @@
                     @foreach($file->revisionRequests->sortByDesc('created_at') as $revisionRequest)
                         <!-- Revision request -->
                         <x-list-item
-                            to="{{ route('public.showRevisionRequest', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}"
+                            to="{{ route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}"
                             title="{{ $revisionRequest->name }}"
                             subtitle="{{ __('Created on') }}: {{ $revisionRequest->created_at }} by {{ $revisionRequest->technicianLastName }}, {{ $revisionRequest->technicianFirstName }}."
                             :labels="[['color' => 'sky', 'text' => __('Status') . ': ' . ($revisionRequest->submitted ? 'awaiting approval' : 'awaiting submission')]]"></x-list-item>

@@ -10,7 +10,7 @@
 
         <!-- Content -->
         <div>
-            <form action="{{ route('public.storeRevisionRequest', ['file' => $file]) }}" method="POST" id="createForm">
+            <form action="{{ route('public.revisionRequests.store', ['file' => $file]) }}" method="POST" id="createForm">
                 @csrf
                 @method("POST")
                 <input type="hidden" name="fileId" value="{{ $file->id }}">

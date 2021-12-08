@@ -12,6 +12,8 @@ use App\Models\File;
 use App\Models\Revision;
 use App\Models\RevisionRequest;
 use App\Models\RevisionRequestCategory;
+use App\Models\RevisionRequestDocument;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -122,7 +124,7 @@ class PublicController extends Controller
 
         $revisionRequest = RevisionRequest::create($request->validated());
 
-        return redirect()->route('public.showRevisionRequest', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+        return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }
 
     /**
@@ -153,7 +155,73 @@ class PublicController extends Controller
 
         $revisionRequest->update($request->validated());
 
-        return redirect()->route('public.showRevisionRequest', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+        return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return Renderable
+     */
+    public function addRevisionRequestAttachment(File $file, RevisionRequest $revisionRequest)
+    {
+        $this->checkAccess($file);
+
+        return view('public.files.revisionRequests.uploadFile', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param Request $request
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return RedirectResponse
+     * @throws FileNotFoundException
+     */
+    public function storeRevisionRequestAttachment(Request $request, File $file, RevisionRequest $revisionRequest)
+    {
+        $this->checkAccess($file);
+
+        if ( ! $request->hasFile('files')) {
+            throw new FileNotFoundException();
+        }
+
+        foreach ($request->file('files') as $inputFile) {
+            if ( ! $inputFile->isValid()) {
+                throw new FileNotFoundException();
+            }
+
+            $path = $inputFile->store('data/revisionRequests/documents');
+
+            $revisionRequest->revisionDocuments()->create([
+                "fileName" => $inputFile->getClientOriginalName(),
+                "path" => $path,
+                "size" => $inputFile->getSize()
+            ]);
+        }
+
+        return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @param RevisionRequestDocument $revisionRequestDocument
+     * @return RedirectResponse
+     */
+    public function destroyRevisionRequestAttachment(File $file, RevisionRequest $revisionRequest, RevisionRequestDocument $revisionRequestDocument)
+    {
+        $this->checkAccess($file);
+
+        Storage::delete($revisionRequestDocument->path);
+        $revisionRequestDocument->delete();
+
+        return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }
 
     /**

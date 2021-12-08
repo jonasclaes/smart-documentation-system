@@ -10,7 +10,7 @@
 
         <!-- Content -->
         <div>
-            <form action="{{ route('public.updateRevisionRequest', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}" method="POST" id="editForm">
+            <form action="{{ route('public.revisionRequests.update', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}" method="POST" id="editForm">
                 @csrf
                 @method("PUT")
                 <input type="hidden" name="fileId" value="{{ $file->id }}">
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="flex justify-end flex-grow gap-2 w-full md:w-auto mt-3">
-                            <a href="{{ route('public.showRevisionRequest', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}"
+                            <a href="{{ route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}"
                                class="bg-red-600 hover:bg-red-700 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
                                 <x-heroicon-s-trash class="h-4 w-4 mr-1"></x-heroicon-s-trash><span>{{ __('Discard') }}</span>
                             </a>

@@ -105,15 +105,20 @@ Route::prefix('public/')->name('public.')->group(function () {
     Route::get('files/{file}', [PublicController::class, 'showFile'])->name('showFile');
     Route::get('files/{file}/revisions/{revision}', [PublicController::class, 'showRevision'])->name('showRevision');
 
-    Route::get('files/{file}/revisionRequests/create', [PublicController::class, 'createRevisionRequest'])->name('createRevisionRequest');
-    Route::post('files/{file}/revisionRequests', [PublicController::class, 'storeRevisionRequest'])->name('storeRevisionRequest');
+    Route::get('files/{file}/revisionRequests/create', [PublicController::class, 'createRevisionRequest'])->name('revisionRequests.create');
+    Route::post('files/{file}/revisionRequests', [PublicController::class, 'storeRevisionRequest'])->name('revisionRequests.store');
 
-    Route::get('files/{file}/revisionRequests/{revisionRequest}/edit', [PublicController::class, 'editRevisionRequest'])->name('editRevisionRequest');
-    Route::put('files/{file}/revisionRequests/{revisionRequest}', [PublicController::class, 'updateRevisionRequest'])->name('updateRevisionRequest');
+    Route::get('files/{file}/revisionRequests/{revisionRequest}/edit', [PublicController::class, 'editRevisionRequest'])->name('revisionRequests.edit');
+    Route::put('files/{file}/revisionRequests/{revisionRequest}', [PublicController::class, 'updateRevisionRequest'])->name('revisionRequests.update');
 
-    Route::get('files/{file}/revisionRequests/{revisionRequest}', [PublicController::class, 'showRevisionRequest'])->name('showRevisionRequest');
-    Route::get('files/{file}/revisions/{revision}/attachments/{document}/download', [PublicController::class, 'downloadDocument'])->name('downloadDocument');
+    // Revision request attachments
+    Route::get('files/{file}/revisionRequests/{revisionRequest}/attachments/upload', [PublicController::class, 'addRevisionRequestAttachment'])->name('revisionRequests.attachments.create');
+    Route::post('files/{file}/revisionRequests/{revisionRequest}/attachments', [PublicController::class, 'storeRevisionRequestAttachment'])->name('revisionRequests.attachments.store');
+    Route::delete('files/{file}/revisionRequests/{revisionRequest}/attachments/{revisionRequestDocument}', [PublicController::class, 'destroyRevisionRequestAttachment'])->name('revisionRequests.attachments.delete');
 
-    Route::get('files/{file}/shareFile', [PublicController::class, 'shareFile'])->name('shareFile');
-    Route::post('files/{file}/shareFile', [PublicController::class, 'doShareFile'])->name('doShareFile');
+    Route::get('files/{file}/revisionRequests/{revisionRequest}', [PublicController::class, 'showRevisionRequest'])->name('revisionRequests.show');
+    Route::get('files/{file}/revisions/{revision}/attachments/{document}/download', [PublicController::class, 'downloadDocument'])->name('revisionRequests.download');
+
+    Route::get('files/{file}/shareFile', [PublicController::class, 'shareFile'])->name('revisionRequests.shareFile');
+    Route::post('files/{file}/shareFile', [PublicController::class, 'doShareFile'])->name('revisionRequests.performShareFile');
 });
