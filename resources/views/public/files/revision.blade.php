@@ -9,9 +9,15 @@
 @section('content')
 
     <div class="container mx-auto">
-        <div class="grid gap-3 grid-cols-1">
+        <!-- Section: Back button -->
+        <a href="{{ route('public.showFile', ['file' => $file]) }}"
+           class="bg-sky-500 hover:bg-sky-600 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
+            <x-heroicon-s-chevron-left class="h-4 w-4 mr-1"></x-heroicon-s-chevron-left>{{ __('Back to file') }}
+        </a>
+
+        <div class="grid gap-3 grid-cols-1 md:grid-cols-2">
             <!-- Section: Header -->
-            <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4">
+            <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4 col-span-full">
                 <h1 class="text-xl font-semibold">{{ __('Revision') }}: {{ $revision->revisionNumber }}</h1>
                 <small class="text-gray-400 dark:text-gray-300">{{ __('This revision was last edited on') }} {{ $revision->updated_at }}</small>
                 <!-- Actions -->
@@ -30,7 +36,7 @@
             </div>
 
             <!-- Section: Files -->
-            <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4" id="sectionFiles">
+            <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4 self-start" id="sectionFiles">
                 <h1 class="text-xl font-semibold">{{ __('Attachments') }}</h1>
                 <!-- Attachments -->
                 <div class="grid grid-cols-1 gap-2 mt-1">
@@ -38,7 +44,7 @@
                         @foreach($revision->documents as $attachment)
                             <!-- Attachment -->
                             <x-list-item
-                                to="{{ route('public.downloadDocument', ['file' => $file, 'revision' => $revision, 'document' => $attachment]) }}"
+                                to="{{ route('public.revisionRequests.download', ['file' => $file, 'revision' => $revision, 'document' => $attachment]) }}"
                                 title="{{ $attachment->fileName }}"
                                 subtitle="{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($attachment->size) }}"></x-list-item>
                         @endforeach
@@ -51,7 +57,7 @@
             </div>
 
             <!-- Section: Comments -->
-            <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4" id="sectionComments">
+            <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4 self-start" id="sectionComments">
                 <h1 class="text-xl font-semibold">{{ __('Comments') }}</h1>
 
                 <!-- Comments -->
@@ -61,7 +67,7 @@
                             <!-- Comment -->
                             <x-list-item
                                 title="{{ $comment->content }}"
-                                subtitle="{{ __('Created on') }}: {{ $comment->created_on }}"></x-list-item>
+                                subtitle="{{ __('Last updated on') }}: {{ $comment->updated_at }}"></x-list-item>
                         @endforeach
                     @else
                         <div class="flex-grow flex items-center">

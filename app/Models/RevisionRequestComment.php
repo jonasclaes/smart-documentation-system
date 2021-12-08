@@ -35,4 +35,9 @@ class RevisionRequestComment extends Model
         'content',
         'revisionRequestId'
     ];
+
+    public function revisionRequest()
+    {
+        return $this->belongsTo(RevisionRequest::class, 'revisionRequestId');
+    }
 }

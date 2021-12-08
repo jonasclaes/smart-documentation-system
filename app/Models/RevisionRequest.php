@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
@@ -56,8 +57,23 @@ class RevisionRequest extends Model
         'technicianEmail',
         'fileId',
         'categoryId',
-        'submitted'
+        'submitted',
+        'description'
     ];
+
+    // Set default values for attributes.
+    protected $attributes = [
+        'submitted' => false
+    ];
+
+    /**
+     * Get the revision category that this request has.
+     * @return BelongsTo
+     */
+    public function file()
+    {
+        return $this->belongsTo(File::class, 'fileId');
+    }
 
     /**
      * Get the revision category that this request has.
@@ -65,7 +81,8 @@ class RevisionRequest extends Model
      */
     public function revisionCategory()
     {
-        return $this->hasOne(RevisionRequestCategory::class, 'categoryId');
+        // For some reason Laravel doesn't want to take categoryId.
+        return $this->hasOne(RevisionRequestCategory::class, 'id', 'categoryId');
     }
 
     /**

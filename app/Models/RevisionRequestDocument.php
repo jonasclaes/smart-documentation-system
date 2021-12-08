@@ -41,4 +41,9 @@ class RevisionRequestDocument extends Model
         'size',
         'revisionRequestId'
     ];
+
+    public function revisionRequest()
+    {
+        return $this->belongsTo(RevisionRequest::class, 'revisionRequestId');
+    }
 }
