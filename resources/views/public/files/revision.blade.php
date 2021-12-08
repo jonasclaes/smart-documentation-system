@@ -44,7 +44,7 @@
                         @foreach($revision->documents as $attachment)
                             <!-- Attachment -->
                             <x-list-item
-                                to="{{ route('public.downloadDocument', ['file' => $file, 'revision' => $revision, 'document' => $attachment]) }}"
+                                to="{{ route('public.revisionRequests.download', ['file' => $file, 'revision' => $revision, 'document' => $attachment]) }}"
                                 title="{{ $attachment->fileName }}"
                                 subtitle="{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($attachment->size) }}"></x-list-item>
                         @endforeach

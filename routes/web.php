@@ -109,12 +109,18 @@ Route::prefix('public/')->name('public.')->group(function () {
     Route::post('files/{file}/revisionRequests', [PublicController::class, 'storeRevisionRequest'])->name('revisionRequests.store');
 
     Route::get('files/{file}/revisionRequests/{revisionRequest}/edit', [PublicController::class, 'editRevisionRequest'])->name('revisionRequests.edit');
+    Route::put('files/{file}/revisionRequests/{revisionRequest}/submit', [PublicController::class, 'submitRevisionRequest'])->name('revisionRequests.submit');
     Route::put('files/{file}/revisionRequests/{revisionRequest}', [PublicController::class, 'updateRevisionRequest'])->name('revisionRequests.update');
 
     // Revision request attachments
     Route::get('files/{file}/revisionRequests/{revisionRequest}/attachments/upload', [PublicController::class, 'addRevisionRequestAttachment'])->name('revisionRequests.attachments.create');
     Route::post('files/{file}/revisionRequests/{revisionRequest}/attachments', [PublicController::class, 'storeRevisionRequestAttachment'])->name('revisionRequests.attachments.store');
     Route::delete('files/{file}/revisionRequests/{revisionRequest}/attachments/{revisionRequestDocument}', [PublicController::class, 'destroyRevisionRequestAttachment'])->name('revisionRequests.attachments.delete');
+
+    // Revision request comments
+    Route::get('files/{file}/revisionRequests/{revisionRequest}/comments/create', [PublicController::class, 'addRevisionRequestComment'])->name('revisionRequests.comments.create');
+    Route::post('files/{file}/revisionRequests/{revisionRequest}/comments', [PublicController::class, 'storeRevisionRequestComment'])->name('revisionRequests.comments.store');
+    Route::delete('files/{file}/revisionRequests/{revisionRequest}/comments/{revisionRequestComment}', [PublicController::class, 'destroyRevisionRequestComment'])->name('revisionRequests.comments.delete');
 
     Route::get('files/{file}/revisionRequests/{revisionRequest}', [PublicController::class, 'showRevisionRequest'])->name('revisionRequests.show');
     Route::get('files/{file}/revisions/{revision}/attachments/{document}/download', [PublicController::class, 'downloadDocument'])->name('revisionRequests.download');

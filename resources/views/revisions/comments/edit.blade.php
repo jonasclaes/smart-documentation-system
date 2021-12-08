@@ -22,10 +22,15 @@
                 @csrf
                 @method("POST")
                 <div class="grid-cols-12 pt-3">
-                    <h1>Comment</h1>
-                    <textarea form="editComment" name="content" id="content" rows="10" class="border p-2 rounded w-full">{{old('content', $comment->content)}}</textarea>
+                    <label for="content">{{ __('Comment') }} ({{ __('required') }}):</label>
+                    <textarea name="content" id="content" rows="10" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">{{ old('content', $comment->content) }}</textarea>
+                    <small>{{ __('Fill in the comment you want to attach here.') }}</small>
+                    @error('content')
+                    <br>
+                    <small class="text-red-600 font-semibold">{{ $message }}</small>
+                    @enderror
                 </div>
-                <button type="submit" hidden></button>
+                <button type="submit" class="hidden"></button>
             </form>
         </div>
 

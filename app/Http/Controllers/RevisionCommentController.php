@@ -59,8 +59,6 @@ class RevisionCommentController extends Controller
 
         $comment = Revision::find($input['revisionId'])->comments()->create($input);
 
-//        $comment = $revision->comments()->create($request->validated());
-
         $request->session()->flash('success', 'Comment ' . $comment->id . ' for Revision ' . $revision->revisionNumber . ' was successfully created.');
 
         return redirect()->route('revisions.show', ['file' => $file, 'revision' => $revision]);

@@ -16,8 +16,7 @@
 
         <!-- Content -->
         <div class="bg-white rounded-xl p-4">
-            <form action="{{ route('revisions.comments.store', [$file, $revision]) }}" method="POST" id="createComment"
-                  enctype="multipart/form-data">
+            <form action="{{ route('revisions.comments.store', [$file, $revision]) }}" method="POST" id="createComment">
                 @csrf
                 @method("POST")
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
@@ -39,13 +38,17 @@
                         <small class="text-red-600 font-semibold">{{ $message }}</small>
                         @enderror
                     </div>
+                    <div>
+                        <label for="content">{{ __('Comment') }} ({{ __('required') }}):</label>
+                        <textarea form="createComment" name="content" id="content" rows="10" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full" placeholder="{{ __('Enter your comment here.') }}"></textarea>
+                        <small>{{ __('Fill in the comment you want to attach here.') }}</small>
+                        @error('content')
+                        <br>
+                        <small class="text-red-600 font-semibold">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
-                <div class="grid-cols-12 pt-3">
-                    <label for="content">{{ __('Comment') }}</label>
-                    <textarea form="createComment" name="content" id="content" rows="10" class="border p-2 rounded w-full" placeholder="{{ __('Enter your comment here.') }}"></textarea>
-                    <small>{{ __('Fill in the comment you want to attach here.') }}</small>
-                </div>
-                <button type="submit" hidden></button>
+                <button type="submit" class="hidden"></button>
             </form>
         </div>
 

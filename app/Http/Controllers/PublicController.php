@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PublicShareFileRequest;
 use App\Http\Requests\StorePublicRevisionRequestRequest;
+use App\Http\Requests\StoreRevisionRequestCommentRequest;
 use App\Http\Requests\ThemeUpdateRequest;
 use App\Http\Requests\UpdatePublicRevisionRequestRequest;
 use App\Mail\Public\ShareFile;
@@ -12,6 +13,7 @@ use App\Models\File;
 use App\Models\Revision;
 use App\Models\RevisionRequest;
 use App\Models\RevisionRequestCategory;
+use App\Models\RevisionRequestComment;
 use App\Models\RevisionRequestDocument;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Support\Renderable;
@@ -163,6 +165,24 @@ class PublicController extends Controller
      *
      * @param File $file
      * @param RevisionRequest $revisionRequest
+     * @return RedirectResponse
+     */
+    public function submitRevisionRequest(File $file, RevisionRequest $revisionRequest)
+    {
+        $this->checkAccess($file);
+
+        $revisionRequest->update([
+            'submitted' => true
+        ]);
+
+        return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
      * @return Renderable
      */
     public function addRevisionRequestAttachment(File $file, RevisionRequest $revisionRequest)
@@ -220,6 +240,55 @@ class PublicController extends Controller
 
         Storage::delete($revisionRequestDocument->path);
         $revisionRequestDocument->delete();
+
+        return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return Renderable
+     */
+    public function addRevisionRequestComment(File $file, RevisionRequest $revisionRequest)
+    {
+        $this->checkAccess($file);
+
+        return view('public.files.revisionRequests.createComment', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param StoreRevisionRequestCommentRequest $request
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return RedirectResponse
+     * @throws FileNotFoundException
+     */
+    public function storeRevisionRequestComment(StoreRevisionRequestCommentRequest $request, File $file, RevisionRequest $revisionRequest)
+    {
+        $this->checkAccess($file);
+
+        $revisionRequest->revisionComments()->create($request->validated());
+
+        return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @param RevisionRequestComment $revisionRequestComment
+     * @return RedirectResponse
+     */
+    public function destroyRevisionRequestComment(File $file, RevisionRequest $revisionRequest, RevisionRequestComment $revisionRequestComment)
+    {
+        $this->checkAccess($file);
+
+        $revisionRequestComment->delete();
 
         return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }

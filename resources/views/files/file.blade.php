@@ -150,7 +150,7 @@ $qrCodeEncoded = base64_encode($qrCode);
                         <div class="bg-gray-100 rounded hidden xl:block"></div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl p-4 flex flex-col">
+                <div class="bg-white rounded-xl p-4 flex flex-col gap-3">
                     @if(count($file->revisionRequests) > 0)
                         @foreach($file->revisionRequests->sortByDesc('updated_at') as $revisionRequest)
                             <x-list-item
