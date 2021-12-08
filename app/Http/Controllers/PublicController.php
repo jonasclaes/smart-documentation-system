@@ -7,6 +7,7 @@ use App\Http\Requests\StorePublicRevisionRequestRequest;
 use App\Http\Requests\StoreRevisionRequestCommentRequest;
 use App\Http\Requests\ThemeUpdateRequest;
 use App\Http\Requests\UpdatePublicRevisionRequestRequest;
+use App\Mail\Public\RevisionRequestCreated;
 use App\Mail\Public\ShareFile;
 use App\Models\Document;
 use App\Models\File;
@@ -125,6 +126,8 @@ class PublicController extends Controller
         $this->checkAccess($file);
 
         $revisionRequest = RevisionRequest::create($request->validated());
+
+        Mail::to($revisionRequest->technicianEmail)->send(new RevisionRequestCreated($revisionRequest));
 
         return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }
