@@ -84,6 +84,26 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the user full name
+     *
+     * @return string
+     */
+    public function name(): string
+    {
+        return "{$this->lastName}, {$this->firstName}";
+    }
+
+    /**
+     * Get the user full name
+     *
+     * @return string
+     */
+    public function fullName(): string
+    {
+        return $this->name();
+    }
+
+    /**
      * Get the route key for the model.
      *
      * @return string

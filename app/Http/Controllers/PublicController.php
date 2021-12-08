@@ -8,7 +8,6 @@ use App\Http\Requests\StoreRevisionRequestCommentRequest;
 use App\Http\Requests\ThemeUpdateRequest;
 use App\Http\Requests\UpdatePublicRevisionRequestRequest;
 use App\Mail\Public\RevisionRequestCreated;
-use App\Mail\Public\RevisionRequestSubmitted;
 use App\Mail\Public\ShareFile;
 use App\Models\Document;
 use App\Models\File;
@@ -17,6 +16,7 @@ use App\Models\RevisionRequest;
 use App\Models\RevisionRequestCategory;
 use App\Models\RevisionRequestComment;
 use App\Models\RevisionRequestDocument;
+use App\Models\User;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
@@ -179,7 +179,8 @@ class PublicController extends Controller
             'submitted' => true
         ]);
 
-        Mail::to($revisionRequest->technicianEmail)->send(new RevisionRequestSubmitted($revisionRequest));
+        Mail::to($revisionRequest->technicianEmail)->send(new \App\Mail\Public\RevisionRequestSubmitted($revisionRequest));
+        Mail::to(User::all()->pluck('email'))->send(new \App\Mail\Internal\RevisionRequestSubmitted($revisionRequest));
 
         return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }
