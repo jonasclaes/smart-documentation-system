@@ -29,6 +29,7 @@
                 <p>{{ __('Change category') }}: <strong>{{ $revisionRequest->revisionCategory->name }}</strong></p>
                 <p>{{ __('This revision request was made by') }}: <strong>{{ $revisionRequest->technicianLastName }}, {{ $revisionRequest->technicianFirstName }}</strong></p>
                 <p>{{ __('Technician e-mail') }}: <strong>{{ $revisionRequest->technicianEmail }}</strong></p>
+                <p>{{ __('Change description') }}: <strong>{{ $revisionRequest->description }}</strong></p>
                 <!-- Actions -->
                 <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center mt-2">
                     @if( ! $revisionRequest->submitted)
