@@ -8,6 +8,7 @@ use App\Http\Requests\StoreRevisionRequestCommentRequest;
 use App\Http\Requests\ThemeUpdateRequest;
 use App\Http\Requests\UpdatePublicRevisionRequestRequest;
 use App\Mail\Public\RevisionRequestCreated;
+use App\Mail\Public\RevisionRequestSubmitted;
 use App\Mail\Public\ShareFile;
 use App\Models\Document;
 use App\Models\File;
@@ -177,6 +178,8 @@ class PublicController extends Controller
         $revisionRequest->update([
             'submitted' => true
         ]);
+
+        Mail::to($revisionRequest->technicianEmail)->send(new RevisionRequestSubmitted($revisionRequest));
 
         return redirect()->route('public.revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }

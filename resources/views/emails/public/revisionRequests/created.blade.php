@@ -1,7 +1,9 @@
 @component('mail::message')
 # New revision request created
 
-Thank you for creating a new revision request, {{ $revisionRequest->technicianFirstName }}.
+Hey {{ $revisionRequest->technicianFirstName }},
+
+Thank you for creating a new revision request!
 
 This request has not been submitted for review yet.
 This means that you can still add files, make comments, update the description....
