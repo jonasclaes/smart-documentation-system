@@ -7,6 +7,9 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\RevisionAttachmentController;
 use App\Http\Controllers\RevisionCommentController;
 use App\Http\Controllers\RevisionController;
+use App\Http\Controllers\RevisionRequestCommentController;
+use App\Http\Controllers\RevisionRequestController;
+use App\Http\Controllers\RevisionRequestDocumentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileController;
@@ -39,6 +42,16 @@ Route::middleware([
 
     // Files
     Route::resource('files', FileController::class);
+
+    // Revision requests
+    Route::resource('files/{file}/revisionRequests', RevisionRequestController::class);
+
+    // Revision request documents
+    Route::get('files/{file}/revisionRequests/{revisionRequest}/documents/{revisionRequestDocument}/download', [RevisionRequestDocumentController::class, 'download'])->name('revisionRequestDocuments.download');
+    Route::resource('files/{file}/revisionRequests/{revisionrequest}/documents', RevisionRequestDocumentController::class);
+
+    // Revision request comments
+    Route::resource('files/{file}/revisionRequests/{revisionrequest}/comments', RevisionRequestCommentController::class);
 
     // Revisions
     Route::get('files/{file}/revisions/copy', [RevisionController::class, 'copy'])->name('revisions.copy');
