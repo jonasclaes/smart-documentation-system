@@ -2,60 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
+use App\Models\RevisionRequest;
 use App\Models\RevisionRequestComment;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class RevisionRequestCommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\RevisionRequestComment  $revisionRequestComment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(RevisionRequestComment $revisionRequestComment)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\RevisionRequestComment  $revisionRequestComment
      * @return \Illuminate\Http\Response
      */
-    public function edit(RevisionRequestComment $revisionRequestComment)
+    public function edit(File $file, RevisionRequest $revisionRequest, RevisionRequestComment $revisionRequestComment)
     {
         //
     }
@@ -67,7 +28,7 @@ class RevisionRequestCommentController extends Controller
      * @param  \App\Models\RevisionRequestComment  $revisionRequestComment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RevisionRequestComment $revisionRequestComment)
+    public function update(Request $request, File $file, RevisionRequest $revisionRequest, RevisionRequestComment $revisionRequestComment)
     {
         //
     }
@@ -76,10 +37,14 @@ class RevisionRequestCommentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\RevisionRequestComment  $revisionRequestComment
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function destroy(RevisionRequestComment $revisionRequestComment)
+    public function destroy(File $file, RevisionRequest $revisionRequest, RevisionRequestComment $revisionRequestComment)
     {
-        //
+        $this->authorize('delete', $revisionRequestComment);
+
+        $revisionRequestComment->delete();
+
+        return redirect()->route('revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }
 }
