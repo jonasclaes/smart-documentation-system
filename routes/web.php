@@ -48,10 +48,10 @@ Route::middleware([
 
     // Revision request documents
     Route::get('files/{file}/revisionRequests/{revisionRequest}/documents/{revisionRequestDocument}/download', [RevisionRequestDocumentController::class, 'download'])->name('revisionRequestDocuments.download');
-    Route::resource('files/{file}/revisionRequests/{revisionrequest}/documents', RevisionRequestDocumentController::class);
+    Route::resource('files/{file}/revisionRequests/{revisionRequest}/revisionRequestDocuments', RevisionRequestDocumentController::class);
 
     // Revision request comments
-    Route::resource('files/{file}/revisionRequests/{revisionrequest}/comments', RevisionRequestCommentController::class);
+    Route::resource('files/{file}/revisionRequests/{revisionRequest}/revisionRequestComments', RevisionRequestCommentController::class);
 
     // Revisions
     Route::get('files/{file}/revisions/copy', [RevisionController::class, 'copy'])->name('revisions.copy');

@@ -56,6 +56,11 @@
                 <div class="grid grid-cols-1 gap-3">
                     @if(count($revisionRequest->revisionDocuments) > 0)
                         @foreach($revisionRequest->revisionDocuments as $attachment)
+                            <form method="POST" action="{{ route('revisionRequestDocuments.destroy', ['file' => $file, 'revisionRequest' => $revisionRequest, 'revisionRequestDocument' => $attachment]) }}" id="deleteAttachmentForm-{{ $attachment->id }}" class="hidden">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="id" value="{{ $attachment->id }}">
+                            </form>
                             <div class="flex justify-between bg-white p-3 rounded-xl shadow border border-gray-400 border-opacity-25
         hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center dark:bg-coolGray-700 dark:text-white
         dark:border-gray-800 dark:hover:bg-gray-500">
@@ -68,7 +73,7 @@
                                     <a href="{{ route('revisionRequestDocuments.download', ['file' => $file, 'revisionRequest' => $revisionRequest, 'revisionRequestDocument' => $attachment]) }}">
                                         <x-heroicon-s-download class="h-6 w-6 text-blue-500"></x-heroicon-s-download>
                                     </a>
-                                    <a href="#">
+                                    <a href="javascript:$('#deleteAttachmentForm-{{ $attachment->id }}').submit();">
                                         <x-heroicon-s-trash class="h-6 w-6 text-red-500"></x-heroicon-s-trash>
                                     </a>
                                 </div>
