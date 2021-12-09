@@ -85,7 +85,7 @@
                                     <br>
                                     <span class="text-gray-400">{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($attachment->size) }}</span>
                                 </div>
-                                <div class="flex gap-0">
+                                <div class="flex gap-1">
                                     <a href="javascript:$('#deleteAttachmentForm-{{ $attachment->id }}').submit();">
                                         <x-heroicon-s-trash class="h-6 w-6 text-red-500"></x-heroicon-s-trash>
                                     </a>
@@ -120,7 +120,7 @@
                                     <br>
                                     <span class="text-gray-400">{{ __('Last updated on') }}: {{ $comment->updated_at }}</span>
                                 </div>
-                                <div class="flex gap-0">
+                                <div class="flex gap-1">
                                     <a href="javascript:$('#deleteCommentForm-{{ $comment->id }}').submit();">
                                         <x-heroicon-s-trash class="h-6 w-6 text-red-500"></x-heroicon-s-trash>
                                     </a>

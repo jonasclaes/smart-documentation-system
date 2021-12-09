@@ -71,7 +71,7 @@ $qrCodeEncoded = base64_encode($qrCode);
                 <p>{{ __('Client name:') }} {{ $file->client->name }}</p>
 
                 <h2 class="font-semibold text-lg mb-1">{{ __('Contacts') }}</h2>
-                <div class="grid grid-cols-1 gap-3 max-h-60 overflow-y-auto">
+                <div class="grid grid-cols-1 gap-3 max-h-48 overflow-y-auto">
                     @foreach($file->client->contacts as $contact)
                         <!-- Contact -->
                         <div class="col-span-full">
@@ -154,8 +154,9 @@ $qrCodeEncoded = base64_encode($qrCode);
                     @if(count($file->revisionRequests) > 0)
                         @foreach($file->revisionRequests->sortByDesc('updated_at') as $revisionRequest)
                             <x-list-item
+                                to="{{ route('revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}"
                                 title="{{ $revisionRequest->name }}"
-                                subtitle="{{ __('Created at:') }} {{ $revisionRequest->created_at }}"></x-list-item>
+                                subtitle="{{ __('Created by:') }} {{ $revisionRequest->technicianLastName }}, {{ $revisionRequest->technicianFirstName }}"></x-list-item>
                         @endforeach
                     @else
                         <div class="flex-grow flex items-center">
