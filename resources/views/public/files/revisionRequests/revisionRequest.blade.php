@@ -68,27 +68,31 @@
 
             <!-- Section: Files -->
             <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4 self-start" id="sectionFiles">
-                <h1 class="text-xl font-semibold">{{ __('Attachments') }}</h1>
+                <h1 class="text-xl font-semibold mb-1">{{ __('Attachments') }}</h1>
                 <!-- Attachments -->
-                <div class="grid grid-cols-1 gap-2 mt-1">
+                <div class="grid grid-cols-1 gap-3">
                 @if(count($revisionRequest->revisionDocuments) > 0)
                     @foreach($revisionRequest->revisionDocuments as $attachment)
                             <!-- Attachment -->
-                            <form method="POST" action="{{ route('public.revisionRequests.attachments.delete', ['file' => $file, 'revisionRequest' => $revisionRequest, 'revisionRequestDocument' => $attachment]) }}" id="deleteAttachmentForm-{{ $attachment->id }}">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="id" value="{{ $attachment->id }}">
-                            </form>
+                            @if( ! $revisionRequest->submitted )
+                                <form method="POST" action="{{ route('public.revisionRequests.attachments.delete', ['file' => $file, 'revisionRequest' => $revisionRequest, 'revisionRequestDocument' => $attachment]) }}" id="deleteAttachmentForm-{{ $attachment->id }}" class="hidden">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="id" value="{{ $attachment->id }}">
+                                </form>
+                            @endif
                             <div class="flex justify-between bg-white p-3 rounded-xl shadow border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center dark:bg-coolGray-700 dark:text-white dark:border-gray-800 dark:hover:bg-gray-500">
                                 <div>
                                     <span>{{ $attachment->fileName }}</span>
                                     <br>
                                     <span class="text-gray-400">{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($attachment->size) }}</span>
                                 </div>
-                                <div class="flex gap-0">
-                                    <a href="javascript:$('#deleteAttachmentForm-{{ $attachment->id }}').submit();">
-                                        <x-heroicon-s-trash class="h-6 w-6 text-red-500"></x-heroicon-s-trash>
-                                    </a>
+                                <div class="flex gap-1">
+                                    @if( ! $revisionRequest->submitted )
+                                        <a href="javascript:$('#deleteAttachmentForm-{{ $attachment->id }}').submit();">
+                                            <x-heroicon-s-trash class="h-6 w-6 text-red-500"></x-heroicon-s-trash>
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
@@ -102,28 +106,32 @@
 
             <!-- Section: Comments -->
             <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4 self-start" id="sectionComments">
-                <h1 class="text-xl font-semibold">{{ __('Comments') }}</h1>
+                <h1 class="text-xl font-semibold mb-1">{{ __('Comments') }}</h1>
 
                 <!-- Comments -->
-                <div class="grid grid-cols-1 gap-2 mt-1">
+                <div class="grid grid-cols-1 gap-3">
                 @if(count($revisionRequest->revisionComments) > 0)
                     @foreach($revisionRequest->revisionComments as $comment)
                             <!-- Comment -->
-                            <form method="POST" action="{{ route('public.revisionRequests.comments.delete', ['file' => $file, 'revisionRequest' => $revisionRequest, 'revisionRequestComment' => $comment]) }}" id="deleteCommentForm-{{ $comment->id }}">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="id" value="{{ $comment->id }}">
-                            </form>
+                            @if( ! $revisionRequest->submitted )
+                                <form method="POST" action="{{ route('public.revisionRequests.comments.delete', ['file' => $file, 'revisionRequest' => $revisionRequest, 'revisionRequestComment' => $comment]) }}" id="deleteCommentForm-{{ $comment->id }}" class="hidden">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="id" value="{{ $comment->id }}">
+                                </form>
+                            @endif
                             <div class="flex justify-between bg-white p-3 rounded-xl shadow border border-gray-400 border-opacity-25 hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center dark:bg-coolGray-700 dark:text-white dark:border-gray-800 dark:hover:bg-gray-500">
                                 <div>
                                     <span>{{ $comment->content }}</span>
                                     <br>
                                     <span class="text-gray-400">{{ __('Last updated on') }}: {{ $comment->updated_at }}</span>
                                 </div>
-                                <div class="flex gap-0">
-                                    <a href="javascript:$('#deleteCommentForm-{{ $comment->id }}').submit();">
-                                        <x-heroicon-s-trash class="h-6 w-6 text-red-500"></x-heroicon-s-trash>
-                                    </a>
+                                <div class="flex gap-1">
+                                    @if( ! $revisionRequest->submitted )
+                                        <a href="javascript:$('#deleteCommentForm-{{ $comment->id }}').submit();">
+                                            <x-heroicon-s-trash class="h-6 w-6 text-red-500"></x-heroicon-s-trash>
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
