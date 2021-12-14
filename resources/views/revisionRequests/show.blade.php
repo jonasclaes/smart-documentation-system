@@ -3,10 +3,16 @@
 @section('content')
 
     <div class="container mx-auto px-3">
-        <!-- Delete form -->
-        <form action="#" method="POST" id="deleteForm">
+        <!-- Approve form -->
+        <form action="{{ route('revisionRequests.approve', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}" method="POST" id="approveForm">
             @csrf
-            @method('DELETE')
+            @method('POST')
+        </form>
+
+        <!-- Refuse form -->
+        <form action="{{ route('revisionRequests.refuse', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}" method="POST" id="refuseForm">
+            @csrf
+            @method('POST')
         </form>
 
         <!-- Back Button -->
@@ -20,22 +26,26 @@
             <h1 class="text-xl font-semibold mb-2 pb-1 border-b">{{ __('Revision request') }}</h1>
             <div class="flex flex-wrap items-start gap-2">
                 <p class="flex-grow"><strong>{{ $revisionRequest->name }}</strong> {{ __('made by') }} <strong>{{$revisionRequest->technicianLastName }}, {{$revisionRequest->technicianFirstName }}</strong></p>
-                <div class="flex justify-end flex-grow gap-2 w-full md:w-auto">
-                    <a href="#"
-                       class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0 flex justify-center items-center">
-                        <x-heroicon-s-pencil class="h-4 w-4 mr-1"></x-heroicon-s-pencil><span>{{ __('Edit') }}</span>
-                    </a>
-                    <a href="javascript:$('#deleteForm').submit();"
-                       class="bg-red-600 hover:bg-red-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0 flex justify-center items-center">
-                        <x-heroicon-s-trash class="h-4 w-4 mr-1"></x-heroicon-s-trash><span>{{ __('Delete') }}</span>
-                    </a>
-                </div>
             </div>
         </div>
 
         <!-- Content -->
         <div class="grid gap-3 grid-cols-4">
-            <div class="bg-white rounded-xl shadow-md p-4 col-span-2">
+            <div class="bg-white rounded-xl shadow-md p-4 col-span-full">
+                <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-center">
+                    <a href="javascript:$('#approveForm').submit();"
+                       class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                        <x-heroicon-s-check class="h-4 w-4"></x-heroicon-s-check><span>{{ __('Approve') }}</span>
+                    </a>
+                    <a href="javascript:$('#refuseForm').submit();"
+                       class="bg-red-600 hover:bg-red-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                        <x-heroicon-s-x class="h-4 w-4"></x-heroicon-s-x><span>{{ __('Refuse') }}</span>
+                    </a>
+                    <div class="bg-gray-100 rounded hidden md:block"></div>
+                    <div class="bg-gray-100 rounded hidden xl:block"></div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-4 col-span-3">
                 <h2 class="font-semibold text-lg mb-1">{{ __('General information') }}</h2>
                 <p>{{ __('Created on') }}: <strong>{{ $revisionRequest->created_at }}</strong></p>
                 <p>{{ __('Last edit') }}: <strong>{{ $revisionRequest->updated_at }}</strong></p>
@@ -44,7 +54,7 @@
                 <p>{{ __('Category') }}: <strong>{{ $revisionRequest->revisionCategory->name }}</strong></p>
                 <p>{{ __('Description') }}: <strong>{{ $revisionRequest->description }}</strong></p>
             </div>
-            <div class="bg-white rounded-xl shadow-md p-4 col-span-2">
+            <div class="bg-white rounded-xl shadow-md p-4 col-span-1">
                 <h2 class="font-semibold text-lg mb-1">{{ __('Information about the submitter') }}</h2>
                 <p>{{ __('First name') }}: <strong>{{ $revisionRequest->technicianFirstName }}</strong></p>
                 <p>{{ __('Last name') }}: <strong>{{ $revisionRequest->technicianLastName }}</strong></p>

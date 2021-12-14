@@ -36,7 +36,7 @@
             <a href="javascript:$('#createForm').submit();"
                class="bg-green-600 hover:bg-green-700 md:px-9 py-3 mb-3 text-white rounded flex-grow md:flex-grow-0
                 flex justify-center items-center">
-                <x-heroicon-s-upload class="h-4 w-4 mr-1" ></x-heroicon-s-upload>{{ __('Upload') }}
+                <x-heroicon-s-plus class="h-4 w-4 mr-1" ></x-heroicon-s-plus>{{ __('Add') }}
             </a>
         </div>
     </div>

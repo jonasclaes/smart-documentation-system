@@ -3,85 +3,116 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\Revision;
 use App\Models\RevisionRequest;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use PHLAK\SemVer;
 
 class RevisionRequestController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RevisionRequest  $revisionRequest
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
      * @return Renderable
+     * @throws AuthorizationException
      */
     public function show(File $file, RevisionRequest $revisionRequest)
     {
+        $this->authorize('view', $revisionRequest);
+
         return view('revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Approve the specified resource.
      *
-     * @param  \App\Models\RevisionRequest  $revisionRequest
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function edit(RevisionRequest $revisionRequest)
+    public function approve(File $file, RevisionRequest $revisionRequest)
     {
-        //
+        $this->authorize('update', $revisionRequest);
+
+        $sourceRevision = $file->revisions->sortByDesc('created_at')->first();
+
+        // Try semantic versioning, if it fails, add suffix (1) to latest revision number.
+        $version = "";
+        try {
+            $version = SemVer\Version::parse($sourceRevision->revisionNumber)->incrementPatch();
+        } catch (SemVer\Exceptions\InvalidVersionException $e) {
+            $version = "{$sourceRevision->revisionNumber} (1)";
+        }
+
+        // Copy to new revision
+        $newRevision = $sourceRevision->replicate();
+
+        // Change the revision number to the new one.
+        $newRevision->revisionNumber = $version;
+
+        // Throw it into the database.
+        $newRevision->push();
+
+        // Copy all the old documents and comments over to the new revision.
+        $newRevision->documents()->attach($sourceRevision->documents);
+        $newRevision->comments()->attach($sourceRevision->comments);
+
+        foreach ($revisionRequest->revisionDocuments as $revisionDocument) {
+            $path = str_replace("revisionRequests", "revisions", $revisionDocument->path);
+            Storage::move($revisionDocument->path, $path);
+
+            $newRevision->documents()->create([
+                "fileName" => $revisionDocument->fileName,
+                "path" => $path,
+                "size" => $revisionDocument->size
+            ]);
+
+            $revisionDocument->delete();
+        }
+
+        foreach ($revisionRequest->revisionComments as $revisionComment) {
+            $newRevision->comments()->create([
+                "content" => $revisionComment->content,
+            ]);
+
+            $revisionComment->delete();
+        }
+
+        $revisionRequest->delete();
+
+        return redirect()->route('files.show', ['file' => $file]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Refuse the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RevisionRequest  $revisionRequest
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function update(Request $request, RevisionRequest $revisionRequest)
+    public function refuse(File $file, RevisionRequest $revisionRequest)
     {
-        //
-    }
+        $this->authorize('update', $revisionRequest);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RevisionRequest  $revisionRequest
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(RevisionRequest $revisionRequest)
-    {
-        //
+        foreach ($revisionRequest->revisionDocuments as $revisionDocument) {
+            Storage::delete($revisionDocument->path);
+            $revisionDocument->delete();
+        }
+
+        foreach ($revisionRequest->revisionComments as $revisionComment) {
+            $revisionComment->delete();
+        }
+
+        $revisionRequest->delete();
+
+        return redirect()->route('files.show', ['file' => $file]);
     }
 }

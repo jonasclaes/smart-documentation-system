@@ -44,6 +44,8 @@ Route::middleware([
     Route::resource('files', FileController::class);
 
     // Revision requests
+    Route::post('files/{file}/revisionRequests/{revisionRequest}/approve', [RevisionRequestController::class, 'approve'])->name('revisionRequests.approve');
+    Route::post('files/{file}/revisionRequests/{revisionRequest}/refuse', [RevisionRequestController::class, 'refuse'])->name('revisionRequests.refuse');
     Route::resource('files/{file}/revisionRequests', RevisionRequestController::class);
 
     // Revision request documents
