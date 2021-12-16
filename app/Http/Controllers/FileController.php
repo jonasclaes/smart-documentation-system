@@ -50,8 +50,14 @@ class FileController extends Controller
      */
     public function create()
     {
+        $latestFile = File::all()->sortBy("fileId")->last();
+        $fileId = "";
+        if (is_numeric($latestFile->fileId)) {
+            $fileId = sprintf("%04d", intval($latestFile->fileId) + 1);
+        }
+
         $clients = Client::all()->sortBy('name');
-        return view('files.create', ['clients' => $clients]);
+        return view('files.create', ['clients' => $clients, 'fileId' => $fileId]);
     }
 
     /**
