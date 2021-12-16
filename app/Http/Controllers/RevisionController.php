@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Exceptions\NotImplementedException;
 use App\Http\Requests\StoreRevisionRequest;
 use App\Http\Requests\UpdateRevisionRequest;
-use App\Models\Comment;
-use App\Models\Document;
 use App\Models\File;
 use App\Models\Revision;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -14,7 +12,9 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use Storage;
+use PHLAK\SemVer\Version;
 
 class RevisionController extends Controller
 {
@@ -45,7 +45,20 @@ class RevisionController extends Controller
      */
     public function create(File $file)
     {
-        return view('revisions.create', ['files' => File::all(), 'file' => $file]);
+        $revisions = Revision::where('fileId', $file->id)->get();
+
+        // Try semantic versioning, if it fails, add suffix (1) to latest revision number.
+        $version = "";
+        if (count($revisions) > 0) {
+            try {
+                $version = Version::parse($revisions->last()->revisionNumber)->incrementPatch();
+                $version = "v{$version}";
+            } catch (InvalidVersionException $e) {
+                $version = "{$revisions->last()->revisionNumber} (1)";
+            }
+        }
+
+        return view('revisions.create', ['files' => File::all(), 'file' => $file, 'generatedRevisionNumber' => $version]);
     }
 
     /**
@@ -153,7 +166,16 @@ class RevisionController extends Controller
 
         $revisions = Revision::where('fileId', $file->id)->get();
 
-        return view('revisions.copy', ['revisions' => $revisions, 'file' => $file]);
+        // Try semantic versioning, if it fails, add suffix (1) to latest revision number.
+        $version = "";
+        try {
+            $version = Version::parse($revisions->last()->revisionNumber)->incrementPatch();
+            $version = "v{$version}";
+        } catch (InvalidVersionException $e) {
+            $version = "{$revisions->last()->revisionNumber} (1)";
+        }
+
+        return view('revisions.copy', ['revisions' => $revisions, 'file' => $file, 'generatedRevisionNumber' => $version]);
     }
 
 

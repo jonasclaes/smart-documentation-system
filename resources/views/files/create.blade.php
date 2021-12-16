@@ -17,7 +17,7 @@
                     <div>
                         <label for="fileId">{{ __('File number') }} ({{ __('required') }}):</label>
                         <input type="text" name="fileId" id="fileId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
-                            placeholder="{{ __('File number') }}" value="{{ old('fileId') }}">
+                            placeholder="{{ __('File number') }}" value="{{ old('fileId', $fileId) }}">
                         <small class="opacity-50">{{ __('Fill in the number of the file here.') }}</small>
                         @error('fileId')
                         <br>
