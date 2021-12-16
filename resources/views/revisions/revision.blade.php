@@ -12,7 +12,8 @@
 
     <div class="container mx-auto px-3">
         <!-- Delete form -->
-        <form action="{{ route('revisions.destroy', ['revision' => $revision, 'file' => $file]) }}" method="POST" id="deleteForm">
+        <form action="{{ route('revisions.destroy', ['revision' => $revision, 'file' => $file]) }}" method="POST"
+              id="deleteForm">
             @csrf
             @method('DELETE')
         </form>
@@ -58,7 +59,8 @@
                     <div class="grid gap-3 grid-cols-1 xl:grid-cols-2 justify-center">
                         <a href="{{ route('revisions.attachments.create', ['file' => $file, 'revision' => $revision]) }}"
                            class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full text-center">
-                            <x-heroicon-s-upload class="h-4 w-4 mr-1"></x-heroicon-s-upload>{{ __('Upload attachment(s)') }}
+                            <x-heroicon-s-upload
+                                class="h-4 w-4 mr-1"></x-heroicon-s-upload>{{ __('Upload attachment(s)') }}
                         </a>
                         <a href="{{ route('revisions.attachments.createDirectory', ['file' => $file, 'revision' => $revision]) }}"
                            class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full text-center">
@@ -69,9 +71,10 @@
 
                 <!-- Attachments -->
                 <div class="bg-white rounded-xl p-4">
-                    <div class="grid grid-cols-1 gap-2">
-                        @if(count($revision->documents) > 0)
-                            @foreach($revision->documents as $document)
+                    @if(count($revision->documents) > 0)
+                        <div class="grid grid-cols-1 gap-2">
+                            <h3 class="font-semibold border-b">Documents</h3>
+                            @foreach($revision->documents->where('category', '=', 'document') as $document)
                                 <div
                                     class="flex justify-between bg-white p-3 rounded-xl shadow border border-gray-400 border-opacity-25
         hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center dark:bg-coolGray-700 dark:text-white
@@ -79,24 +82,99 @@
                                     <div>
                                         <span>{{ $document->fileName }}</span>
                                         <br>
-                                        <span class="text-gray-400">{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($document->size) }}</span>
+                                        <span
+                                            class="text-gray-400">{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($document->size) }}</span>
                                     </div>
                                     <div class="flex">
                                         <a href="{{ route('revisions.attachments.download', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}">
-                                            <x-heroicon-s-download class="h-6 w-6 text-blue-600"></x-heroicon-s-download>
+                                            <x-heroicon-s-download
+                                                class="h-6 w-6 text-blue-600"></x-heroicon-s-download>
                                         </a>
                                         <a href="{{ route('revisions.attachments.show', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}">
-                                            <x-heroicon-s-chevron-right class="h-6 w-6 opacity-25"></x-heroicon-s-chevron-right>
+                                            <x-heroicon-s-chevron-right
+                                                class="h-6 w-6 opacity-25"></x-heroicon-s-chevron-right>
                                         </a>
                                     </div>
                                 </div>
                             @endforeach
-                        @else
-                            <div class="flex-grow flex items-center">
-                                <span class="text-center w-full">{{ __('There are no attachments.') }}</span>
-                            </div>
-                        @endif
-                    </div>
+                            <h3 class="font-semibold border-b">Images</h3>
+                            @foreach($revision->documents->where('category', '=', 'image') as $document)
+                                <div
+                                    class="flex justify-between bg-white p-3 rounded-xl shadow border border-gray-400 border-opacity-25
+        hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center dark:bg-coolGray-700 dark:text-white
+        dark:border-gray-800 dark:hover:bg-gray-500 cursor-pointer">
+                                    <div>
+                                        <span>{{ $document->fileName }}</span>
+                                        <br>
+                                        <span
+                                            class="text-gray-400">{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($document->size) }}</span>
+                                    </div>
+                                    <div class="flex">
+                                        <a href="{{ route('revisions.attachments.download', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}">
+                                            <x-heroicon-s-download
+                                                class="h-6 w-6 text-blue-600"></x-heroicon-s-download>
+                                        </a>
+                                        <a href="{{ route('revisions.attachments.show', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}">
+                                            <x-heroicon-s-chevron-right
+                                                class="h-6 w-6 opacity-25"></x-heroicon-s-chevron-right>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <h3 class="font-semibold border-b">Software</h3>
+                            @foreach($revision->documents->where('category', '=', 'software') as $document)
+                                <div
+                                    class="flex justify-between bg-white p-3 rounded-xl shadow border border-gray-400 border-opacity-25
+        hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center dark:bg-coolGray-700 dark:text-white
+        dark:border-gray-800 dark:hover:bg-gray-500 cursor-pointer">
+                                    <div>
+                                        <span>{{ $document->fileName }}</span>
+                                        <br>
+                                        <span
+                                            class="text-gray-400">{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($document->size) }}</span>
+                                    </div>
+                                    <div class="flex">
+                                        <a href="{{ route('revisions.attachments.download', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}">
+                                            <x-heroicon-s-download
+                                                class="h-6 w-6 text-blue-600"></x-heroicon-s-download>
+                                        </a>
+                                        <a href="{{ route('revisions.attachments.show', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}">
+                                            <x-heroicon-s-chevron-right
+                                                class="h-6 w-6 opacity-25"></x-heroicon-s-chevron-right>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <h3 class="font-semibold border-b">Other</h3>
+                            @foreach($revision->documents->where('category', '=', 'other') as $document)
+                                <div
+                                    class="flex justify-between bg-white p-3 rounded-xl shadow border border-gray-400 border-opacity-25
+        hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center dark:bg-coolGray-700 dark:text-white
+        dark:border-gray-800 dark:hover:bg-gray-500 cursor-pointer">
+                                    <div>
+                                        <span>{{ $document->fileName }}</span>
+                                        <br>
+                                        <span
+                                            class="text-gray-400">{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($document->size) }}</span>
+                                    </div>
+                                    <div class="flex">
+                                        <a href="{{ route('revisions.attachments.download', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}">
+                                            <x-heroicon-s-download
+                                                class="h-6 w-6 text-blue-600"></x-heroicon-s-download>
+                                        </a>
+                                        <a href="{{ route('revisions.attachments.show', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}">
+                                            <x-heroicon-s-chevron-right
+                                                class="h-6 w-6 opacity-25"></x-heroicon-s-chevron-right>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="flex-grow flex items-center">
+                            <span class="text-center w-full">{{ __('There are no attachments.') }}</span>
+                        </div>
+                    @endif
                 </div>
             </div>
 

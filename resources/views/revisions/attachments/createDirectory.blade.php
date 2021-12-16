@@ -21,6 +21,20 @@
                         customProperties='multiple directory="" webkitdirectory="" moxdirectory=""'>
                     </x-forms.input-block.file>
                     <div>
+                        <label for="category">{{ __('Category') }} ({{ __('required') }}):</label>
+                        <select name="category" id="category" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                            <option value="document" @if(old('category') === "document") selected @endif>{{ __('Document') }}</option>
+                            <option value="image" @if(old('category') === "image") selected @endif>{{ __('Image') }}</option>
+                            <option value="software" @if(old('category') === "software") selected @endif>{{ __('Software') }}</option>
+                            <option value="other" @if(old('category') === "other") selected @endif>{{ __('Other') }}</option>
+                        </select>
+                        <small class="text-gray-400">{{ __('Select the category the attachment(s) belong to here.') }}</small>
+                        @error('category')
+                        <br>
+                        <small class="text-red-600 font-semibold">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div>
                         <label for="revisionId">{{ __('Revision') }} ({{ __('required') }}):</label>
                         <select name="revisionId" id="revisionId" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
                             @foreach ($revisions as $revisionEntry)
