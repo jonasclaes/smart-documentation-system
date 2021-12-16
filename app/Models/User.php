@@ -68,7 +68,6 @@ class User extends Authenticatable
         'phoneNumber',
         'password',
         'active',
-        'rights'
     ];
 
     // Hide the following properties.
@@ -80,7 +79,6 @@ class User extends Authenticatable
     // Set default values for attributes.
     protected $attributes = [
         'active' => false,
-        'rights' => 0
     ];
 
     /**
