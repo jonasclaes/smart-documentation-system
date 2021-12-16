@@ -90,6 +90,14 @@ class User extends Authenticatable
      */
     public function name(): string
     {
+        if ($this->firstName === "") {
+            return $this->lastName;
+        }
+
+        if ($this->lastName === "") {
+            return $this->firstName;
+        }
+
         return "{$this->lastName}, {$this->firstName}";
     }
 
