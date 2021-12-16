@@ -25,10 +25,10 @@
                             name="firstName"
                             id="firstName"
                             value="{{ old('firstName') }}"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                 @error('firstName') ring ring-red-500 ring-opacity-50 @enderror">
-
+                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                        <small class="text-gray-400">{{ __('Fill in the persons first name here.') }}</small>
                         @error('firstName')
+                        <br>
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -46,16 +46,16 @@
                             name="lastName"
                             id="lastName"
                             value="{{ old('lastName') }}"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('lastName') ring ring-red-500 ring-opacity-50 @enderror">
-
+                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                        <small class="text-gray-400">{{ __('Fill in the persons last name here.') }}</small>
                         @error('lastName')
+                        <br>
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
-                    <div class="col-span-2">
+                    <div>
                         <label
                             for="email"
                             class="text-gray-700">
@@ -67,10 +67,10 @@
                             name="email"
                             id="email"
                             value="{{ old('email')}}"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('email') ring ring-red-500 ring-opacity-50 @enderror">
-
+                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                        <small class="text-gray-400">{{ __('Fill in the persons e-mail address here.') }}</small>
                         @error('email')
+                        <br>
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -87,9 +87,10 @@
                             name="phoneNumber"
                             id="phoneNumber"
                             value="{{ old('phoneNumber') }}"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('phoneNumber') ring ring-red-500 ring-opacity-50 @enderror">
+                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                        <small class="text-gray-400">{{ __('Fill in the persons phone number here.') }}</small>
                         @error('phoneNumber')
+                        <br>
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -99,7 +100,7 @@
                         <label
                             for="username"
                             class="text-gray-700">
-                            {{ __('Username') }} ({{ __('required') }}):</label>
+                            {{ __('Username') }} ({{ __('optional') }}):</label>
                         <input
                             type="text"
                             autofocus
@@ -108,9 +109,12 @@
                             name="username"
                             id="username"
                             value="{{ old('username') }}"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('username') ring ring-red-500 ring-opacity-50 @enderror">
+                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                        <small class="text-gray-400">{{ __('Fill in the persons username here.') }}</small>
+                        <br>
+                        <small class="text-gray-400">{{ __('Attention: if you do not fill in this field, it will generate a username in the format of {firstName}.{lastName}.') }}</small>
                         @error('username')
+                        <br>
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

@@ -65,10 +65,21 @@ class UserController extends Controller
     {
         $input = $request->validated();
 
+        // Auto-generate username if it's not set.
+        if (!isset($input["username"]) || $input["username"] === "") {
+            $firstName = strtolower($input["firstName"]);
+            $lastName = strtolower($input["lastName"]);
+
+            $input["username"] = "{$firstName}.{$lastName}";
+        }
+
         // Set password hash to "!", this hash can NEVER be create in any way.
         // So the account is locked until the user changes his password.
         // Reference: /etc/shadow in Unix systems
         $input['password'] = "!";
+
+        // Make the user active on creation.
+        $input["active"] = true;
 
         $user = User::create($input);
 
