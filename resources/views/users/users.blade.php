@@ -35,7 +35,19 @@
                     <br>
                     <hr>
                     <br>
-                    @include('components.UserList')
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+                        @if(count($users) > 0)
+                            @foreach($users as $user)
+                                <x-list-item
+                                    to="{{ route('users.show', ['user' => $user]) }}"
+                                    title="{{ $user->fullName() }}"
+                                    subtitle="{{ __('E-mail') }}: {{ $user->email }}">
+                                </x-list-item>
+                            @endforeach
+                        @else
+                            <p>{{ __('No users have been found.') }}</p>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

@@ -10,6 +10,7 @@
 
         <!-- Content -->
         <div class="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
+            <!-- Statistics -->
             <div class="hidden sm:grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 col-span-full">
                 <!-- Users -->
                 <div class="bg-gradient-to-br from-sky-500 to-blue-700 text-white rounded-xl shadow-md p-4">
@@ -67,6 +68,9 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Open revision requests -->
+            @if(request()->user()->can('view-any', \App\Models\RevisionRequest::class))
             <div class="bg-white rounded-xl shadow-md p-4 col-span-1 lg:col-span-2 xl:col-span-3">
                 <h2 class="text-lg font-semibold mb-2">{{ __('Open revision requests') }} ({{ count($revisionRequests) }})</h2>
                 @if(count($revisionRequests) > 0)
@@ -87,6 +91,7 @@
                     </div>
                 @endif
             </div>
+            @endif
         </div>
     </div>
 
