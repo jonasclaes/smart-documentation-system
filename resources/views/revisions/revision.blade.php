@@ -72,11 +72,24 @@
                     <div class="grid grid-cols-1 gap-2">
                         @if(count($revision->documents) > 0)
                             @foreach($revision->documents as $document)
-                                <x-list-item
-                                    to="{{ route('revisions.attachments.show', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}"
-                                    title="{{ $document->fileName }}"
-                                    subtitle="{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($document->size) }}">
-                                </x-list-item>
+                                <div
+                                    class="flex justify-between bg-white p-3 rounded-xl shadow border border-gray-400 border-opacity-25
+        hover:bg-gray-200 transition-colors duration-150 ease-in-out items-center dark:bg-coolGray-700 dark:text-white
+        dark:border-gray-800 dark:hover:bg-gray-500 cursor-pointer">
+                                    <div>
+                                        <span>{{ $document->fileName }}</span>
+                                        <br>
+                                        <span class="text-gray-400">{{ __('Size') }}: {{ \App\Helpers\ByteHelper::toHuman($document->size) }}</span>
+                                    </div>
+                                    <div class="flex">
+                                        <a href="{{ route('revisions.attachments.download', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}">
+                                            <x-heroicon-s-download class="h-6 w-6 text-blue-600"></x-heroicon-s-download>
+                                        </a>
+                                        <a href="{{ route('revisions.attachments.show', ['file' => $file, 'revision' => $revision, 'document' => $document]) }}">
+                                            <x-heroicon-s-chevron-right class="h-6 w-6 opacity-25"></x-heroicon-s-chevron-right>
+                                        </a>
+                                    </div>
+                                </div>
                             @endforeach
                         @else
                             <div class="flex-grow flex items-center">
