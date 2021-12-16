@@ -9,8 +9,8 @@
 
         <div class="bg-white rounded-xl p-4">
             <form method="POST" action="{{ route('users.store') }}" id="createForm">
-                {{ csrf_field() }}
-                {{ method_field('POST') }}
+                @csrf
+                @method("POST")
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label
@@ -116,46 +116,6 @@
                         </span>
                         @enderror
                     </div>
-                    <div>
-                        <label
-                            for="password"
-                            class="text-gray-700">
-                            {{ __('Password') }} ({{ __('required') }}):</label>
-                        <input
-                            type="password"
-                            required
-                            autocomplete="new-password"
-                            name="password"
-                            id="password"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('password') ring ring-red-500 ring-opacity-50 @enderror">
-
-                        @error('password')
-                        <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div>
-                        <label
-                            for="password-confirm"
-                            class="text-gray-700">
-                            {{ __('Confirm password') }} ({{ __('required') }}):</label>
-                        <input
-                            type="password"
-                            required
-                            autocomplete="new-password"
-                            name="password_confirmation"
-                            id="password-confirm"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('password') ring ring-red-500 ring-opacity-50 @enderror">
-
-                        @error('password')
-                        <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
                 </div>
             </form>
         </div>
@@ -169,8 +129,8 @@
             <a href="javascript:$('#createForm').submit();"
                class="bg-green-600 hover:bg-green-700 md:px-9 py-3 mb-3 text-white rounded flex-grow md:flex-grow-0
                 flex justify-center items-center">
-                <x-heroicon-s-pencil class="h-4 w-4 mr-1"/>
-                <span>{{ __('Create user') }}</span>
+                <x-heroicon-s-plus class="h-4 w-4 mr-1"/>
+                <span>{{ __('Create') }}</span>
             </a>
         </div>
     </div>

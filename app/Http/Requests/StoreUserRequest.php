@@ -30,7 +30,6 @@ class StoreUserRequest extends FormRequest
             'username' => ['required', 'max:255', 'string'],
             'email' => ['required', 'max:255', 'email'],
             'phoneNumber' => ['max:255'],
-            'password' => ['required', 'max:255']
         ];
     }
 }

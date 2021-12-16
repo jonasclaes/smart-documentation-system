@@ -37,7 +37,6 @@
                                 autocomplete="password"
                                 name="password"
                                 id="password"
-                                value="{{ old('password') }}"
                                 class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
                             @error('password')
                             <span class="text-red-600">
