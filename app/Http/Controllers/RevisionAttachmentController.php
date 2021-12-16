@@ -64,6 +64,10 @@ class RevisionAttachmentController extends Controller
             throw new FileNotFoundException();
         }
 
+        $category = $request->get('category');
+        $revisionId = $request->get('revisionId');
+        $revision = Revision::find($revisionId);
+
         foreach ($request->file('files') as $inputFile) {
             if ( ! $inputFile->isValid()) {
                 throw new FileNotFoundException();
@@ -74,7 +78,8 @@ class RevisionAttachmentController extends Controller
             $revision->documents()->create([
                 "fileName" => $inputFile->getClientOriginalName(),
                 "path" => $path,
-                "size" => $inputFile->getSize()
+                "size" => $inputFile->getSize(),
+                "category" => $category
             ]);
         }
 

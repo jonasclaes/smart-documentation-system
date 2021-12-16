@@ -11,7 +11,7 @@
         <span>{{ $title }}</span>
         @if($subtitle)
             <br>
-            <span class="opacity-50">{{ $subtitle }}</span>
+            <span class="text-gray-400">{{ $subtitle }}</span>
         @endif
         @if(count($labels) > 0)
             <div class="mt-1">
