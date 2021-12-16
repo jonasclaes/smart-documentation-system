@@ -9,12 +9,6 @@
 @section('content')
 
     <div class="container mx-auto">
-        <!-- Section: Back button -->
-        <a href="{{ route('public.showFile', ['file' => $file]) }}"
-           class="bg-sky-500 hover:bg-sky-600 px-9 py-3 mb-3 text-white rounded flex md:inline-flex justify-center items-center">
-            <x-heroicon-s-chevron-left class="h-4 w-4 mr-1"></x-heroicon-s-chevron-left>{{ __('Back to file') }}
-        </a>
-
         <div class="grid gap-3 grid-cols-1 md:grid-cols-2">
             <!-- Section: Header -->
             <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4 col-span-full">

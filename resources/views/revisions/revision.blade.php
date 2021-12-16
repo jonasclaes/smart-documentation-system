@@ -17,12 +17,6 @@
             @method('DELETE')
         </form>
 
-        <!-- Back Button -->
-        <a href="{{ route('files.show', ['file' => $file]) }}"
-            class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
-            <x-heroicon-s-chevron-left class="h-4 w-4 mr-1"></x-heroicon-s-chevron-left>{{ __('Back') }}
-        </a>
-
         <!-- Menu bar -->
         <div class="bg-white rounded-xl p-4 w-full mb-3">
             <h1 class="text-xl font-semibold mb-2 pb-1 border-b">{{ __('Revision') }}</h1>
@@ -63,11 +57,11 @@
                     <!-- Action buttons -->
                     <div class="grid gap-3 grid-cols-1 xl:grid-cols-2 justify-center">
                         <a href="{{ route('revisions.attachments.create', ['file' => $file, 'revision' => $revision]) }}"
-                           class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                           class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full text-center">
                             <x-heroicon-s-upload class="h-4 w-4 mr-1"></x-heroicon-s-upload>{{ __('Upload attachment(s)') }}
                         </a>
                         <a href="{{ route('revisions.attachments.createDirectory', ['file' => $file, 'revision' => $revision]) }}"
-                           class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                           class="bg-green-600 hover:bg-green-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full text-center">
                             <x-heroicon-s-upload class="h-4 w-4 mr-1"></x-heroicon-s-upload>{{ __('Upload directory') }}
                         </a>
                     </div>

@@ -47,6 +47,7 @@ class RevisionRequestController extends Controller
         $version = "";
         try {
             $version = SemVer\Version::parse($sourceRevision->revisionNumber)->incrementPatch();
+            $version = "v{$version}";
         } catch (SemVer\Exceptions\InvalidVersionException $e) {
             $version = "{$sourceRevision->revisionNumber} (1)";
         }

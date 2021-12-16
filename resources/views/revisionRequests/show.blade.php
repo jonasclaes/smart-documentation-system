@@ -15,12 +15,6 @@
             @method('POST')
         </form>
 
-        <!-- Back Button -->
-        <a href="{{ route('files.show', ['file' => $file]) }}"
-           class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
-            <x-heroicon-s-chevron-left class="h-4 w-4"></x-heroicon-s-chevron-left><span>{{ __('Back to file') }}</span>
-        </a>
-
         <!-- Menu bar -->
         <div class="bg-white rounded-xl shadow-md p-4 w-full mb-3">
             <h1 class="text-xl font-semibold mb-2 pb-1 border-b">{{ __('Revision request') }}</h1>
