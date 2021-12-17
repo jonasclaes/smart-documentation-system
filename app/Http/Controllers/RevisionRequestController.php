@@ -72,7 +72,8 @@ class RevisionRequestController extends Controller
             $newRevision->documents()->create([
                 "fileName" => $revisionDocument->fileName,
                 "path" => $path,
-                "size" => $revisionDocument->size
+                "size" => $revisionDocument->size,
+                "category" => "other"
             ]);
 
             $revisionDocument->delete();
