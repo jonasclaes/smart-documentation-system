@@ -66,7 +66,7 @@ class RevisionAttachmentController extends Controller
 
         $category = $request->get('category');
         $revisionId = $request->get('revisionId');
-        $revision = Revision::find($revisionId);
+        $revisionAttach = Revision::find($revisionId);
 
         foreach ($request->file('files') as $inputFile) {
             if ( ! $inputFile->isValid()) {
@@ -75,7 +75,7 @@ class RevisionAttachmentController extends Controller
 
             $path = $inputFile->store('data/revisions/documents');
 
-            $revision->documents()->create([
+            $revisionAttach->documents()->create([
                 "fileName" => $inputFile->getClientOriginalName(),
                 "path" => $path,
                 "size" => $inputFile->getSize(),
