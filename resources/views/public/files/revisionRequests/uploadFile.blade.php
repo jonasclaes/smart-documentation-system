@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.page', ['topnav' => true])
 
 @section('content')
 
