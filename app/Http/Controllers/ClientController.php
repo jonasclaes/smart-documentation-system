@@ -48,7 +48,7 @@ class ClientController extends Controller
     {
         $latestClient = Client::all()->sortBy("clientNumber")->last();
         $clientNumber = "";
-        if (is_numeric($latestClient->clientNumber)) {
+        if ($latestClient && is_numeric($latestClient->clientNumber)) {
             $clientNumber = sprintf("%04d", intval($latestClient->clientNumber) + 1);
         }
 

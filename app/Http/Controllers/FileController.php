@@ -52,7 +52,7 @@ class FileController extends Controller
     {
         $latestFile = File::all()->sortBy("fileId")->last();
         $fileId = "";
-        if (is_numeric($latestFile->fileId)) {
+        if ($latestFile && is_numeric($latestFile->fileId)) {
             $fileId = sprintf("%04d", intval($latestFile->fileId) + 1);
         }
 

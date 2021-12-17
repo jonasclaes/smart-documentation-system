@@ -168,11 +168,13 @@ class RevisionController extends Controller
 
         // Try semantic versioning, if it fails, add suffix (1) to latest revision number.
         $version = "";
-        try {
-            $version = Version::parse($revisions->last()->revisionNumber)->incrementPatch();
-            $version = "v{$version}";
-        } catch (InvalidVersionException $e) {
-            $version = "{$revisions->last()->revisionNumber} (1)";
+        if (count($revisions) > 0) {
+            try {
+                $version = Version::parse($revisions->last()->revisionNumber)->incrementPatch();
+                $version = "v{$version}";
+            } catch (InvalidVersionException $e) {
+                $version = "{$revisions->last()->revisionNumber} (1)";
+            }
         }
 
         return view('revisions.copy', ['revisions' => $revisions, 'file' => $file, 'generatedRevisionNumber' => $version]);
