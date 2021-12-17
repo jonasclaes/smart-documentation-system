@@ -15,6 +15,13 @@
             @method('POST')
         </form>
 
+        <div class="mb-3 md:flex">
+            <a href="{{ route('files.show', ['file' => $file]) }}" class="flex items-center justify-center p-2 rounded bg-sky-600 hover:bg-sky-700 text-white">
+                <x-heroicon-s-chevron-left
+                    class="h-6 w-6"></x-heroicon-s-chevron-left><span>{{ __('Back to file') }}</span>
+            </a>
+        </div>
+
         <!-- Menu bar -->
         <div class="bg-white rounded-xl shadow-md p-4 w-full mb-3">
             <h1 class="text-xl font-semibold mb-2 pb-1 border-b">{{ __('Revision request') }}</h1>
