@@ -1,6 +1,17 @@
 # For more information: https://laravel.com/docs/sail
 version: '3'
 services:
+    caddy:
+      image: caddy:2
+      command: caddy reverse-proxy --from https://smartdocs.deltatechnics.be:443 --to http://laravel.prod:80
+      ports:
+        - "80:80"
+        - "443:443"
+      volumes:
+        - caddy:/data
+      depends_on:
+        - laravel.prod
+
     laravel.prod:
         build:
             context: ./
@@ -11,7 +22,8 @@ services:
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
-            - '${APP_PORT:-80}:80'
+#            - '${APP_PORT:-80}:80'
+            - '127.0.0.1:8080:80'
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
@@ -39,3 +51,6 @@ services:
 networks:
     laravel:
         driver: bridge
+
+volumes:
+  caddy:
