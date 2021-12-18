@@ -3,12 +3,14 @@ version: '3'
 services:
     caddy:
       image: caddy:2
-      command: caddy reverse-proxy --from https://smartdocs.deltatechnics.be:443 --to http://laravel.prod:80
+      command: caddy reverse-proxy --from smartdocs.jonasclaes.be --to laravel.prod:80
       ports:
         - "80:80"
         - "443:443"
       volumes:
         - caddy:/data
+      networks:
+        - laravel
       depends_on:
         - laravel.prod
 
