@@ -46,7 +46,10 @@
                        class="bg-blue-600 hover:bg-blue-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
                         <x-heroicon-s-refresh class="h-4 w-4"></x-heroicon-s-refresh><span>{{ __('Reopen with message') }}</span>
                     </a>
-                    <div class="bg-gray-100 rounded hidden xl:block"></div>
+                    <a href="{{ route('revisionRequests.edit', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}"
+                       class="bg-blue-600 hover:bg-blue-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                        <x-heroicon-s-pencil class="h-4 w-4"></x-heroicon-s-pencil><span>{{ __('Edit') }}</span>
+                    </a>
                 </div>
             </div>
             <div class="bg-white rounded-xl shadow-md p-4 col-span-3">
