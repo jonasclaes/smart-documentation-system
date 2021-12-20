@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReopenRevisionRequestRequest;
 use App\Http\Requests\UpdateRevisionRequestRequest;
+use App\Mail\Public\RevisionRequestApproved;
+use App\Mail\Public\RevisionRequestRefused;
 use App\Mail\Public\RevisionRequestReopened;
 use App\Models\File;
 use App\Models\Revision;
@@ -126,6 +128,8 @@ class RevisionRequestController extends Controller
 
         $revisionRequest->delete();
 
+        Mail::to($revisionRequest->technicianEmail)->send(new RevisionRequestApproved($revisionRequest));
+
         return redirect()->route('files.show', ['file' => $file]);
     }
 
@@ -151,6 +155,8 @@ class RevisionRequestController extends Controller
         }
 
         $revisionRequest->delete();
+
+        Mail::to($revisionRequest->technicianEmail)->send(new RevisionRequestRefused($revisionRequest));
 
         return redirect()->route('files.show', ['file' => $file]);
     }

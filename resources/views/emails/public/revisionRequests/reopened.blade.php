@@ -1,20 +1,20 @@
 @component('mail::message')
-# Revision request reopened
+# {{ __('Revision request reopened') }}
 
-Hey {{ $revisionRequest->technicianFirstName }},
+{{ __('Hey') }} {{ $revisionRequest->technicianFirstName }},
 
-A revision request you created has been reopened.
-You can find more information about this further down this email.
+{{ __('A revision request you created has been reopened.') }}
+{{ __('You can find more information about this further down this email.') }}
 
-Once you've made the changes that have been requested, be sure to resubmit the request for approval.
+{{ __("Once you've made the changes that have been requested, be sure to resubmit the request for approval.") }}
 
 @component('mail::panel')
-## Information about the change
-- Name: {{ $revisionRequest->name }}
-- Category: {{ $revisionRequest->revisionCategory->name }}
-- Description: {{ $revisionRequest->description }}
+## {{ __('Information about the change') }}
+- {{ __('Name') }}: {{ $revisionRequest->name }}
+- {{ __('Category') }}: {{ $revisionRequest->revisionCategory->name }}
+- {{ __('Description') }}: {{ $revisionRequest->description }}
 
-## Reason for reopening
+## {{ __('Reason for reopening') }}
 {{ $message }}
 @endcomponent
 
@@ -24,7 +24,7 @@ Once you've made the changes that have been requested, be sure to resubmit the r
     {{ __('Open file') }}
 @endcomponent
 
-Thanks,<br>
+{{ __('Thanks,') }}<br>
 {{ config('app.name') }}
 
 <br>
