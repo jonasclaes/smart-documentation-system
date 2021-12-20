@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReopenRevisionRequestRequest;
+use App\Mail\Public\RevisionRequestReopened;
 use App\Models\File;
 use App\Models\Revision;
 use App\Models\RevisionRequest;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use PHLAK\SemVer;
@@ -114,6 +117,43 @@ class RevisionRequestController extends Controller
         }
 
         $revisionRequest->delete();
+
+        return redirect()->route('files.show', ['file' => $file]);
+    }
+
+    /**
+     * Refuse the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return Renderable
+     * @throws AuthorizationException
+     */
+    public function reopen(File $file, RevisionRequest $revisionRequest)
+    {
+        $this->authorize('update', $revisionRequest);
+
+        return view('revisionRequests.reopen', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Refuse the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function doReopen(ReopenRevisionRequestRequest $request, File $file, RevisionRequest $revisionRequest)
+    {
+        $this->authorize('update', $revisionRequest);
+
+        $input = $request->validated();
+
+        Mail::to($revisionRequest->technicianEmail)->send(new RevisionRequestReopened($revisionRequest, $input["message"]));
+
+        $revisionRequest->submitted = false;
+        $revisionRequest->update();
 
         return redirect()->route('files.show', ['file' => $file]);
     }

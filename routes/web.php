@@ -46,6 +46,8 @@ Route::middleware([
     // Revision requests
     Route::post('files/{file}/revisionRequests/{revisionRequest}/approve', [RevisionRequestController::class, 'approve'])->name('revisionRequests.approve');
     Route::post('files/{file}/revisionRequests/{revisionRequest}/refuse', [RevisionRequestController::class, 'refuse'])->name('revisionRequests.refuse');
+    Route::get('files/{file}/revisionRequests/{revisionRequest}/reopen', [RevisionRequestController::class, 'reopen'])->name('revisionRequests.reopen');
+    Route::post('files/{file}/revisionRequests/{revisionRequest}/reopen', [RevisionRequestController::class, 'doReopen'])->name('revisionRequests.doReopen');
     Route::resource('files/{file}/revisionRequests', RevisionRequestController::class);
 
     // Revision request documents

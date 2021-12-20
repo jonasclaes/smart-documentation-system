@@ -42,7 +42,10 @@
                        class="bg-red-600 hover:bg-red-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
                         <x-heroicon-s-x class="h-4 w-4"></x-heroicon-s-x><span>{{ __('Refuse') }}</span>
                     </a>
-                    <div class="bg-gray-100 rounded hidden md:block"></div>
+                    <a href="{{ route('revisionRequests.reopen', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}"
+                       class="bg-blue-600 hover:bg-blue-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                        <x-heroicon-s-refresh class="h-4 w-4"></x-heroicon-s-refresh><span>{{ __('Reopen with message') }}</span>
+                    </a>
                     <div class="bg-gray-100 rounded hidden xl:block"></div>
                 </div>
             </div>
