@@ -57,6 +57,8 @@ class LoginController extends Controller
             return redirect()->intended('dashboard');
         }
 
+        $request->flashExcept(['password']);
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);

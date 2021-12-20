@@ -1,8 +1,8 @@
 @component('mail::message')
-# {{ __('Revision request submitted') }}
+# {{ __('Revision request refused') }}
 {{ __('Hey') }} {{ $revisionRequest->technicianFirstName }},
 
-{{ __('Thank you for submitting the revision request, we will review it shortly!') }}
+{{ __("We're sad to inform you that your revision request was refused.") }}
 
 @component('mail::panel')
 ## {{ __('Change request details') }}
@@ -13,8 +13,6 @@
 - {{ __('Total comments') }}: {{ count($revisionRequest->revisionComments) }}
 @endcomponent
 
-{{ __('Once the request has been approved or denied, you will be notified by mail.') }}
-
-{{ __('Thanks,') }}<br>
+Thanks,<br>
 {{ config('app.name') }}
 @endcomponent
