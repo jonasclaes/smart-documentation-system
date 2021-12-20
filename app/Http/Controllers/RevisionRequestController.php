@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReopenRevisionRequestRequest;
+use App\Http\Requests\UpdateRevisionRequestRequest;
 use App\Mail\Public\RevisionRequestReopened;
 use App\Models\File;
 use App\Models\Revision;
 use App\Models\RevisionRequest;
+use App\Models\RevisionRequestCategory;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -30,6 +32,38 @@ class RevisionRequestController extends Controller
         $this->authorize('view', $revisionRequest);
 
         return view('revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return Renderable
+     * @throws AuthorizationException
+     */
+    public function edit(File $file, RevisionRequest $revisionRequest)
+    {
+        $this->authorize('update', $revisionRequest);
+
+        return view('revisionRequests.edit', ['file' => $file, 'revisionRequest' => $revisionRequest, 'categories' => RevisionRequestCategory::all()]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function update(UpdateRevisionRequestRequest $request, File $file, RevisionRequest $revisionRequest)
+    {
+        $this->authorize('update', $revisionRequest);
+
+        $revisionRequest->update($request->validated());
+
+        return redirect()->route('revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
     }
 
     /**
