@@ -142,6 +142,7 @@
         id="modal-delete-backdrop"
     ></div>
     <script type="text/javascript">
+        <!-- Modal Toggler -->
         function toggleModal(modalID) {
             document.getElementById(modalID).classList.toggle("hidden");
             document
