@@ -17,7 +17,7 @@
                     <div>
                         <label for="clientNumber">{{ __('Client number') }} ({{ __('required') }}):</label>
                         <input type="text" name="clientNumber" id="clientNumber" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
-                               placeholder="{{ __('Client number') }}" value="{{old('clientNumber')}}">
+                               placeholder="{{ __('Client number') }}" value="{{old('clientNumber', $clientNumber)}}">
                         <small class="text-gray-400">{{ __('Fill in the client number here.') }}</small>
                         @error('clientNumber')
                         <span class="text-red-600" role="alert">

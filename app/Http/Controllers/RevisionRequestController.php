@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReopenRevisionRequestRequest;
+use App\Http\Requests\UpdateRevisionRequestRequest;
+use App\Mail\Public\RevisionRequestApproved;
+use App\Mail\Public\RevisionRequestRefused;
+use App\Mail\Public\RevisionRequestReopened;
 use App\Models\File;
 use App\Models\Revision;
 use App\Models\RevisionRequest;
+use App\Models\RevisionRequestCategory;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use PHLAK\SemVer;
@@ -30,6 +37,38 @@ class RevisionRequestController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return Renderable
+     * @throws AuthorizationException
+     */
+    public function edit(File $file, RevisionRequest $revisionRequest)
+    {
+        $this->authorize('update', $revisionRequest);
+
+        return view('revisionRequests.edit', ['file' => $file, 'revisionRequest' => $revisionRequest, 'categories' => RevisionRequestCategory::all()]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function update(UpdateRevisionRequestRequest $request, File $file, RevisionRequest $revisionRequest)
+    {
+        $this->authorize('update', $revisionRequest);
+
+        $revisionRequest->update($request->validated());
+
+        return redirect()->route('revisionRequests.show', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
      * Approve the specified resource.
      *
      * @param File $file
@@ -47,6 +86,7 @@ class RevisionRequestController extends Controller
         $version = "";
         try {
             $version = SemVer\Version::parse($sourceRevision->revisionNumber)->incrementPatch();
+            $version = "v{$version}";
         } catch (SemVer\Exceptions\InvalidVersionException $e) {
             $version = "{$sourceRevision->revisionNumber} (1)";
         }
@@ -71,7 +111,8 @@ class RevisionRequestController extends Controller
             $newRevision->documents()->create([
                 "fileName" => $revisionDocument->fileName,
                 "path" => $path,
-                "size" => $revisionDocument->size
+                "size" => $revisionDocument->size,
+                "category" => "other"
             ]);
 
             $revisionDocument->delete();
@@ -86,6 +127,8 @@ class RevisionRequestController extends Controller
         }
 
         $revisionRequest->delete();
+
+        Mail::to($revisionRequest->technicianEmail)->send(new RevisionRequestApproved($revisionRequest));
 
         return redirect()->route('files.show', ['file' => $file]);
     }
@@ -112,6 +155,45 @@ class RevisionRequestController extends Controller
         }
 
         $revisionRequest->delete();
+
+        Mail::to($revisionRequest->technicianEmail)->send(new RevisionRequestRefused($revisionRequest));
+
+        return redirect()->route('files.show', ['file' => $file]);
+    }
+
+    /**
+     * Refuse the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return Renderable
+     * @throws AuthorizationException
+     */
+    public function reopen(File $file, RevisionRequest $revisionRequest)
+    {
+        $this->authorize('update', $revisionRequest);
+
+        return view('revisionRequests.reopen', ['file' => $file, 'revisionRequest' => $revisionRequest]);
+    }
+
+    /**
+     * Refuse the specified resource.
+     *
+     * @param File $file
+     * @param RevisionRequest $revisionRequest
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function doReopen(ReopenRevisionRequestRequest $request, File $file, RevisionRequest $revisionRequest)
+    {
+        $this->authorize('update', $revisionRequest);
+
+        $input = $request->validated();
+
+        Mail::to($revisionRequest->technicianEmail)->send(new RevisionRequestReopened($revisionRequest, $input["message"]));
+
+        $revisionRequest->submitted = false;
+        $revisionRequest->update();
 
         return redirect()->route('files.show', ['file' => $file]);
     }

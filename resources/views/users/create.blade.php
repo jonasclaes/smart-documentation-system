@@ -9,8 +9,8 @@
 
         <div class="bg-white rounded-xl p-4">
             <form method="POST" action="{{ route('users.store') }}" id="createForm">
-                {{ csrf_field() }}
-                {{ method_field('POST') }}
+                @csrf
+                @method("POST")
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label
@@ -25,10 +25,10 @@
                             name="firstName"
                             id="firstName"
                             value="{{ old('firstName') }}"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                 @error('firstName') ring ring-red-500 ring-opacity-50 @enderror">
-
+                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                        <small class="text-gray-400">{{ __('Fill in the persons first name here.') }}</small>
                         @error('firstName')
+                        <br>
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -46,16 +46,16 @@
                             name="lastName"
                             id="lastName"
                             value="{{ old('lastName') }}"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('lastName') ring ring-red-500 ring-opacity-50 @enderror">
-
+                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                        <small class="text-gray-400">{{ __('Fill in the persons last name here.') }}</small>
                         @error('lastName')
+                        <br>
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
-                    <div class="col-span-2">
+                    <div>
                         <label
                             for="email"
                             class="text-gray-700">
@@ -67,10 +67,10 @@
                             name="email"
                             id="email"
                             value="{{ old('email')}}"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('email') ring ring-red-500 ring-opacity-50 @enderror">
-
+                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                        <small class="text-gray-400">{{ __('Fill in the persons e-mail address here.') }}</small>
                         @error('email')
+                        <br>
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -87,9 +87,10 @@
                             name="phoneNumber"
                             id="phoneNumber"
                             value="{{ old('phoneNumber') }}"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('phoneNumber') ring ring-red-500 ring-opacity-50 @enderror">
+                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                        <small class="text-gray-400">{{ __('Fill in the persons phone number here.') }}</small>
                         @error('phoneNumber')
+                        <br>
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -99,7 +100,7 @@
                         <label
                             for="username"
                             class="text-gray-700">
-                            {{ __('Username') }} ({{ __('required') }}):</label>
+                            {{ __('Username') }} ({{ __('optional') }}):</label>
                         <input
                             type="text"
                             autofocus
@@ -108,49 +109,12 @@
                             name="username"
                             id="username"
                             value="{{ old('username') }}"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('username') ring ring-red-500 ring-opacity-50 @enderror">
+                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full">
+                        <small class="text-gray-400">{{ __('Fill in the persons username here.') }}</small>
+                        <br>
+                        <small class="text-gray-400">{{ __('Attention: if you do not fill in this field, it will generate a username in the format of {firstName}.{lastName}.') }}</small>
                         @error('username')
-                        <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div>
-                        <label
-                            for="password"
-                            class="text-gray-700">
-                            {{ __('Password') }} ({{ __('required') }}):</label>
-                        <input
-                            type="password"
-                            required
-                            autocomplete="new-password"
-                            name="password"
-                            id="password"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('password') ring ring-red-500 ring-opacity-50 @enderror">
-
-                        @error('password')
-                        <span class="text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div>
-                        <label
-                            for="password-confirm"
-                            class="text-gray-700">
-                            {{ __('Confirm password') }} ({{ __('required') }}):</label>
-                        <input
-                            type="password"
-                            required
-                            autocomplete="new-password"
-                            name="password_confirmation"
-                            id="password-confirm"
-                            class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full
-                                @error('password') ring ring-red-500 ring-opacity-50 @enderror">
-
-                        @error('password')
+                        <br>
                         <span class="text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -169,8 +133,8 @@
             <a href="javascript:$('#createForm').submit();"
                class="bg-green-600 hover:bg-green-700 md:px-9 py-3 mb-3 text-white rounded flex-grow md:flex-grow-0
                 flex justify-center items-center">
-                <x-heroicon-s-pencil class="h-4 w-4 mr-1"/>
-                <span>{{ __('Create user') }}</span>
+                <x-heroicon-s-plus class="h-4 w-4 mr-1"/>
+                <span>{{ __('Create') }}</span>
             </a>
         </div>
     </div>

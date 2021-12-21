@@ -15,11 +15,12 @@
             @method('POST')
         </form>
 
-        <!-- Back Button -->
-        <a href="{{ route('files.show', ['file' => $file]) }}"
-           class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
-            <x-heroicon-s-chevron-left class="h-4 w-4"></x-heroicon-s-chevron-left><span>{{ __('Back to file') }}</span>
-        </a>
+        <div class="mb-3 md:flex">
+            <a href="{{ route('files.show', ['file' => $file]) }}" class="flex items-center justify-center p-2 rounded bg-sky-600 hover:bg-sky-700 text-white">
+                <x-heroicon-s-chevron-left
+                    class="h-6 w-6"></x-heroicon-s-chevron-left><span>{{ __('Back to file') }}</span>
+            </a>
+        </div>
 
         <!-- Menu bar -->
         <div class="bg-white rounded-xl shadow-md p-4 w-full mb-3">
@@ -41,8 +42,14 @@
                        class="bg-red-600 hover:bg-red-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
                         <x-heroicon-s-x class="h-4 w-4"></x-heroicon-s-x><span>{{ __('Refuse') }}</span>
                     </a>
-                    <div class="bg-gray-100 rounded hidden md:block"></div>
-                    <div class="bg-gray-100 rounded hidden xl:block"></div>
+                    <a href="{{ route('revisionRequests.reopen', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}"
+                       class="bg-blue-600 hover:bg-blue-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                        <x-heroicon-s-refresh class="h-4 w-4"></x-heroicon-s-refresh><span>{{ __('Reopen with message') }}</span>
+                    </a>
+                    <a href="{{ route('revisionRequests.edit', ['file' => $file, 'revisionRequest' => $revisionRequest]) }}"
+                       class="bg-blue-600 hover:bg-blue-700 py-2 px-4 text-white rounded inline-flex justify-center items-center w-full">
+                        <x-heroicon-s-pencil class="h-4 w-4"></x-heroicon-s-pencil><span>{{ __('Edit') }}</span>
+                    </a>
                 </div>
             </div>
             <div class="bg-white rounded-xl shadow-md p-4 col-span-3">

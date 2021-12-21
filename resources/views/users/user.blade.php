@@ -5,12 +5,6 @@
 @section('content')
     <!--Page Content-->
     <div class="container mx-auto px-3">
-        <!--Back Button-->
-        <a href="{{ route('users.index') }}"
-           class="col-span-1 col-start-1 bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
-            <x-heroicon-s-chevron-left class="h-4 w-4"/>
-            <span>Back</span>
-        </a>
         <!-- Menu bar -->
         <!-- Delete form -->
         <form action="{{ route('users.destroy', ['user' => $user]) }}" method="POST" id="deleteUser">
@@ -148,6 +142,7 @@
         id="modal-delete-backdrop"
     ></div>
     <script type="text/javascript">
+        <!-- Modal Toggler -->
         function toggleModal(modalID) {
             document.getElementById(modalID).classList.toggle("hidden");
             document

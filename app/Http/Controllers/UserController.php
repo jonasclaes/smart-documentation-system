@@ -10,6 +10,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Password;
+use Str;
 
 class UserController extends Controller
 {
@@ -62,9 +64,26 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $input = $request->validated();
-        $input['password'] = Hash::make($input['password']);
+
+        // Auto-generate username if it's not set.
+        if (!isset($input["username"]) || $input["username"] === "") {
+            $firstName = strtolower($input["firstName"]);
+            $lastName = strtolower($input["lastName"]);
+
+            $input["username"] = "{$firstName}.{$lastName}";
+        }
+
+        // Set password hash to "!", this hash can NEVER be create in any way.
+        // So the account is locked until the user changes his password.
+        // Reference: /etc/shadow in Unix systems
+        $input['password'] = "!";
+
+        // Make the user active on creation.
+        $input["active"] = true;
 
         $user = User::create($input);
+
+        Password::sendResetLink(["email" => $input["email"]]);
 
         $request->session()->flash('success', 'User ' . $user->firstName . ' ' . $user->lastName . ' was successfully created.');
 
@@ -90,7 +109,30 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', ['user' => $user]);
+        $permissionDescriptions = [
+            "view-any" => "View all",
+            "view" => "View a single",
+            "create" => "Create a",
+            "update" => "Update a",
+            "delete" => "Delete a"
+        ];
+        $permissionPrefixes = [
+            "client-contact",
+            "client",
+            "comment",
+            "document",
+            "file",
+            "qr-code",
+            "revision",
+            "revision-request-category",
+            "revision-request-comment",
+            "revision-request-document",
+            "revision-request",
+            "user-permission",
+            "user",
+        ];
+
+        return view('users.edit', ['user' => $user, 'prefixes' => $permissionPrefixes, 'permissions' => $permissionDescriptions]);
     }
 
     /**
@@ -122,37 +164,26 @@ class UserController extends Controller
 
         $request->session()->flash('success', 'User ' . $user->firstName . ' ' . $user->lastName . ' was successfully deleted.');
 
-        return redirect(route('users.index'));
+        return redirect()->route('users.index');
     }
 
     /**
      * Update the password voor the current user
      *
-     * @param User $user
-     * @return Renderable
-     */
-    public function resetPassword(User $user)
-    {
-        return view('users.password', ['user' => $user]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
      * @param Request $request
      * @param User $user
      * @return RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function updatePassword(Request $request, User $user)
+    public function resetPassword(Request $request, User $user)
     {
-        $user->update([
-            'password' => Hash::make($request->input('password')->validated())
-        ]);
+        $this->authorize('update', $user);
 
-        $request->session()->flash('success', 'Information of user ' . $user->firstName .
-            ' ' . $user->lastName . ' was successfully updated.');
+        Password::sendResetLink(["email" => $user->email]);
 
-        return redirect(route('users.show', ['user' => $user]));
+        $request->session()->flash("success", "A password reset email has been sent to {$user->fullName()}.");
+
+        return redirect()->route('users.show', ['user' => $user]);
     }
 
     /**
@@ -160,9 +191,12 @@ class UserController extends Controller
      * @param Request $request
      * @param User $user
      * @return RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function updateStatus(Request $request, User $user)
     {
+        $this->authorize('update', $user);
+
         $user->update([
             'active' => $request->input('active')
         ]);

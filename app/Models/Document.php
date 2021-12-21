@@ -39,7 +39,8 @@ class Document extends Model
     protected $fillable = [
         'fileName',
         'path',
-        'size'
+        'size',
+        'category'
     ];
 
     public function revisions()

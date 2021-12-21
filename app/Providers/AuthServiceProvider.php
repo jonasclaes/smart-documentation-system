@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\UserPermission;
-use App\Policies\UserPermissionPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 

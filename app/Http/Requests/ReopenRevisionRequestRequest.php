@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends FormRequest
+class ReopenRevisionRequestRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +24,7 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstName' => ['required', 'max:255', 'string'],
-            'lastName' => ['required', 'max:255', 'string'],
-            'username' => ['nullable', 'max:255', 'string'],
-            'email' => ['required', 'max:255', 'email'],
-            'phoneNumber' => ['max:255'],
+            "message" => ["required", "string"]
         ];
     }
 }

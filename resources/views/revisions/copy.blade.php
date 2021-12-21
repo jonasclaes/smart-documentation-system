@@ -46,7 +46,7 @@
                     <div>
                         <label for="revisionNumber">{{ __('Revision number') }} ({{ __('required') }}):</label>
                         <input type="text" name="revisionNumber" id="revisionNumber" class="block rounded-md border-0 bg-gray-100 focus:ring-2 w-full"
-                               placeholder="{{ __('Revision number') }}" value="{{ old('revisionNumber') }}">
+                               placeholder="{{ __('Revision number') }}" value="{{ old('revisionNumber', $generatedRevisionNumber) }}">
                         <small class="opacity-50">{{ __('Fill in the number of the revision here.') }}</small>
                         @error('revisionNumber')
                         <br>

@@ -5,13 +5,6 @@
 @section('content')
 
     <div class="container mx-auto px-3">
-        <!-- Back Button -->
-        <a href="{{ route('clients.index') }}"
-           class="bg-gray-700 hover:bg-gray-800 px-9 py-3 mb-3 text-white rounded inline-flex justify-center items-center">
-            <x-heroicon-s-chevron-left class="h-4 w-4"/>
-            <span>Back</span>
-        </a>
-
         <!-- Delete form -->
         <form action="{{ route('clients.destroy', ['client' => $client]) }}" method="POST" id="deleteClient">
             @csrf

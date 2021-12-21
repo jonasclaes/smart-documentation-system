@@ -10,6 +10,13 @@
 
     <div class="container mx-auto">
         <div class="grid gap-3 grid-cols-1">
+            <div class="col-span-full md:col-span-1">
+                <a href="{{ route('public.showFile', ['file' => $file]) }}" class="flex items-center justify-center p-2 rounded bg-sky-600 hover:bg-sky-700 text-white">
+                    <x-heroicon-s-chevron-left
+                        class="h-6 w-6"></x-heroicon-s-chevron-left><span>{{ __('Back to file') }}</span>
+                </a>
+            </div>
+
             <!-- Section: Header -->
             <div class="bg-white dark:bg-coolGray-800 dark:text-white rounded-xl shadow-md p-4">
                 <h1 class="text-xl font-semibold">{{ __('Share file') }}</h1>
