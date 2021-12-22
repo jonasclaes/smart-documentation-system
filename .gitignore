@@ -24,4 +24,6 @@ Homestead.json
 .idea/
 sail
 
-public/assets/icon.png
+./data/*
+
+!./data/.gitkeep
