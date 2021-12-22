@@ -1,5 +1,5 @@
 # smart-documentation-system
-Smart Documentation System for Delta Technics
+Smart Documentation System
 
 ## Installation instructions
 1. Clone the repo

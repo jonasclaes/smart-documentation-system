@@ -25,8 +25,8 @@
                         <!-- Logo Section -->
                         <img class="h-full"
                              src="{{ asset('assets/icon.png') }}"
-                             alt="Delta Technics"/>
-                        <h1 class="text-xl capitalize min-h-full">Delta Technics</h1>
+                             alt="Icon"/>
+                        <h1 class="text-xl capitalize min-h-full">{{ config('app.name', 'Laravel') }}</h1>
                     </div>
                 </div>
             </nav>

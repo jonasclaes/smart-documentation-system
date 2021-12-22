@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Delta Technics Smart Docs') }}</title>
+    <title>{{ config('app.name', 'Smart Documentation System') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -26,7 +26,7 @@
                 <a class="h-6 w-6 mx-auto" href="{{ url('/') }}">
                     <img class="h-6 w-6 mx-auto"
                          src="{{ asset('assets/icon.png') }}"
-                         alt="Delta Technics"/>
+                         alt="Icon"/>
                 </a>
             </div>
 
