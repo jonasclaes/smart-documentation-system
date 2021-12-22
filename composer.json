@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "jonasclaes/smart-documentation-system",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Smart Documentation System",
+    "keywords": ["framework", "laravel", "smart", "documentation", "system"],
     "license": "MIT",
     "require": {
         "php": "^8.0",
