@@ -3,6 +3,7 @@ version: '3'
 services:
     caddy:
       image: caddy:2
+      restart: always
       command: caddy reverse-proxy --from smartdocs.deltatechnics.be --to laravel.prod:80
       ports:
         - "80:80"
@@ -21,6 +22,7 @@ services:
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: smart-documentation-system/app
+        restart: always
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -37,6 +39,7 @@ services:
             - mysql
     mysql:
         image: 'mysql:8.0'
+        restart: always
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_DATABASE: '${DB_DATABASE}'

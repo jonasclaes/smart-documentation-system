@@ -24,7 +24,7 @@
                     <div class="h-full flex items-center gap-2">
                         <!-- Logo Section -->
                         <img class="h-full"
-                             src="{{ asset('assets/delta-technics-small.png') }}"
+                             src="{{ asset('assets/icon.png') }}"
                              alt="Delta Technics"/>
                         <h1 class="text-xl capitalize min-h-full">Delta Technics</h1>
                     </div>

@@ -25,7 +25,7 @@
                 <!-- Logo Section -->
                 <a class="h-6 w-6 mx-auto" href="{{ url('/') }}">
                     <img class="h-6 w-6 mx-auto"
-                         src="{{ asset('assets/delta-technics-small.png') }}"
+                         src="{{ asset('assets/icon.png') }}"
                          alt="Delta Technics"/>
                 </a>
             </div>
