@@ -23,7 +23,3 @@ Homestead.json
 .phpunit.result.cache
 .idea/
 sail
-
-./data/*
-
-!./data/.gitkeep
