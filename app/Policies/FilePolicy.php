@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\File;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class FilePolicy
 {
@@ -23,6 +24,7 @@ class FilePolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view all files.");
     }
 
     /**
@@ -35,8 +37,12 @@ class FilePolicy
     public function view(User $user, File $file)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
+                Log::info("{$user->firstName} {$user->lastName} view file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
     }
 
     /**
@@ -48,8 +54,12 @@ class FilePolicy
     public function create(User $user)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
+                Log::info("{$user->firstName} {$user->lastName} created a new file.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to create a new file.");
     }
 
     /**
@@ -62,8 +72,12 @@ class FilePolicy
     public function update(User $user, File $file)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
+                Log::info("{$user->firstName} {$user->lastName} updated file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to update file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
     }
 
     /**
@@ -76,8 +90,12 @@ class FilePolicy
     public function delete(User $user, File $file)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
+                Log::info("{$user->firstName} {$user->lastName} deleted file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to delete file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
     }
 
     /**
@@ -90,8 +108,12 @@ class FilePolicy
     public function restore(User $user, File $file)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") {
+                Log::info("{$user->firstName} {$user->lastName} restored file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to restore file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
     }
 
     /**
@@ -104,7 +126,11 @@ class FilePolicy
     public function forceDelete(User $user, File $file)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") {
+                Log::info("{$user->firstName} {$user->lastName} force-deleted file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to force-delete file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
     }
 }

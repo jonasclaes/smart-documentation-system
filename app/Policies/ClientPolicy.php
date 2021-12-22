@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class ClientPolicy
 {
@@ -23,6 +24,7 @@ class ClientPolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view all clients.");
     }
 
     /**
@@ -35,8 +37,12 @@ class ClientPolicy
     public function view(User $user, Client $client)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
+                Log::info("{$user->firstName} {$user->lastName} viewed client {$client->name} (Client Number: {$client->clientNumber}).");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view client {$client->name} (Client Number: {$client->clientNumber}).");
     }
 
     /**
@@ -48,8 +54,12 @@ class ClientPolicy
     public function create(User $user)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
+                Log::info("{$user->firstName} {$user->lastName} created a new client.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to create e new client.");
     }
 
     /**
@@ -62,8 +72,12 @@ class ClientPolicy
     public function update(User $user, Client $client)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
+                Log::info("{$user->firstName} {$user->lastName} updated client {$client->name} (Client Number: {$client->clientNumber}).");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to update client {$client->name} (Client Number: {$client->clientNumber}).");
     }
 
     /**
@@ -76,8 +90,12 @@ class ClientPolicy
     public function delete(User $user, Client $client)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
+                Log::info("{$user->firstName} {$user->lastName} deleted client {$client->name} (Client Number: {$client->clientNumber}).");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to delete client {$client->name} (Client Number: {$client->clientNumber}).");
     }
 
     /**
@@ -90,8 +108,12 @@ class ClientPolicy
     public function restore(User $user, Client $client)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") {
+                Log::info("{$user->firstName} {$user->lastName} restored client {$client->name} (Client Number: {$client->clientNumber}).");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to restore client {$client->name} (Client Number: {$client->clientNumber}).");
     }
 
     /**
@@ -104,7 +126,11 @@ class ClientPolicy
     public function forceDelete(User $user, Client $client)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") {
+                Log::info("{$user->firstName} {$user->lastName} force-deleted client {$client->name} (Client Number: {$client->clientNumber}).");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to force-delete client {$client->name} (Client Number: {$client->clientNumber}).");
     }
 }

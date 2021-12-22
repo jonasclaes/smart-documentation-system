@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\RevisionRequestDocument;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class RevisionRequestDocumentPolicy
 {
@@ -23,6 +24,7 @@ class RevisionRequestDocumentPolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view all revision request documents.");
     }
 
     /**
@@ -35,8 +37,12 @@ class RevisionRequestDocumentPolicy
     public function view(User $user, RevisionRequestDocument $revisionRequestDocument)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
+                Log::info("{$user->firstName} {$user->lastName} viewed the revision request document {$revisionRequestDocument->fileName} for revision {$revisionRequestDocument->revisionRequestId}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view the revision request document {$revisionRequestDocument->fileName} for revision {$revisionRequestDocument->revisionRequestId}.");
     }
 
     /**
@@ -48,8 +54,12 @@ class RevisionRequestDocumentPolicy
     public function create(User $user)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
+                Log::info("{$user->firstName} {$user->lastName} created a new revision request document.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to create a new revision request document.");
     }
 
     /**
@@ -62,8 +72,12 @@ class RevisionRequestDocumentPolicy
     public function update(User $user, RevisionRequestDocument $revisionRequestDocument)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
+                Log::info("{$user->firstName} {$user->lastName} updated the revision request document {$revisionRequestDocument->fileName} for revision {$revisionRequestDocument->revisionRequestId}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to update the revision request document {$revisionRequestDocument->fileName} for revision {$revisionRequestDocument->revisionRequestId}.");
     }
 
     /**
@@ -76,8 +90,12 @@ class RevisionRequestDocumentPolicy
     public function delete(User $user, RevisionRequestDocument $revisionRequestDocument)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
+                Log::info("{$user->firstName} {$user->lastName} deleted the revision request document {$revisionRequestDocument->fileName} for revision {$revisionRequestDocument->revisionRequestId}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to delete the revision request document {$revisionRequestDocument->fileName} for revision {$revisionRequestDocument->revisionRequestId}.");
     }
 
     /**
@@ -90,8 +108,12 @@ class RevisionRequestDocumentPolicy
     public function restore(User $user, RevisionRequestDocument $revisionRequestDocument)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") {
+                Log::info("{$user->firstName} {$user->lastName} restored the revision request document {$revisionRequestDocument->fileName} for revision {$revisionRequestDocument->revisionRequestId}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to restore the revision request document {$revisionRequestDocument->fileName} for revision {$revisionRequestDocument->revisionRequestId}.");
     }
 
     /**
@@ -104,7 +126,11 @@ class RevisionRequestDocumentPolicy
     public function forceDelete(User $user, RevisionRequestDocument $revisionRequestDocument)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") {
+                Log::info("{$user->firstName} {$user->lastName} force-deleted the revision request document {$revisionRequestDocument->fileName} for revision {$revisionRequestDocument->revisionRequestId}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to force-delete the revision request document {$revisionRequestDocument->fileName} for revision {$revisionRequestDocument->revisionRequestId}.");
     }
 }

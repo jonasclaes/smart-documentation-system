@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\UserPermission;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class UserPermissionPolicy
 {
@@ -23,6 +24,7 @@ class UserPermissionPolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to access all user permissions.");
     }
 
     /**
@@ -37,8 +39,13 @@ class UserPermissionPolicy
         if ($user->id === $userPermission->userId) return true;
 
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
+                Log::info("{$user->firstName} {$user->lastName} viewed the user permissions of user ID {$userPermission->userId}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view the user permissions of user ID {$userPermission->userId}.");
+
     }
 
     /**
@@ -50,8 +57,12 @@ class UserPermissionPolicy
     public function create(User $user)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
+                Log::info("{$user->firstName} {$user->lastName} created new user permissions.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to create new user permissions.");
     }
 
     /**
@@ -64,8 +75,12 @@ class UserPermissionPolicy
     public function update(User $user, UserPermission $userPermission)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
+                Log::info("{$user->firstName} {$user->lastName} updated user permission {$userPermission->permissionName} of user ID {$userPermission->userId}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to update user permission {$userPermission->permissionName} of user ID {$userPermission->userId}.");
     }
 
     /**
@@ -78,8 +93,12 @@ class UserPermissionPolicy
     public function delete(User $user, UserPermission $userPermission)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
+                Log::info("{$user->firstName} {$user->lastName} deleted user permission {$userPermission->permissionName} of user ID {$userPermission->userId}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to delete user permission {$userPermission->permissionName} of user ID {$userPermission->userId}.");
     }
 
     /**
@@ -92,8 +111,12 @@ class UserPermissionPolicy
     public function restore(User $user, UserPermission $userPermission)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") {
+                Log::info("{$user->firstName} {$user->lastName} restored user permission {$userPermission->permissionName} of user ID {$userPermission->userId}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to restore user permission {$userPermission->permissionName} of user ID {$userPermission->userId}.");
     }
 
     /**
@@ -106,7 +129,11 @@ class UserPermissionPolicy
     public function forceDelete(User $user, UserPermission $userPermission)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") {
+                Log::info("{$user->firstName} {$user->lastName} force-deleted user permission {$userPermission->permissionName} of user ID {$userPermission->userId}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to force-delete user permission {$userPermission->permissionName} of user ID {$userPermission->userId}.");
     }
 }

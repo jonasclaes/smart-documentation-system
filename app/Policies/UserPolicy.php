@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class UserPolicy
 {
@@ -22,6 +23,7 @@ class UserPolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view all users.");
     }
 
     /**
@@ -34,8 +36,12 @@ class UserPolicy
     public function view(User $user, User $model)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
+                Log::info("{$user->firstName} {$user->lastName} viewed information of user: {$model->firstName} {$model->lastName}.");
+                return true;
+            }
         }
+        Log::error($user->firstName . ' ' . $user->lastName . "failed to view information of user: " . $model->firstName . ' ' . $model->lastName . '.');
     }
 
     /**
@@ -47,8 +53,12 @@ class UserPolicy
     public function create(User $user)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
+                Log::info("{$user->firstName} {$user->lastName} created a new user.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to create a new user.");
     }
 
     /**
@@ -61,8 +71,12 @@ class UserPolicy
     public function update(User $user, User $model)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
+                Log::info("{$user->firstName} {$user->lastName} updated the information of user: {$model->firstName} {$model->lastName}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to update the information of user: {$model->firstName} {$model->lastName}.");
     }
 
     /**
@@ -75,8 +89,12 @@ class UserPolicy
     public function delete(User $user, User $model)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
+                Log::info("{$user->firstName} {$user->lastName} deleted user: {$model->firstName} {$model->lastName}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to delete user: {$model->firstName} {$model->lastName}.");
     }
 
     /**
@@ -89,8 +107,12 @@ class UserPolicy
     public function restore(User $user, User $model)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") {
+                Log::info("{$user->firstName} {$user->lastName} restored user: {$model->firstName} {$model->lastName}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to restore user: {$model->firstName} {$model->lastName}.");
     }
 
     /**
@@ -103,7 +125,11 @@ class UserPolicy
     public function forceDelete(User $user, User $model)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") {
+                Log::info("{$user->firstName} {$user->lastName} force-deleted user: {$model->firstName} {$model->lastName}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to force-delete user: {$model->firstName} {$model->lastName}.");
     }
 }
