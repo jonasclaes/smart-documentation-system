@@ -86,28 +86,6 @@
             </form>
         </div>
 
-        <!-- Permissions Section -->
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-3 bg-white rounded-xl mt-3 p-4">
-            <h3 class="col-span-full">User Permissions Section</h3>
-            @foreach($prefixes as $prefix)
-                <div class="bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow-md p-4 col-span-1">
-                    <div class="font-bold">
-                        <x-forms.input-block.checkbox label="{{ $prefix }}" name="{{ $prefix }}" id="{{ $prefix }}"></x-forms.input-block.checkbox>
-                    </div>
-                    @foreach($permissions as $permission => $description)
-                        <div class="pl-3">
-                            <x-forms.input-block.checkbox
-                                label="{{ __(':prefix::permission', ['prefix' => $prefix, 'permission' => $permission]) }}"
-                                name="{{ $prefix }}"
-                                id="{{ $prefix }}:{{ $permission }}"
-                                helpText="{{ $description }} {{ $prefix }}.">
-                            </x-forms.input-block.checkbox>
-                        </div>
-                    @endforeach
-                </div>
-            @endforeach
-        </div>
-
         <!-- Buttons -->
         <div class="flex justify-end flex-grow gap-2 w-full md:w-auto mt-3">
             <a href="{{ route('users.show', ['user' => $user]) }}"

@@ -103,6 +103,8 @@ Route::middleware([
 
     // User permissions
     Route::resource('userPermissions', UserPermissionController::class);
+    Route::get('users/{user}/permissions', [UserPermissionController::class, 'edit'])->name('userPermissions.edit');
+    Route::put('users/{user}/updatePermissions', [UserPermissionController::class, 'update'])->name('userPermissions.update');
 
     // Clients
     Route::resource('clients', ClientController::class);

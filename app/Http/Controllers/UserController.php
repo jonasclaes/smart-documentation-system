@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserPermission;
 use Illuminate\Contracts\Support\Renderable;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -109,30 +110,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $permissionDescriptions = [
-            "view-any" => "View all",
-            "view" => "View a single",
-            "create" => "Create a",
-            "update" => "Update a",
-            "delete" => "Delete a"
-        ];
-        $permissionPrefixes = [
-            "client-contact",
-            "client",
-            "comment",
-            "document",
-            "file",
-            "qr-code",
-            "revision",
-            "revision-request-category",
-            "revision-request-comment",
-            "revision-request-document",
-            "revision-request",
-            "user-permission",
-            "user",
-        ];
-
-        return view('users.edit', ['user' => $user, 'prefixes' => $permissionPrefixes, 'permissions' => $permissionDescriptions]);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**

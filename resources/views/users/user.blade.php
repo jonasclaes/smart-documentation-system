@@ -1,4 +1,8 @@
-@php /** @var App\Models\User[]|Illuminate\Database\Eloquent\Collection $users */ @endphp
+@php
+    /**
+     * @var App\Models\User[]|Illuminate\Database\Eloquent\Collection $users
+    */
+@endphp
 
 @extends('layouts.app')
 
@@ -59,6 +63,13 @@
                        flex justify-center items-center">
                         <x-heroicon-s-pencil class="h-4 w-4 mr-1"/>
                         {{ __('Edit') }}
+                    </a>
+                    <!--Edit Permissions Button-->
+                    <a href="{{ route('userPermissions.edit', ['user' => $user]) }}"
+                       class="bg-blue-600 hover:bg-blue-700 md:px-9 py-3 text-white rounded flex-grow md:flex-grow-0
+                       flex justify-center items-center">
+                        <x-heroicon-s-pencil class="h-4 w-4 mr-1"/>
+                        {{ __('Edit Rights') }}
                     </a>
                     <!--Delete Button to Modal-->
                     <a href="javascript:toggleModal('modal-delete')"
