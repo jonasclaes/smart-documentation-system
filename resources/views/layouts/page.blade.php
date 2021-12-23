@@ -13,6 +13,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('assets/icon.png') }}">
 </head>
 <body>
 <div id="app" @class(['dark' => Session::get('theme') === "dark"])>
