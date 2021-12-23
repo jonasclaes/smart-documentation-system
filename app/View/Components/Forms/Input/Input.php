@@ -29,15 +29,23 @@ class Input extends Component
     public $customProperties;
 
     /**
+     * Input custom properties.
+     *
+     * @var
+     */
+    public $id;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(string $name = "", string $placeholder = "", string $customProperties = "")
+    public function __construct(string $name = "", string $placeholder = "", string $customProperties = "", string $id = "")
     {
         $this->name = $name;
         $this->placeholder = $placeholder;
         $this->customProperties = $customProperties;
+        $this->id = $id;
     }
 
     /**

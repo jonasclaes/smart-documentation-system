@@ -1,5 +1,6 @@
 {
-    "private": true,
+    "name": "smart-documentation-system",
+    "license": "MIT",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
