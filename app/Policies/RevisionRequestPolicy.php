@@ -24,7 +24,7 @@ class RevisionRequestPolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view all revision requests.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view all revision requests.");
     }
 
     /**
@@ -38,11 +38,11 @@ class RevisionRequestPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
-                Log::info("{$user->firstName} {$user->lastName} viewed revision request {$revisionRequest->name} for file ID {$revisionRequest->fileId}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} viewed revision request {$revisionRequest->name} for file ID {$revisionRequest->fileId}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view revision request {$revisionRequest->name} for file ID {$revisionRequest->fileId}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view revision request {$revisionRequest->name} for file ID {$revisionRequest->fileId}.");
     }
 
     /**
@@ -55,11 +55,11 @@ class RevisionRequestPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
-                Log::info("{$user->firstName} {$user->lastName} created a new revision request.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} created a new revision request.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to create a new revision request.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to create a new revision request.");
     }
 
     /**
@@ -73,7 +73,7 @@ class RevisionRequestPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
-                Log::info("{$user->firstName} {$user->lastName} updated revision request {$revisionRequest->name} for file ID {$revisionRequest->fileId}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} updated revision request {$revisionRequest->name} for file ID {$revisionRequest->fileId}.");
                 return true;
             }
         }

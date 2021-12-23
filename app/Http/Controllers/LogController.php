@@ -23,7 +23,7 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logFile = file(storage_path().'/logs/laravel.log');
+        $logFile = file(storage_path().'/logs/application.log');
         $logFile = array_reverse(array_slice($logFile, -500));
 
         return view('logs.logs', ['logFile' => $logFile]);

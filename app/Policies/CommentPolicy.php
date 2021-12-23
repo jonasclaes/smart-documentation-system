@@ -24,7 +24,7 @@ class CommentPolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view all comments.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view all comments.");
     }
 
     /**
@@ -38,11 +38,11 @@ class CommentPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
-                Log::info("{$user->firstName} {$user->lastName} viewed comment ID {$comment->id}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} viewed comment ID {$comment->id}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view comment ID {$comment->id}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view comment ID {$comment->id}.");
     }
 
     /**
@@ -55,11 +55,11 @@ class CommentPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
-                Log::info("{$user->firstName} {$user->lastName} created a new comment.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} created a new comment.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to create a new comment.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to create a new comment.");
     }
 
     /**
@@ -73,11 +73,11 @@ class CommentPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
-                Log::info("{$user->firstName} {$user->lastName} updated comment ID {$comment->id}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} updated comment ID {$comment->id}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to update comment ID {$comment->id}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to update comment ID {$comment->id}.");
     }
 
     /**
@@ -91,11 +91,11 @@ class CommentPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
-                Log::info("{$user->firstName} {$user->lastName} deleted comment ID {$comment->id}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} deleted comment ID {$comment->id}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to delete comment ID {$comment->id}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to delete comment ID {$comment->id}.");
     }
 
     /**
@@ -109,11 +109,11 @@ class CommentPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") {
-                Log::info("{$user->firstName} {$user->lastName} restored comment ID {$comment->id}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} restored comment ID {$comment->id}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to restore comment ID {$comment->id}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to restore comment ID {$comment->id}.");
     }
 
     /**
@@ -127,10 +127,10 @@ class CommentPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") {
-                Log::info("{$user->firstName} {$user->lastName} force-deleted comment ID {$comment->id}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} force-deleted comment ID {$comment->id}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to force-delete comment ID {$comment->id}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to force-delete comment ID {$comment->id}.");
     }
 }

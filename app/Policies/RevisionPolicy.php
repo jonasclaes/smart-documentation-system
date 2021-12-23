@@ -24,7 +24,7 @@ class RevisionPolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view all revisions.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view all revisions.");
     }
 
     /**
@@ -38,11 +38,11 @@ class RevisionPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
-                Log::info("{$user->firstName} {$user->lastName} viewed revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} viewed revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
     }
 
     /**
@@ -55,11 +55,11 @@ class RevisionPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
-                Log::info("{$user->firstName} {$user->lastName} created a new revision.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} created a new revision.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to create a new revision.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to create a new revision.");
     }
 
     /**
@@ -73,11 +73,11 @@ class RevisionPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
-                Log::info("{$user->firstName} {$user->lastName} updated revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} updated revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
     }
 
     /**
@@ -91,11 +91,11 @@ class RevisionPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
-                Log::info("{$user->firstName} {$user->lastName} deleted revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} deleted revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to delete revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to delete revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
     }
 
     /**
@@ -109,11 +109,11 @@ class RevisionPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") {
-                Log::info("{$user->firstName} {$user->lastName} restored revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} restored revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to restore revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to restore revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
     }
 
     /**
@@ -127,10 +127,10 @@ class RevisionPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") {
-                Log::info("{$user->firstName} {$user->lastName} force-deleted revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} force-deleted revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to force-delete revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to force-delete revision {$revision->revisionNumber} for file ID {$revision->fileId}.");
     }
 }

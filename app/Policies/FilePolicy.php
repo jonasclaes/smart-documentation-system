@@ -24,7 +24,7 @@ class FilePolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view all files.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view all files.");
     }
 
     /**
@@ -38,11 +38,11 @@ class FilePolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
-                Log::info("{$user->firstName} {$user->lastName} view file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} view file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
     }
 
     /**
@@ -55,11 +55,11 @@ class FilePolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
-                Log::info("{$user->firstName} {$user->lastName} created a new file.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} created a new file.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to create a new file.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to create a new file.");
     }
 
     /**
@@ -73,11 +73,11 @@ class FilePolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
-                Log::info("{$user->firstName} {$user->lastName} updated file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} updated file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to update file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to update file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
     }
 
     /**
@@ -91,11 +91,11 @@ class FilePolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
-                Log::info("{$user->firstName} {$user->lastName} deleted file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} deleted file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to delete file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to delete file {$file->name} (ID: {$file->fileId}) for client {$file->client->name}.");
     }
 
     /**

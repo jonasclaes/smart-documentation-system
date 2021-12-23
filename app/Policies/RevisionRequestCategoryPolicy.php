@@ -24,7 +24,7 @@ class RevisionRequestCategoryPolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view all revision request categories.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view all revision request categories.");
     }
 
     /**
@@ -38,11 +38,11 @@ class RevisionRequestCategoryPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
-                Log::info("{$user->firstName} {$user->lastName} viewed revision request category: {$revisionRequestCategory->name}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} viewed revision request category: {$revisionRequestCategory->name}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view revision request category: {$revisionRequestCategory->name}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view revision request category: {$revisionRequestCategory->name}.");
     }
 
     /**
@@ -55,11 +55,11 @@ class RevisionRequestCategoryPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
-                Log::info("{$user->firstName} {$user->lastName} created a new revision request category.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} created a new revision request category.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to create a new revision request category.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to create a new revision request category.");
     }
 
     /**
@@ -73,11 +73,11 @@ class RevisionRequestCategoryPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
-                Log::info("{$user->firstName} {$user->lastName} updated revision request category: {$revisionRequestCategory->name}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} updated revision request category: {$revisionRequestCategory->name}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to update revision request category: {$revisionRequestCategory->name}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to update revision request category: {$revisionRequestCategory->name}.");
     }
 
     /**
@@ -91,11 +91,11 @@ class RevisionRequestCategoryPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
-                Log::info("{$user->firstName} {$user->lastName} deleted revision request category: {$revisionRequestCategory->name}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} deleted revision request category: {$revisionRequestCategory->name}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to delete revision request category: {$revisionRequestCategory->name}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to delete revision request category: {$revisionRequestCategory->name}.");
     }
 
     /**

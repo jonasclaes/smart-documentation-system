@@ -23,7 +23,7 @@ class UserPolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to view all users.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to view all users.");
     }
 
     /**
@@ -37,11 +37,11 @@ class UserPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
-                Log::info("{$user->firstName} {$user->lastName} viewed information of user: {$model->firstName} {$model->lastName}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} viewed information of user: {$model->firstName} {$model->lastName}.");
                 return true;
             }
         }
-        Log::error($user->firstName . ' ' . $user->lastName . "failed to view information of user: " . $model->firstName . ' ' . $model->lastName . '.');
+        Log::channel('application')->error($user->firstName . ' ' . $user->lastName . "failed to view information of user: " . $model->firstName . ' ' . $model->lastName . '.');
     }
 
     /**
@@ -54,11 +54,11 @@ class UserPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
-                Log::info("{$user->firstName} {$user->lastName} created a new user.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} created a new user.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to create a new user.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to create a new user.");
     }
 
     /**
@@ -72,11 +72,11 @@ class UserPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
-                Log::info("{$user->firstName} {$user->lastName} updated the information of user: {$model->firstName} {$model->lastName}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} updated the information of user: {$model->firstName} {$model->lastName}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to update the information of user: {$model->firstName} {$model->lastName}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to update the information of user: {$model->firstName} {$model->lastName}.");
     }
 
     /**
@@ -90,11 +90,11 @@ class UserPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
-                Log::info("{$user->firstName} {$user->lastName} deleted user: {$model->firstName} {$model->lastName}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} deleted user: {$model->firstName} {$model->lastName}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to delete user: {$model->firstName} {$model->lastName}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to delete user: {$model->firstName} {$model->lastName}.");
     }
 
     /**
@@ -108,11 +108,11 @@ class UserPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") {
-                Log::info("{$user->firstName} {$user->lastName} restored user: {$model->firstName} {$model->lastName}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} restored user: {$model->firstName} {$model->lastName}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to restore user: {$model->firstName} {$model->lastName}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to restore user: {$model->firstName} {$model->lastName}.");
     }
 
     /**
@@ -126,10 +126,10 @@ class UserPolicy
     {
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") {
-                Log::info("{$user->firstName} {$user->lastName} force-deleted user: {$model->firstName} {$model->lastName}.");
+                Log::channel('application')->info("{$user->firstName} {$user->lastName} force-deleted user: {$model->firstName} {$model->lastName}.");
                 return true;
             }
         }
-        Log::info("{$user->firstName} {$user->lastName} tried to force-delete user: {$model->firstName} {$model->lastName}.");
+        Log::channel('application')->info("{$user->firstName} {$user->lastName} tried to force-delete user: {$model->firstName} {$model->lastName}.");
     }
 }
