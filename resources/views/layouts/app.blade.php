@@ -56,6 +56,14 @@
                         <x-heroicon-o-folder class="h-6 w-6"/>
                     </a>
                 </li>
+                <li class="hover:bg-gray-100">
+                    <a
+                        href="{{ route('logs') }}"
+                        class="h-16 px-6 flex justify-center items-center w-full
+					focus:text-orange-500">
+                        <x-heroicon-o-menu-alt-1 class="h-6 w-6"/>
+                    </a>
+                </li>
             </ul>
 
             <ul class="mt-auto">

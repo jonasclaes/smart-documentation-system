@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\RevisionRequestCategory;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class RevisionRequestCategoryPolicy
 {
@@ -23,6 +24,7 @@ class RevisionRequestCategoryPolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view all revision request categories.");
     }
 
     /**
@@ -35,8 +37,12 @@ class RevisionRequestCategoryPolicy
     public function view(User $user, RevisionRequestCategory $revisionRequestCategory)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
+                Log::info("{$user->firstName} {$user->lastName} viewed revision request category: {$revisionRequestCategory->name}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view revision request category: {$revisionRequestCategory->name}.");
     }
 
     /**
@@ -48,8 +54,12 @@ class RevisionRequestCategoryPolicy
     public function create(User $user)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
+                Log::info("{$user->firstName} {$user->lastName} created a new revision request category.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to create a new revision request category.");
     }
 
     /**
@@ -62,8 +72,12 @@ class RevisionRequestCategoryPolicy
     public function update(User $user, RevisionRequestCategory $revisionRequestCategory)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
+                Log::info("{$user->firstName} {$user->lastName} updated revision request category: {$revisionRequestCategory->name}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to update revision request category: {$revisionRequestCategory->name}.");
     }
 
     /**
@@ -76,8 +90,12 @@ class RevisionRequestCategoryPolicy
     public function delete(User $user, RevisionRequestCategory $revisionRequestCategory)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
+                Log::info("{$user->firstName} {$user->lastName} deleted revision request category: {$revisionRequestCategory->name}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to delete revision request category: {$revisionRequestCategory->name}.");
     }
 
     /**
@@ -90,8 +108,12 @@ class RevisionRequestCategoryPolicy
     public function restore(User $user, RevisionRequestCategory $revisionRequestCategory)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") {
+                Log::info("{$user->firstName} {$user->lastName} restored revision request category: {$revisionRequestCategory->name}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to restore revision request category: {$revisionRequestCategory->name}.");
     }
 
     /**
@@ -104,7 +126,11 @@ class RevisionRequestCategoryPolicy
     public function forceDelete(User $user, RevisionRequestCategory $revisionRequestCategory)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") {
+                Log::info("{$user->firstName} {$user->lastName} force-deleted revision request category: {$revisionRequestCategory->name}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to force-delete revision request category: {$revisionRequestCategory->name}.");
     }
 }

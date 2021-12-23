@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\QRCode;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class QRCodePolicy
 {
@@ -23,6 +24,7 @@ class QRCodePolicy
         foreach ($user->permissions as $permission) {
             if ($permission->permissionName === self::PERMISSION_PREFIX . "view-any") return true;
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view all qr-codes.");
     }
 
     /**
@@ -35,8 +37,12 @@ class QRCodePolicy
     public function view(User $user, QRCode $qRCode)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "view") {
+                Log::info("{$user->firstName} {$user->lastName} viewed QR-code for file {$qRCode->file}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to view QR-code for file {$qRCode->file}.");
     }
 
     /**
@@ -48,8 +54,12 @@ class QRCodePolicy
     public function create(User $user)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "create") {
+                Log::info("{$user->firstName} {$user->lastName} created a new QR-code.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to create a new QR-code.");
     }
 
     /**
@@ -62,8 +72,12 @@ class QRCodePolicy
     public function update(User $user, QRCode $qRCode)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "update") {
+                Log::info("{$user->firstName} {$user->lastName} updated QR-code for file {$qRCode->file}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to update QR-code for file {$qRCode->file}.");
     }
 
     /**
@@ -76,8 +90,12 @@ class QRCodePolicy
     public function delete(User $user, QRCode $qRCode)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "delete") {
+                Log::info("{$user->firstName} {$user->lastName} deleted QR-code for file {$qRCode->file}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to delete QR-code for file {$qRCode->file}.");
     }
 
     /**
@@ -90,8 +108,12 @@ class QRCodePolicy
     public function restore(User $user, QRCode $qRCode)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "restore") {
+                Log::info("{$user->firstName} {$user->lastName} restored QR-code for file {$qRCode->file}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to restore QR-code for file {$qRCode->file}.");
     }
 
     /**
@@ -104,7 +126,11 @@ class QRCodePolicy
     public function forceDelete(User $user, QRCode $qRCode)
     {
         foreach ($user->permissions as $permission) {
-            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") return true;
+            if ($permission->permissionName === self::PERMISSION_PREFIX . "force-delete") {
+                Log::info("{$user->firstName} {$user->lastName} force-deleted QR-code for file {$qRCode->file}.");
+                return true;
+            }
         }
+        Log::info("{$user->firstName} {$user->lastName} tried to force-delete QR-code for file {$qRCode->file}.");
     }
 }

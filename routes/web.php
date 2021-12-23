@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientContactController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\RevisionAttachmentController;
 use App\Http\Controllers\RevisionCommentController;
@@ -39,6 +40,9 @@ Route::middleware([
 ])->group(function () {
     // Dashboard route
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Log route
+    Route::get('/logs', [LogController::class, 'index'])->name('logs');
 
     // Files
     Route::resource('files', FileController::class);
