@@ -54,6 +54,7 @@ RUN chmod +x /usr/local/bin/start-container
 EXPOSE 8000
 
 COPY . .
+COPY ./data/icon.png ./public/assets/icon.png
 
 RUN composer install && \
     npm install && \

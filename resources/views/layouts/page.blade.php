@@ -24,9 +24,9 @@
                     <div class="h-full flex items-center gap-2">
                         <!-- Logo Section -->
                         <img class="h-full"
-                             src="{{ asset('assets/delta-technics-small.png') }}"
-                             alt="Delta Technics"/>
-                        <h1 class="text-xl capitalize min-h-full">Delta Technics</h1>
+                             src="{{ asset('assets/icon.png') }}"
+                             alt="Icon"/>
+                        <h1 class="text-xl capitalize min-h-full">{{ config('app.name', 'Laravel') }}</h1>
                     </div>
                 </div>
             </nav>

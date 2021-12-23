@@ -8,7 +8,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 $qrCode = QrCode::size(512)
             ->format('png')
             ->errorCorrection('H')
-            ->merge('/public/assets/delta-technics-small.png', 0.3)
+            ->merge('/public/assets/icon.png', 0.3)
             ->generate($file->QRCode->content);
 $qrCodeEncoded = base64_encode($qrCode);
 @endphp
